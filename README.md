@@ -13,6 +13,20 @@
 </tr>
 </table>
 
+<br>
+
+<!-- GitHub Stats (using reliable badge counter instead of github-readme-stats API) -->
+<img src="https://komarev.com/ghpvc/?username=Akileswaran04&style=for-the-badge&color=22d3ee&label=PROFILE+VIEWS" />
+
+<br>
+
+<img src="./contrib-heatmap.svg" width="860" alt="GitHub contribution graph" />
+
+<br><br>
+
+<sub>⚡ Profile art auto-generated — portrait SVGs refresh when source photo changes, contribution data refreshes every 6 hours via GitHub Actions.</sub>
+
+</div>
 <!-- Name & Title -->
 ## AKILESWARAN A
 
@@ -87,20 +101,6 @@ Currently exploring multi-agent AI systems and workflow automation.
 </tr>
 </table>
 
-<br>
-
-<!-- GitHub Stats (using reliable badge counter instead of github-readme-stats API) -->
-<img src="https://komarev.com/ghpvc/?username=Akileswaran04&style=for-the-badge&color=22d3ee&label=PROFILE+VIEWS" />
-
-<br>
-
-<img src="./contrib-heatmap.svg" width="860" alt="GitHub contribution graph" />
-
-<br><br>
-
-<sub>⚡ Profile art auto-generated — portrait SVGs refresh when source photo changes, contribution data refreshes every 6 hours via GitHub Actions.</sub>
-
-</div>
 
 <!-- ========================================================================== -->
 <!--  NEW SECTIONS — Added below this line                                     -->
