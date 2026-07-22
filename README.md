@@ -27,6 +27,7 @@
 <sub>⚡ Profile art auto-generated — portrait SVGs refresh when source photo changes, contribution data refreshes every 6 hours via GitHub Actions.</sub>
 
 </div>
+
 <!-- Name & Title -->
 ## AKILESWARAN A
 
