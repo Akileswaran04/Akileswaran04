@@ -1,0 +1,1173 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="320"
+     viewBox="0 0 640 320"
+     font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+<style></style>
+<rect width="640" height="320" rx="14" fill="#0d1117"/>
+<rect x="0.5" y="0.5" width="639" height="319" rx="14"
+      fill="none" stroke="#2dd4bf" stroke-width="1" stroke-opacity="0.55"/>
+
+    <rect x="0" y="0" width="640" height="34" rx="12" fill="#1f2937"/>
+    <rect x="0" y="24" width="640" height="10" fill="#1f2937"/>
+    <circle cx="40" cy="17.0" r="5" fill="#ff5f56"/><circle cx="56" cy="17.0" r="5" fill="#ffbd2e"/><circle cx="72" cy="17.0" r="5" fill="#27c93f"/>
+    <text x="320.0" y="21.0" fill="#5eead4" font-size="12"
+          text-anchor="middle" font-family="'Courier New',monospace"
+          font-weight="500">Akileswaran@github: ~/countdown</text>
+    
+
+    <g>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#2dd4bf">5
+        <animate attributeName="opacity"
+                 values="0;1;1;0" keyTimes="0;0.217;0.565;1"
+                 begin="0.000s" dur="2.30s" fill="freeze"/>
+        <animateTransform attributeName="transform" type="scale"
+                 values="0;1;1;1.3" keyTimes="0;0.217;0.565;1"
+                 begin="0.000s" dur="2.30s" fill="freeze"/>
+      </text>
+      
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="1.433s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">5
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-46,-56"
+                         begin="1.433s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="1.433s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="279"
+                         begin="1.433s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="1.305s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">5
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-67,-135"
+                         begin="1.305s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="1.305s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="211"
+                         begin="1.305s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="1.417s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">5
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="23,113"
+                         begin="1.417s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="1.417s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="190"
+                         begin="1.417s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="1.301s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">5
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-86,-25"
+                         begin="1.301s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="1.301s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-392"
+                         begin="1.301s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="1.472s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">5
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="46,-125"
+                         begin="1.472s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="1.472s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="302"
+                         begin="1.472s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="1.409s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">5
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-41,67"
+                         begin="1.409s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="1.409s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-215"
+                         begin="1.409s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="1.368s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">5
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="48,-127"
+                         begin="1.368s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="1.368s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-373"
+                         begin="1.368s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="1.404s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">5
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-137,-46"
+                         begin="1.404s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="1.404s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-403"
+                         begin="1.404s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="1.314s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">5
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-21,-71"
+                         begin="1.314s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="1.314s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="262"
+                         begin="1.314s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="1.366s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">5
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="9,79"
+                         begin="1.366s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="1.366s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-280"
+                         begin="1.366s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    </g>
+
+    <g>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#2dd4bf">4
+        <animate attributeName="opacity"
+                 values="0;1;1;0" keyTimes="0;0.217;0.565;1"
+                 begin="2.600s" dur="2.30s" fill="freeze"/>
+        <animateTransform attributeName="transform" type="scale"
+                 values="0;1;1;1.3" keyTimes="0;0.217;0.565;1"
+                 begin="2.600s" dur="2.30s" fill="freeze"/>
+      </text>
+      
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="4.017s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">4
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-61,65"
+                         begin="4.017s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="4.017s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-276"
+                         begin="4.017s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="3.968s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">4
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-66,-54"
+                         begin="3.968s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="3.968s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="442"
+                         begin="3.968s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="4.052s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">4
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="127,-8"
+                         begin="4.052s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="4.052s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-381"
+                         begin="4.052s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="3.948s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">4
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="15,-89"
+                         begin="3.948s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="3.948s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="192"
+                         begin="3.948s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="4.018s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">4
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="38,150"
+                         begin="4.018s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="4.018s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="495"
+                         begin="4.018s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="3.944s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">4
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-121,93"
+                         begin="3.944s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="3.944s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="345"
+                         begin="3.944s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="3.972s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">4
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-87,-35"
+                         begin="3.972s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="3.972s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-390"
+                         begin="3.972s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="3.908s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">4
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="31,157"
+                         begin="3.908s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="3.908s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="363"
+                         begin="3.908s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="3.911s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">4
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="98,80"
+                         begin="3.911s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="3.911s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="465"
+                         begin="3.911s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="4.055s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">4
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-117,108"
+                         begin="4.055s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="4.055s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-370"
+                         begin="4.055s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    </g>
+
+    <g>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#2dd4bf">3
+        <animate attributeName="opacity"
+                 values="0;1;1;0" keyTimes="0;0.217;0.565;1"
+                 begin="5.200s" dur="2.30s" fill="freeze"/>
+        <animateTransform attributeName="transform" type="scale"
+                 values="0;1;1;1.3" keyTimes="0;0.217;0.565;1"
+                 begin="5.200s" dur="2.30s" fill="freeze"/>
+      </text>
+      
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="6.548s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">3
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="135,10"
+                         begin="6.548s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="6.548s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-425"
+                         begin="6.548s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="6.672s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">3
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-51,-62"
+                         begin="6.672s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="6.672s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="337"
+                         begin="6.672s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="6.664s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">3
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="67,-66"
+                         begin="6.664s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="6.664s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="360"
+                         begin="6.664s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="6.528s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">3
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="67,-70"
+                         begin="6.528s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="6.528s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-410"
+                         begin="6.528s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="6.500s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">3
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="9,-118"
+                         begin="6.500s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="6.500s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-460"
+                         begin="6.500s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="6.650s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">3
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-32,64"
+                         begin="6.650s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="6.650s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-514"
+                         begin="6.650s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="6.515s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">3
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-27,70"
+                         begin="6.515s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="6.515s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-496"
+                         begin="6.515s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="6.523s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">3
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-76,7"
+                         begin="6.523s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="6.523s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-454"
+                         begin="6.523s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="6.576s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">3
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-118,18"
+                         begin="6.576s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="6.576s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-275"
+                         begin="6.576s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="6.556s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">3
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="28,115"
+                         begin="6.556s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="6.556s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="443"
+                         begin="6.556s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    </g>
+
+    <g>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#2dd4bf">2
+        <animate attributeName="opacity"
+                 values="0;1;1;0" keyTimes="0;0.217;0.565;1"
+                 begin="7.800s" dur="2.30s" fill="freeze"/>
+        <animateTransform attributeName="transform" type="scale"
+                 values="0;1;1;1.3" keyTimes="0;0.217;0.565;1"
+                 begin="7.800s" dur="2.30s" fill="freeze"/>
+      </text>
+      
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="9.122s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">2
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="128,-4"
+                         begin="9.122s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="9.122s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-338"
+                         begin="9.122s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="9.140s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">2
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="16,99"
+                         begin="9.140s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="9.140s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="392"
+                         begin="9.140s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="9.255s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">2
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="114,55"
+                         begin="9.255s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="9.255s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-262"
+                         begin="9.255s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="9.124s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">2
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="83,39"
+                         begin="9.124s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="9.124s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="421"
+                         begin="9.124s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="9.245s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">2
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="112,-48"
+                         begin="9.245s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="9.245s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-350"
+                         begin="9.245s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="9.184s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">2
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="29,73"
+                         begin="9.184s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="9.184s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="335"
+                         begin="9.184s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="9.172s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">2
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-17,-129"
+                         begin="9.172s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="9.172s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="534"
+                         begin="9.172s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="9.181s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">2
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-79,125"
+                         begin="9.181s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="9.181s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="270"
+                         begin="9.181s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="9.180s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">2
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-84,45"
+                         begin="9.180s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="9.180s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-270"
+                         begin="9.180s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="9.250s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">2
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="77,-91"
+                         begin="9.250s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="9.250s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-198"
+                         begin="9.250s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    </g>
+
+    <g>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#2dd4bf">1
+        <animate attributeName="opacity"
+                 values="0;1;1;0" keyTimes="0;0.217;0.565;1"
+                 begin="10.400s" dur="2.30s" fill="freeze"/>
+        <animateTransform attributeName="transform" type="scale"
+                 values="0;1;1;1.3" keyTimes="0;0.217;0.565;1"
+                 begin="10.400s" dur="2.30s" fill="freeze"/>
+      </text>
+      
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="11.787s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">1
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="150,-30"
+                         begin="11.787s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="11.787s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="486"
+                         begin="11.787s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="11.877s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">1
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="24,103"
+                         begin="11.877s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="11.877s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="201"
+                         begin="11.877s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="11.872s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">1
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-13,140"
+                         begin="11.872s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="11.872s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="344"
+                         begin="11.872s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="11.753s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">1
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="120,-3"
+                         begin="11.753s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="11.753s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="439"
+                         begin="11.753s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="11.710s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">1
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="120,-24"
+                         begin="11.710s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="11.710s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-375"
+                         begin="11.710s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="11.873s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">1
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-100,-58"
+                         begin="11.873s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="11.873s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="487"
+                         begin="11.873s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="11.742s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">1
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="76,42"
+                         begin="11.742s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="11.742s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-394"
+                         begin="11.742s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="11.811s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">1
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="110,103"
+                         begin="11.811s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="11.811s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-269"
+                         begin="11.811s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="11.737s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">1
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-107,60"
+                         begin="11.737s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="11.737s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-368"
+                         begin="11.737s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
+               begin="11.754s" dur="1.00s" fill="freeze"/>
+      <text x="320.0" y="170" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
+            fill="#5eead4">1
+        <animateTransform attributeName="transform" type="translate"
+                         from="0,0" to="-19,-89"
+                         begin="11.754s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="scale"
+                         from="1" to="1.8"
+                         begin="11.754s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+        <animateTransform attributeName="transform" type="rotate"
+                         from="0" to="-322"
+                         begin="11.754s" dur="1.00s"
+                         fill="freeze" additive="sum"/>
+      </text>
+    </g>
+    </g>
+
+    <g>
+      <text x="320.0" y="160" text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Courier New',monospace" font-size="60" font-weight="bold"
+            fill="#2dd4bf">
+        <!-- type in -->
+        <animate attributeName="opacity" values="0;1" keyTimes="0;0.15"
+                 begin="12.700s" dur="0.5s" fill="freeze"/>
+        <animateTransform attributeName="transform" type="scale"
+                 values="2;1" keyTimes="0;0.15"
+                 begin="12.700s" dur="0.5s" fill="freeze"/>
+        <!-- perpetual gentle pulse (pure SMIL) -->
+        <animateTransform attributeName="transform" type="translate"
+                 values="0,0;0,-3;0,0" keyTimes="0;0.5;1"
+                 begin="13.200s" dur="3s" repeatCount="indefinite"
+                 additive="sum"/>
+        &#8594; GO!
+      </text>
+      <!-- glow ring: initial pulse, then perpetual gentle breathe -->
+      <circle cx="320.0" cy="160" r="80" fill="none"
+              stroke="#2dd4bf" stroke-width="1.5" opacity="0">
+        <animate attributeName="opacity" values="0;0.15;0;0.08;0.04;0.08"
+                 keyTimes="0;0.08;0.25;0.5;0.75;1"
+                 begin="13.200s" dur="4s" repeatCount="indefinite" fill="freeze"/>
+        <animate attributeName="r" values="40;90;40"
+                 keyTimes="0;0.5;1"
+                 begin="13.200s" dur="4s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+<text x="320.0" y="302" text-anchor="middle" fill="#5eead4"
+      font-size="11" opacity="0.6">countdown v1.0 — Akileswaran</text>
+</svg>
