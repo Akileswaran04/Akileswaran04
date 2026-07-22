@@ -1,25 +1,24 @@
 <!--
   This is your PROFILE README. It goes in a repo named exactly after your
-  username (e.g. github.com/OCTOCAT/OCTOCAT) so GitHub shows it on your profile.
-  Replace the ALL-CAPS placeholders. Widths 370/490 keep the portrait and info
-  card the same height -- if you change the info card's H, re-match these.
+  username (e.g. github.com/YOUR_USERNAME/YOUR_USERNAME) so GitHub shows it on your profile.
+  Replace the ALL-CAPS placeholders.
 -->
 <div align="center">
 
 <table>
 <tr>
 <td valign="top"><img src="./avi-ascii.svg" width="370" alt="ASCII portrait" /></td>
-<td valign="top"><img src="./info-card.svg" width="490" alt="Experience, stack, highlights" /></td>
+<td valign="top"><img src="./info-card.svg" width="480" alt="Experience, stack, highlights" /></td>
 </tr>
 </table>
 
 ## YOUR NAME
 
-**Your Title · Second Thing · Third Thing**
+**Your Title · Your Role · Your Focus**
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-yoursite.com-0d1117?style=for-the-badge&logo=vercel&logoColor=white)](https://YOURSITE.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-YOURHANDLE-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/YOURHANDLE)
-[![Instagram](https://img.shields.io/badge/Instagram-YOURHANDLE-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/YOURHANDLE)
+[![Email](https://img.shields.io/badge/YOUR.EMAIL@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:YOUR.EMAIL@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/YOUR-LINKEDIN-HANDLE-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/YOUR-LINKEDIN-HANDLE)
+[![GitHub](https://img.shields.io/badge/YOUR_USERNAME-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/YOUR_USERNAME)
 
 <br>
 

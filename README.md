@@ -14,9 +14,11 @@
 
 ## AKILESWARAN A
 
-**B.Tech IT · Software Developer · ML & AI Engineer**
+**Software Engineering Intern Candidate · Full-Stack & Applied ML**
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-akileswaran--ammamuthu-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/akileswaran-ammamuthu)
+[![Email](https://img.shields.io/badge/akileswaranammamuthu@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:akileswaranammamuthu@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/akileswaran--ammamuthu-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/akileswaran-ammamuthu)
+[![GitHub](https://img.shields.io/badge/Akileswaran04-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Akileswaran04)
 
 <br>
 
