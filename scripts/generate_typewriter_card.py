@@ -200,6 +200,14 @@ def make_name_reveal():
     parts = []
     defs = []
 
+    # Glow filter for underscores
+    defs.insert(0,
+        '<filter id="underscore-glow">'
+        '<feGaussianBlur stdDeviation="2" result="blur"/>'
+        '<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>'
+        '</filter>'
+    )
+
     for i, target in enumerate(name):
         cx = x0 + i * CHAR_W + CHAR_W / 2
         seq = get_char_seq(i, target)
@@ -219,6 +227,7 @@ def make_name_reveal():
 
         # If only one char (start == target), just show it directly
         if len(seq) == 1:
+            underscore_y = NAME_Y + FONT_SIZE / 2 + 4
             parts.append(
                 f'<text x="{cx:.1f}" y="{NAME_Y}" text-anchor="middle" dominant-baseline="central"'
                 f' font-family="\'Courier New\',monospace" font-size="{FONT_SIZE}" font-weight="bold" fill="{NAME}">'
@@ -226,6 +235,14 @@ def make_name_reveal():
                 f'<animate attributeName="opacity" values="0;1" keyTimes="0;0.1"'
                 f' begin="{ch_start:.3f}s" dur="0.2s" fill="freeze"/>'
                 f'</text>'
+                # Glowing underscore that appears when character lands
+                f'<rect x="{cx - CHAR_W/2:.1f}" y="{underscore_y:.1f}"'
+                f' width="{CHAR_W:.1f}" height="2" rx="1" fill="{NAME}"'
+                f' filter="url(#underscore-glow)" opacity="0">'
+                f'<animate attributeName="opacity" values="0;0;0.8;0.4;0.9"'
+                f' keyTimes="0;0.2;0.35;0.65;1"'
+                f' begin="{ch_start:.3f}s" dur="0.6s" fill="freeze"/>'
+                f'</rect>'
             )
             continue
 
@@ -241,6 +258,8 @@ def make_name_reveal():
             )
 
         # Two groups: outer has fixed clip-path, inner scrolls the stack
+        underscore_y = NAME_Y + FONT_SIZE / 2 + 4
+        underscore_land = ch_start + scroll_dur  # when scroll finishes
         parts.append(
             f'<g clip-path="url(#{clip_id})">'
             f'<g opacity="0">'
@@ -253,6 +272,14 @@ def make_name_reveal():
             f' calcMode="spline" keySplines="0.4 0 0.2 1" keyTimes="0;1"/>'
             f'</g>'
             f'</g>'
+            # Glowing underscore — outside clip so it stays visible
+            f'<rect x="{cx - CHAR_W/2:.1f}" y="{underscore_y:.1f}"'
+            f' width="{CHAR_W:.1f}" height="2" rx="1" fill="{NAME}"'
+            f' filter="url(#underscore-glow)" opacity="0">'
+            f'<animate attributeName="opacity" values="0;0;0.8;0.4;0.9"'
+            f' keyTimes="0;0.2;0.35;0.65;1"'
+            f' begin="{underscore_land:.3f}s" dur="0.6s" fill="freeze"/>'
+            f'</rect>'
         )
 
     # Subtle glow after all chars have landed
