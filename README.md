@@ -108,22 +108,7 @@ Currently exploring multi-agent AI systems and workflow automation.
 
 <br>
 
-<!-- 1. Contribution Snake Animation (auto-generated every 6h via .github/workflows/snake.yml) -->
-<div align="center" style="border: 1px solid #30363d; border-radius: 12px; padding: 24px 20px 20px; margin-bottom: 24px; background: #0d1117; text-align: center;">
-
-<p style="color:#7d8590; font-size:12px; margin-bottom:6px;"><em>chasing commits, one square at a time</em></p>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Akileswaran04/Akileswaran04/output/github-snake-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Akileswaran04/Akileswaran04/output/github-snake.svg" />
-  <img alt="GitHub contribution snake" src="https://raw.githubusercontent.com/Akileswaran04/Akileswaran04/output/github-snake.svg" />
-</picture>
-
-</div>
-
-<br>
-
-<!-- 2. GitHub Stats + Streak Stats (side-by-side, custom neon palette) -->
+<!-- 1. GitHub Stats + Streak Stats (side-by-side, custom neon palette) -->
 <div align="center" style="border: 1px solid #30363d; border-radius: 12px; padding: 24px 20px 20px; margin-bottom: 24px; background: #0d1117; text-align: center;">
 
 ### 📊 GitHub Stats
