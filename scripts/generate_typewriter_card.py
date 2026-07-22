@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Generate an animated SVG "Exploding Countdown" card.
+"""Generate an animated SVG typewriter-card for Akileswaran's README.
 
-A terminal-style card that counts down 5 → 4 → 3 → 2 → 1 → GO!
-Each number types in, holds briefly, then explodes into shards
-that fly outward and fade — all via SMIL animations (no JS).
+Animation sequence:
+  1. Letters A → K → I type in with a blinking pipe cursor, then shoot out.
+  2. Full name "AKILESWARAN" reveals with per-character flip animation.
+  3. Name stays on screen large and centred as the final state.
+
+All animations use SMIL — no JS, no CSS, works in <img> tags on GitHub README.
 
 Output: akileswaran04-profile/typewriter-card.svg
 """
@@ -16,164 +19,243 @@ HERE = os.path.dirname(__file__)
 OUT_PATH = os.path.join(HERE, "..", "typewriter-card.svg")
 
 # ── Dimensions ──────────────────────────────────────────────────────
-W, H = 640, 320
+W, H = 640, 340
 PAD = 40
 TITLEBAR_H = 34
-CONTENT_Y = 170  # y-centre for the big countdown number
+CONTENT_Y = 180   # y-centre for the big countdown letter
+NAME_Y = 170       # y-centre for the final name
 
 # ── Colors (bioluminescent teal terminal palette) ───────────────────
 BG      = "#0d1117"
-CARD_BG = "#161b22"
 FRAME   = "#2dd4bf"
 MUTED   = "#5eead4"
 TEXT    = "#e6edf3"
-NUM_CLR = "#2dd4bf"     # countdown number colour
+LETTER  = "#2dd4bf"     # countdown letter colour
+PIPE    = "#5eead4"     # pipe cursor colour
 SHARD   = "#5eead4"     # shard fragment colour
-FINAL   = "#2dd4bf"     # final "GO!" colour
-GOLD    = "#fbbf24"     # accent
+NAME    = "#2dd4bf"     # final name colour
+GOLD    = "#fbbf24"
 
 DOT_COLORS = ["#ff5f56", "#ffbd2e", "#27c93f"]
 
 # ── Timing (seconds) ────────────────────────────────────────────────
-TYPE_DUR    = 0.5   # number types in
-HOLD_DUR    = 0.8   # number holds on screen
-EXPLODE_DUR = 1.0   # shards fly outward
-CYCLE_DUR   = TYPE_DUR + HOLD_DUR + EXPLODE_DUR + 0.3  # ~2.6s
+TYPE_DUR    = 0.5    # letter types in
+HOLD_DUR    = 0.7    # letter holds while pipe blinks
+EXPLODE_DUR = 1.0    # letter shards fly outward
+CLEAN_DUR   = 0.3    # pipe fades before next cycle
+CYCLE_DUR   = TYPE_DUR + HOLD_DUR + EXPLODE_DUR + CLEAN_DUR  # 2.5s
 
-N_SHARDS = 10  # shards per explosion
+N_SHARDS = 10
 random.seed(42)
 
 
-def cycle_start(n):
-    """Return start time (seconds) for countdown number n (5=first)."""
-    return (5 - n) * CYCLE_DUR
+def cycle_start(idx):
+    """Start time (seconds) for countdown letter idx (0=A, 1=K, 2=I)."""
+    return idx * CYCLE_DUR
 
+
+def letter_shoot_angle():
+    """Bias shard direction rightward/upward (shoots out of the pipe)."""
+    angle = random.uniform(-30, 120)
+    return angle
+
+
+# ── Card framing ────────────────────────────────────────────────────
 
 def make_title_bar():
     dots = "".join(
         f'<circle cx="{PAD + i * 16}" cy="{TITLEBAR_H / 2}" r="5" fill="{c}"/>'
         for i, c in enumerate(DOT_COLORS)
     )
-    return f"""
-    <rect x="0" y="0" width="{W}" height="{TITLEBAR_H}" rx="12" fill="#1f2937"/>
-    <rect x="0" y="{TITLEBAR_H - 10}" width="{W}" height="10" fill="#1f2937"/>
-    {dots}
-    <text x="{W / 2}" y="{TITLEBAR_H / 2 + 4}" fill="{MUTED}" font-size="12"
-          text-anchor="middle" font-family="'Courier New',monospace"
-          font-weight="500">Akileswaran@github: ~/countdown</text>
+    return (
+        f'<rect x="0" y="0" width="{W}" height="{TITLEBAR_H}" rx="12" fill="#1f2937"/>'
+        f'<rect x="0" y="{TITLEBAR_H - 8}" width="{W}" height="8" fill="#1f2937"/>'
+        f'{dots}'
+        f'<text x="{W/2}" y="{TITLEBAR_H/2+4}" fill="{MUTED}" font-size="12"'
+        f' text-anchor="middle" font-family="\'Courier New\',monospace" font-weight="500">'
+        f'        Akileswaran@github: ~/typewriter</text>'
+    )
+
+
+# ── Countdown letter: A, K, I ──────────────────────────────────────
+
+def make_letter_shards(letter, start_time):
+    """Return SVG for explosion shards of *letter* biased outward-upward."""
+    cx = W / 2 - 18   # letter's x position
+    cy = CONTENT_Y
+
+    parts = []
+    for _ in range(N_SHARDS):
+        angle = letter_shoot_angle()
+        dist = random.uniform(60, 150)
+        dx = dist * math.cos(math.radians(angle))
+        dy = dist * math.sin(math.radians(angle)) - 20  # extra upward bias
+        rot = random.uniform(180, 540) * (1 if random.random() < 0.5 else -1)
+        delay = random.uniform(0, 0.15)
+        t0 = start_time + delay
+
+        parts.append(
+            f'<g opacity="0">'
+            f'<animate attributeName="opacity" values="1;1;0" keyTimes="0;0.12;1"'
+            f' begin="{t0:.3f}s" dur="{EXPLODE_DUR:.2f}s" fill="freeze"/>'
+            f'<text x="{cx}" y="{cy}" text-anchor="middle" dominant-baseline="central"'
+            f' font-family="\'Courier New\',monospace" font-size="72" font-weight="bold" fill="{SHARD}">{letter}'
+            f'<animateTransform attributeName="transform" type="translate"'
+            f' from="0,0" to="{dx:.0f},{dy:.0f}"'
+            f' begin="{t0:.3f}s" dur="{EXPLODE_DUR:.2f}s" fill="freeze" additive="sum"/>'
+            f'<animateTransform attributeName="transform" type="scale"'
+            f' from="1" to="1.8"'
+            f' begin="{t0:.3f}s" dur="{EXPLODE_DUR:.2f}s" fill="freeze" additive="sum"/>'
+            f'<animateTransform attributeName="transform" type="rotate"'
+            f' from="0" to="{rot:.0f}"'
+            f' begin="{t0:.3f}s" dur="{EXPLODE_DUR:.2f}s" fill="freeze" additive="sum"/>'
+            f'</text></g>'
+        )
+    return "\n".join(parts)
+
+
+def make_letter_cycle(letter, idx):
+    """Full cycle for one countdown letter: type in → pipe blinks → explode."""
+    start = cycle_start(idx)
+    total = CYCLE_DUR
+    t_type = TYPE_DUR / total          # ~0.20
+    t_blink_start = t_type             # 0.20
+    t_blink_end = (TYPE_DUR + HOLD_DUR) / total   # ~0.48
+    t_explode = t_blink_end            # 0.48
+
+    cx = W / 2 - 18
+    px = W / 2 + 18   # pipe x position
+    cy = CONTENT_Y
+
+    # Pipe blink: 3 quick blinks during hold phase, then stays solid during
+    # explode, then fades quickly at the very end.
+    # kt indices:  0   1    2    3    4    5    6    7    8    9    10   11   12
+    pipe_kf = "0;1;1;0;1;0;1;0;1;1;1;0"
+    fade_start = (TYPE_DUR + HOLD_DUR + EXPLODE_DUR) / total  # ~0.88
+    fade_mid   = fade_start + 0.04 / total                     # ~0.90
+    pipe_kt = (
+        f"0;{0.02/total:.4f};{t_type:.4f};"
+        f"{(TYPE_DUR+0.08)/total:.4f};{(TYPE_DUR+0.16)/total:.4f};"
+        f"{(TYPE_DUR+0.25)/total:.4f};{(TYPE_DUR+0.35)/total:.4f};"
+        f"{(TYPE_DUR+0.45)/total:.4f};{t_blink_end:.4f};"
+        f"{fade_start:.4f};{fade_mid:.4f};1"
+    )
+
+    return (
+        # Letter: types in → holds → explodes
+        f'<g>'
+        f'<text x="{cx}" y="{cy}" text-anchor="middle" dominant-baseline="central"'
+        f' font-family="\'Courier New\',monospace" font-size="72" font-weight="bold" fill="{LETTER}">{letter}'
+        f'<animate attributeName="opacity"'
+        f' values="0;1;1;0" keyTimes="0;{t_type:.4f};{t_blink_end:.4f};1"'
+        f' begin="{start:.3f}s" dur="{total:.2f}s" fill="freeze"/>'
+        f'<animateTransform attributeName="transform" type="scale"'
+        f' values="0;1;1;1.2" keyTimes="0;{t_type:.4f};{t_blink_end:.4f};1"'
+        f' begin="{start:.3f}s" dur="{total:.2f}s" fill="freeze"/>'
+        f'</text>'
+        # Pipe cursor: types in → blinks → stays during explode → fades
+        f'<text x="{px}" y="{cy}" text-anchor="middle" dominant-baseline="central"'
+        f' font-family="\'Courier New\',monospace" font-size="72" font-weight="bold" fill="{PIPE}">|'
+        f'<animate attributeName="opacity" values="{pipe_kf}" keyTimes="{pipe_kt}"'
+        f' begin="{start:.3f}s" dur="{total:.2f}s" fill="freeze"/>'
+        f'</text>'
+        # Shards
+        f'{make_letter_shards(letter, start + TYPE_DUR + HOLD_DUR)}'
+        f'</g>'
+    )
+
+
+# ── Name reveal: A K I L E S W A R A N ──────────────────────────────
+
+def make_name_reveal():
+    """Flip-in each character of AKILESWARAN with stagger, then stay.
+
+    Alternating entrance per character:
+      - Even index: flips in from above (scale Y 0→1 with slight overshoot)
+      - Odd index:  flips in from below (scale Y 0→1 with slight overshoot)
     """
+    name = "AKILESWARAN"
+    n = len(name)
+    stagger = 0.12     # seconds between each character
+    flip_dur = 0.35    # duration of each character's flip
+    start = cycle_start(2) + CYCLE_DUR + 0.3  # ~7.8s after I finishes
+
+    FONT_SIZE = 38
+    CHAR_W = FONT_SIZE * 0.62
+    total_w = n * CHAR_W
+    x0 = (W - total_w) / 2
+
+    parts = []
+    for i, ch in enumerate(name):
+        cx = x0 + i * CHAR_W + CHAR_W / 2
+        ch_start = start + i * stagger
+
+        # Alternating entrance: even from above (scale + translate), odd from below
+        if i % 2 == 0:
+            # Flips in from above: starts shifted up, scales into place
+            parts.append(
+                f'<text x="{cx:.1f}" y="{NAME_Y}" text-anchor="middle" dominant-baseline="central"'
+                f' font-family="\'Courier New\',monospace" font-size="{FONT_SIZE}" font-weight="bold" fill="{NAME}">'
+                f'{ch}'
+                f'<animate attributeName="opacity" values="0;1" keyTimes="0;0.08"'
+                f' begin="{ch_start:.3f}s" dur="{flip_dur:.2f}s" fill="freeze"/>'
+                f'<animateTransform attributeName="transform" type="scale"'
+                f' values="1,0;1,1.15;1,1" keyTimes="0;0.5;1"'
+                f' begin="{ch_start:.3f}s" dur="{flip_dur:.2f}s" fill="freeze"/>'
+                f'</text>'
+            )
+        else:
+            # Flips in from below: starts shifted down, scales into place
+            parts.append(
+                f'<text x="{cx:.1f}" y="{NAME_Y}" text-anchor="middle" dominant-baseline="central"'
+                f' font-family="\'Courier New\',monospace" font-size="{FONT_SIZE}" font-weight="bold" fill="{NAME}">'
+                f'{ch}'
+                f'<animate attributeName="opacity" values="0;1" keyTimes="0;0.08"'
+                f' begin="{ch_start:.3f}s" dur="{flip_dur:.2f}s" fill="freeze"/>'
+                f'<animateTransform attributeName="transform" type="translate"'
+                f' values="0,{FONT_SIZE*0.6:.1f};0,0" keyTimes="0;0.5"'
+                f' begin="{ch_start:.3f}s" dur="{flip_dur:.2f}s" fill="freeze" additive="sum"/>'
+                f'<animateTransform attributeName="transform" type="scale"'
+                f' values="1,0;1,1.15;1,1" keyTimes="0;0.5;1"'
+                f' begin="{ch_start:.3f}s" dur="{flip_dur:.2f}s" fill="freeze" additive="sum"/>'
+                f'</text>'
+            )
+
+    # Subtle glow effect on the whole name after reveal completes
+    glow_start = start + n * stagger
+    parts.append(
+        f'<ellipse cx="{W/2}" cy="{NAME_Y}" rx="170" ry="40"'
+        f' fill="none" stroke="{NAME}" stroke-width="1" opacity="0">'
+        f'<animate attributeName="opacity" values="0;0.12;0.06;0.10;0.04;0.08;0"'
+        f' keyTimes="0;0.1;0.3;0.5;0.7;0.85;1"'
+        f' begin="{glow_start:.3f}s" dur="6s" repeatCount="indefinite"/>'
+        f'</ellipse>'
+    )
+
+    return "\n".join(parts)
 
 
-def make_shard(num, start):
-    """Return SVG for one explosion shard of *num* at *start* time."""
-    angle = random.uniform(0, 360)
-    dist = random.uniform(70, 160)
-    dx = dist * math.cos(math.radians(angle))
-    dy = dist * math.sin(math.radians(angle))
-    rot = random.uniform(180, 540) * (1 if random.random() < 0.5 else -1)
-    delay = random.uniform(0, 0.18)
-
-    return f"""
-    <g opacity="0">
-      <animate attributeName="opacity" values="1;1;0" keyTimes="0;0.15;1"
-               begin="{start + delay:.3f}s" dur="{EXPLODE_DUR:.2f}s" fill="freeze"/>
-      <text x="{W / 2}" y="{CONTENT_Y}" text-anchor="middle"
-            dominant-baseline="central"
-            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
-            fill="{SHARD}">{num}
-        <animateTransform attributeName="transform" type="translate"
-                         from="0,0" to="{dx:.0f},{dy:.0f}"
-                         begin="{start + delay:.3f}s" dur="{EXPLODE_DUR:.2f}s"
-                         fill="freeze" additive="sum"/>
-        <animateTransform attributeName="transform" type="scale"
-                         from="1" to="1.8"
-                         begin="{start + delay:.3f}s" dur="{EXPLODE_DUR:.2f}s"
-                         fill="freeze" additive="sum"/>
-        <animateTransform attributeName="transform" type="rotate"
-                         from="0" to="{rot:.0f}"
-                         begin="{start + delay:.3f}s" dur="{EXPLODE_DUR:.2f}s"
-                         fill="freeze" additive="sum"/>
-      </text>
-    </g>"""
-
-
-def make_countdown_number(num):
-    """Return SVG for one countdown number (types-in, holds, fades out)."""
-    start = cycle_start(num)
-    total = TYPE_DUR + HOLD_DUR + EXPLODE_DUR
-
-    # Phase keyframes: 0=invisible, 1=visible, 2=explode
-    t1 = TYPE_DUR / total
-    t2 = (TYPE_DUR + HOLD_DUR) / total
-
-    return f"""
-    <g>
-      <text x="{W / 2}" y="{CONTENT_Y}" text-anchor="middle"
-            dominant-baseline="central"
-            font-family="'Courier New',monospace" font-size="72" font-weight="bold"
-            fill="{NUM_CLR}">{num}
-        <animate attributeName="opacity"
-                 values="0;1;1;0" keyTimes="0;{t1:.3f};{t2:.3f};1"
-                 begin="{start:.3f}s" dur="{total:.2f}s" fill="freeze"/>
-        <animateTransform attributeName="transform" type="scale"
-                 values="0;1;1;1.3" keyTimes="0;{t1:.3f};{t2:.3f};1"
-                 begin="{start:.3f}s" dur="{total:.2f}s" fill="freeze"/>
-      </text>
-      { ''.join(make_shard(num, start + TYPE_DUR + HOLD_DUR) for _ in range(N_SHARDS))}
-    </g>"""
-
-
-def make_final_state():
-    """Return SVG for the final '→ GO!' state after countdown ends."""
-    start = cycle_start(1) + CYCLE_DUR - 0.3  # ~12.7s
-    return f"""
-    <g>
-      <text x="{W / 2}" y="{CONTENT_Y - 10}" text-anchor="middle"
-            dominant-baseline="central"
-            font-family="'Courier New',monospace" font-size="60" font-weight="bold"
-            fill="{FINAL}">
-        <!-- type in -->
-        <animate attributeName="opacity" values="0;1" keyTimes="0;0.15"
-                 begin="{start:.3f}s" dur="0.5s" fill="freeze"/>
-        <animateTransform attributeName="transform" type="scale"
-                 values="2;1" keyTimes="0;0.15"
-                 begin="{start:.3f}s" dur="0.5s" fill="freeze"/>
-        <!-- perpetual gentle pulse (pure SMIL) -->
-        <animateTransform attributeName="transform" type="translate"
-                 values="0,0;0,-3;0,0" keyTimes="0;0.5;1"
-                 begin="{start + 0.5:.3f}s" dur="3s" repeatCount="indefinite"
-                 additive="sum"/>
-        &#8594; GO!
-      </text>
-      <!-- glow ring: initial pulse, then perpetual gentle breathe -->
-      <circle cx="{W / 2}" cy="{CONTENT_Y - 10}" r="80" fill="none"
-              stroke="{FINAL}" stroke-width="1.5" opacity="0">
-        <animate attributeName="opacity" values="0;0.15;0;0.08;0.04;0.08"
-                 keyTimes="0;0.08;0.25;0.5;0.75;1"
-                 begin="{start + 0.5:.3f}s" dur="4s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="40;90;40"
-                 keyTimes="0;0.5;1"
-                 begin="{start + 0.5:.3f}s" dur="4s" repeatCount="indefinite"/>
-      </circle>
-    </g>"""
-
+# ── Render ──────────────────────────────────────────────────────────
 
 def render():
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}"',
         f'     viewBox="0 0 {W} {H}"',
         f'     font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">',
-        
+        # Card background
         f'<rect width="{W}" height="{H}" rx="14" fill="{BG}"/>',
-        f'<rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="14"',
-        f'      fill="none" stroke="{FRAME}" stroke-width="1" stroke-opacity="0.55"/>',
+        f'<rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="14"'
+        f' fill="none" stroke="{FRAME}" stroke-width="1" stroke-opacity="0.55"/>',
         make_title_bar(),
-        # Countdown numbers 5 → 1
-        *[make_countdown_number(n) for n in (5, 4, 3, 2, 1)],
-        make_final_state(),
+        # Countdown: A → K → I
+        make_letter_cycle("A", 0),
+        make_letter_cycle("K", 1),
+        make_letter_cycle("I", 2),
+        # Name reveal
+        make_name_reveal(),
         # Bottom text
-        f'<text x="{W / 2}" y="{H - 18}" text-anchor="middle" fill="{MUTED}"',
-        f'      font-size="11" opacity="0.6">countdown v1.0 — Akileswaran</text>',
+        f'<text x="{W/2}" y="{H-16}" text-anchor="middle" fill="{MUTED}"',
+        f' font-size="11" opacity="0.45">typewriter card — Akileswaran</text>',
         '</svg>',
     ]
     return "\n".join(parts)
