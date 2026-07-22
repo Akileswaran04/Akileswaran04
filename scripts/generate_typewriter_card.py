@@ -48,7 +48,7 @@ CONFIG = {
     # ── Name-reveal timing ─────────────────────────────────────
     "STAGGER":          0.12,            # seconds between each char's scroll start
     "BASE_SCROLL":       0.15,           # base scroll duration
-    "PER_STEP":          0.018,          # additional seconds per scroll step
+    "PER_STEP":          0.035,          # additional seconds per scroll step
 
     # ── Underscore wave ────────────────────────────────────────
     "WAVE_STAGGER":      0.08,           # seconds between consecutive underscores
