@@ -9,7 +9,6 @@ Leaves a brief flash trail when passing through each cell.
 import datetime
 import json
 import os
-import random
 
 HERE = os.path.dirname(__file__)
 IN_PATH = os.path.join(HERE, "..", "data", "contributions.json")
@@ -72,72 +71,46 @@ def build_grid(days):
     return grid
 
 
-def build_greedy_path(grid, grid_left, grid_top):
-    """Build a snake-like path visiting every non-None cell using greedy
-    nearest-neighbor traversal. Prefers adjacent cells so the path looks
-    like a real snake rather than scattered dots.
-
-    Starts at the oldest cell (earliest date), ends at the most recent
-    contribution (latest date). Uses a fixed seed for reproducibility.
+def build_smooth_path(grid, grid_left, grid_top):
+    """Build a perfectly smooth serpentine path visiting every non-None cell.
+    Every single step moves to an adjacent cell — no jumps at all.
+    Starts at the oldest cell (earliest date).
     Returns (positions, cells) lists in visitation order.
     """
-    cells_with_pos = []
+    # Build path in column-by-column serpentine order (all adjacent moves)
+    positions = []
+    cells = []
     for ci, column in enumerate(grid):
-        for ri, cell in enumerate(column):
+        rng = range(len(column))
+        if ci % 2 == 1:
+            rng = reversed(rng)
+        for ri in rng:
+            cell = column[ri]
             if cell is None:
                 continue
             cx = grid_left + ci * STEP
             cy = grid_top + ri * STEP
-            cells_with_pos.append(((cx, cy), cell))
+            positions.append((cx, cy))
+            cells.append(cell)
 
-    if not cells_with_pos:
+    if not cells:
         return [], []
 
-    # Build lookup: position → cell tuple
-    pos_to_cell = {p: c for p, c in cells_with_pos}
+    # Find oldest cell index (earliest date string)
+    oldest_idx = min(range(len(cells)), key=lambda i: cells[i][0])
 
-    # Find oldest and latest cells by date string (YYYY-MM-DD sorts chronologically)
-    key_fn = lambda item: item[1][0]
-    oldest_pos, _ = min(cells_with_pos, key=key_fn)
-    latest_pos, latest_cell = max(cells_with_pos, key=key_fn)
+    # Rotate so the path starts at the oldest cell
+    positions = positions[oldest_idx:] + positions[:oldest_idx]
+    cells = cells[oldest_idx:] + cells[:oldest_idx]
 
-    # Save latest for last
-    unvisited = set(pos_to_cell.keys())
-    unvisited.discard(latest_pos)
+    # Move the latest-date cell to the very end so the snake
+    # finishes and fades out at the current date's cell
+    latest_idx = max(range(len(cells)), key=lambda i: cells[i][0])
+    if latest_idx < len(positions) - 1:
+        positions.append(positions.pop(latest_idx))
+        cells.append(cells.pop(latest_idx))
 
-    path = [oldest_pos]
-    cells = [pos_to_cell[oldest_pos]]
-    unvisited.discard(oldest_pos)
-
-    # Use fixed seed for reproducible ordering of tie-breaking
-    random.seed(42)
-    current = oldest_pos
-
-    while unvisited:
-        cx, cy = current
-        # Neighbor positions (up, down, left, right)
-        neighbors = [(cx - STEP, cy), (cx + STEP, cy), (cx, cy - STEP), (cx, cy + STEP)]
-        adj_avail = [n for n in neighbors if n in unvisited]
-
-        if adj_avail:
-            # Shuffle adjacent candidates for organic feel, then pick first
-            random.shuffle(adj_avail)
-            next_pos = adj_avail[0]
-        else:
-            # No adjacent unvisited — jump to nearest (by Manhattan distance)
-            next_pos = min(unvisited, key=lambda p: abs(p[0] - cx) + abs(p[1] - cy))
-
-        path.append(next_pos)
-        cells.append(pos_to_cell[next_pos])
-        unvisited.remove(next_pos)
-        current = next_pos
-
-    # Append latest cell at the end (skip if it's the same as oldest — single cell)
-    if oldest_pos != latest_pos:
-        path.append(latest_pos)
-        cells.append(latest_cell)
-
-    return path, cells
+    return positions, cells
 
 
 def render(data):
@@ -166,7 +139,7 @@ def render(data):
     gx = PAD + LEFT_LABEL_W
     gy = TITLEBAR_H + TOP_LABEL_H
 
-    snake_path, snake_cells = build_greedy_path(grid, gx, gy)
+    snake_path, snake_cells = build_smooth_path(grid, gx, gy)
     n_cells = max(len(snake_path), 2)
 
     # ---- timing ----
