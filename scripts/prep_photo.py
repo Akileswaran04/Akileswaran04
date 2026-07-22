@@ -26,7 +26,7 @@ except Exception:
     HAS_REMBG = False
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-INP = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "..", "pic", "proflie.jpeg")
+INP = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "..", "pic", "profile.jpeg")
 OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, "..", "source-prepped.png")
 
 img = Image.open(INP).convert("RGBA")

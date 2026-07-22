@@ -110,6 +110,8 @@ Currently exploring multi-agent AI systems and workflow automation.
 <br>
 
 <!-- 1. Contribution Snake Animation (auto-generated every 12h via .github/workflows/snake.yml) -->
+<div align="center" style="border: 1px solid #30363d; border-radius: 12px; padding: 24px 20px 20px; margin-bottom: 24px; background: #0d1117; text-align: center;">
+
 ### 🐍 Contribution Snake
 
 <picture>
@@ -118,9 +120,13 @@ Currently exploring multi-agent AI systems and workflow automation.
   <img alt="GitHub contribution snake" src="https://raw.githubusercontent.com/Akileswaran04/Akileswaran04/output/github-snake.svg" />
 </picture>
 
-<br><br>
+</div>
+
+<br>
 
 <!-- 2. GitHub Stats + Streak Stats (side-by-side, custom neon palette) -->
+<div align="center" style="border: 1px solid #30363d; border-radius: 12px; padding: 24px 20px 20px; margin-bottom: 24px; background: #0d1117; text-align: center;">
+
 ### 📊 GitHub Stats
 
 <table>
@@ -134,9 +140,13 @@ Currently exploring multi-agent AI systems and workflow automation.
 </tr>
 </table>
 
+</div>
+
 <br>
 
 <!-- 3. Skill Icons (clickable, from skillicons.dev) -->
+<div align="center" style="border: 1px solid #30363d; border-radius: 12px; padding: 24px 20px 20px; margin-bottom: 24px; background: #0d1117; text-align: center;">
+
 ### 🧰 Skills & Tools
 
 <p align="center">
@@ -151,9 +161,13 @@ Currently exploring multi-agent AI systems and workflow automation.
   <a href="https://fastapi.tiangolo.com" target="_blank"><img src="https://skillicons.dev/icons?i=fastapi" alt="FastAPI" width="48" /></a>&nbsp;
 </p>
 
+</div>
+
 <br>
 
 <!-- 4. Collapsible "Currently Building" section -->
+<div align="center" style="border: 1px solid #30363d; border-radius: 12px; padding: 24px 20px 20px; margin-bottom: 24px; background: #0d1117; text-align: center;">
+
 ### 🔨 Currently Building
 
 <details>
@@ -173,9 +187,13 @@ Currently exploring multi-agent AI systems and workflow automation.
   <br>
 </details>
 
+</div>
+
 <br>
 
 <!-- 5. Typing Animation Header (rotating tagline via readme-typing-svg) -->
+<div align="center" style="border: 1px solid #30363d; border-radius: 12px; padding: 24px 20px 20px; margin-bottom: 24px; background: #0d1117; text-align: center;">
+
 ### ⚡ Tagline
 
 <p align="center">
@@ -183,3 +201,5 @@ Currently exploring multi-agent AI systems and workflow automation.
     <img src="https://readme-typing-svg.demolab.com/?lines=Full-Stack+Developer+%7C+Applied+ML;Full-Stack+x+AI+ML+%E2%80%94+turning+data+into+decisions&font=Fira+Code&size=22&duration=4000&pause=2000&color=22D3EE&center=true&width=500&height=60&repeat=true" alt="Typing SVG" />
   </a>
 </p>
+
+</div>
