@@ -1,4 +1,4 @@
-name: Contribution Snake
+name: Snake & Heatmap
 
 on:
   schedule:
@@ -15,13 +15,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Fetch contributions
+        run: python scripts/fetch_contributions.py
+        env:
+          GH_PROFILE_USER: Akileswaran04
+
+      - name: Render heatmap SVG
+        run: python scripts/render_heatmap_svg.py
+
+      - name: Commit heatmap data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/contributions.json contrib-heatmap.svg
+          git diff --staged --quiet || git commit -m "chore: refresh contribution data [automated]"
+          git push
+
       - name: Generate Snake (dark + light)
         uses: Platane/snk@v3
         with:
           github_user_name: ${{ github.repository_owner }}
           outputs: |
-dist/github-snake-dark.svg?color_snake=%234ade80&color_dots=%23161b22,%230e4429,%23006d32,%2326a641,%234ade80
-dist/github-snake.svg?color_snake=%2316a34a&color_dots=%23ebedf0,%239be9a8,%2340c463,%2330a14e,%2316a34a
+            dist/github-snake-dark.svg?color_snake=%234ade80&color_dots=%23161b22,%230e4429,%23006d32,%2326a641,%234ade80
+            dist/github-snake.svg?color_snake=%2316a34a&color_dots=%23ebedf0,%239be9a8,%2340c463,%2330a14e,%2316a34a
 
       - name: Push snake to output branch
         uses: crazy-max/ghaction-github-pages@v4

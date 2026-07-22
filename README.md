@@ -94,7 +94,11 @@ Currently exploring multi-agent AI systems and workflow automation.
 
 <br>
 
-<sub>⚡ Profile art auto-generated — portrait SVGs refresh when source photo changes, contribution data refreshes daily via GitHub Actions.</sub>
+<img src="./contrib-heatmap.svg" width="860" alt="GitHub contribution graph" />
+
+<br><br>
+
+<sub>⚡ Profile art auto-generated — portrait SVGs refresh when source photo changes, contribution data refreshes every 6 hours via GitHub Actions.</sub>
 
 </div>
 
