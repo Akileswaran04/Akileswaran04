@@ -341,7 +341,7 @@ def make_name_reveal(c):
                     )
                 else:
                     # Intermediate letter: flash briefly then disappear
-                    flash = per_step_time * 0.6
+                    flash = per_step_time * 0.95
                     parts.append(
                         f'<text x="{cx:.1f}" y="{c["Y_CENTER"]}" '
                         f'text-anchor="middle" dominant-baseline="central" '
