@@ -49,10 +49,6 @@ def cycle_start(n):
     return (5 - n) * CYCLE_DUR
 
 
-def make_style():
-    return ""
-
-
 def make_title_bar():
     dots = "".join(
         f'<circle cx="{PAD + i * 16}" cy="{TITLEBAR_H / 2}" r="5" fill="{c}"/>'
@@ -68,7 +64,7 @@ def make_title_bar():
     """
 
 
-def make_shard(num, start, shard_id):
+def make_shard(num, start):
     """Return SVG for one explosion shard of *num* at *start* time."""
     angle = random.uniform(0, 360)
     dist = random.uniform(70, 160)
@@ -123,7 +119,7 @@ def make_countdown_number(num):
                  values="0;1;1;1.3" keyTimes="0;{t1:.3f};{t2:.3f};1"
                  begin="{start:.3f}s" dur="{total:.2f}s" fill="freeze"/>
       </text>
-      { ''.join(make_shard(num, start + TYPE_DUR + HOLD_DUR, i) for i in range(N_SHARDS))}
+      { ''.join(make_shard(num, start + TYPE_DUR + HOLD_DUR) for _ in range(N_SHARDS))}
     </g>"""
 
 
@@ -154,7 +150,7 @@ def make_final_state():
               stroke="{FINAL}" stroke-width="1.5" opacity="0">
         <animate attributeName="opacity" values="0;0.15;0;0.08;0.04;0.08"
                  keyTimes="0;0.08;0.25;0.5;0.75;1"
-                 begin="{start + 0.5:.3f}s" dur="4s" repeatCount="indefinite" fill="freeze"/>
+                 begin="{start + 0.5:.3f}s" dur="4s" repeatCount="indefinite"/>
         <animate attributeName="r" values="40;90;40"
                  keyTimes="0;0.5;1"
                  begin="{start + 0.5:.3f}s" dur="4s" repeatCount="indefinite"/>
@@ -167,7 +163,7 @@ def render():
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}"',
         f'     viewBox="0 0 {W} {H}"',
         f'     font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">',
-        f'<style>{make_style()}</style>',
+        
         f'<rect width="{W}" height="{H}" rx="14" fill="{BG}"/>',
         f'<rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="14"',
         f'      fill="none" stroke="{FRAME}" stroke-width="1" stroke-opacity="0.55"/>',
