@@ -37,8 +37,7 @@ TOP_LABEL_H  = 20
 TITLEBAR_H   = 30
 STATS_H = 88
 SNAKE_DELAY    = 1.5      # seconds before snake starts
-SNAKE_DUR      = 6.0      # seconds for full traversal
-HEAD_R         = 7        # snake head circle radius
+SNAKE_DUR      = 10.0     # seconds for full traversal
 
 
 def level_for(count):
@@ -72,10 +71,8 @@ def build_grid(days):
 
 
 def build_wave_path(grid, grid_left, grid_top):
-    """Build a serpentine wave path sweeping across bands of 3 rows.
-    Wave 1 (rows 0-2): left-to-right across all columns.
-    Wave 2 (rows 3-5): right-to-left across all columns.
-    Wave 3 (row 6): left-to-right across all columns.
+    """Build a serpentine wave path sweeping across bands of 2 rows,
+    with L-shaped smoothing walks between columns within each wave.
     Rotated to start at the oldest cell and end at the latest.
     Returns (positions, cells) lists in visitation order.
     """
@@ -92,27 +89,56 @@ def build_wave_path(grid, grid_left, grid_top):
     if not pos_to_cell:
         return [], []
 
-    all_positions = set(pos_to_cell.keys())
-    WAVE_ROWS = 3
+    all_pos = set(pos_to_cell.keys())
+    WAVE_ROWS = 2
     positions = []
     cells = []
     visited = set()
 
+    def walk_horiz(src_x, y, tgt_x):
+        """Walk horizontally from src_x to tgt_x at row y, adding cells."""
+        step = STEP if tgt_x > src_x else -STEP
+        x = src_x + step
+        while (step > 0 and x <= tgt_x) or (step < 0 and x >= tgt_x):
+            if (x, y) in all_pos and (x, y) not in visited:
+                visited.add((x, y))
+                positions.append((x, y))
+                cells.append(pos_to_cell[(x, y)])
+            x += step
+
+    def walk_vert(x, src_y, tgt_y):
+        """Walk vertically from src_y to tgt_y at column x, adding cells."""
+        step = STEP if tgt_y > src_y else -STEP
+        y = src_y + step
+        while (step > 0 and y <= tgt_y) or (step < 0 and y >= tgt_y):
+            if (x, y) in all_pos and (x, y) not in visited:
+                visited.add((x, y))
+                positions.append((x, y))
+                cells.append(pos_to_cell[(x, y)])
+            y += step
+
     for wave_start in range(0, 7, WAVE_ROWS):
         wave_end = min(wave_start + WAVE_ROWS, 7)
         is_reverse = (wave_start // WAVE_ROWS) % 2 == 1
-        col_range = range(n_cols)
+        col_range = list(range(n_cols))
         if is_reverse:
-            col_range = reversed(col_range)
+            col_range.reverse()
 
         for ci in col_range:
             cx = grid_left + ci * STEP
             for ri in range(wave_start, wave_end):
                 cy = grid_top + ri * STEP
-                if (cx, cy) in all_positions and (cx, cy) not in visited:
-                    visited.add((cx, cy))
-                    positions.append((cx, cy))
-                    cells.append(pos_to_cell[(cx, cy)])
+                if (cx, cy) in all_pos and (cx, cy) not in visited:
+                    # Smooth transition from previous cell via L-shaped walk
+                    if positions:
+                        lx, ly = positions[-1]
+                        if abs(lx - cx) + abs(ly - cy) > STEP:
+                            walk_horiz(lx, ly, cx)
+                            walk_vert(cx, ly, cy)
+                    if (cx, cy) not in visited:
+                        visited.add((cx, cy))
+                        positions.append((cx, cy))
+                        cells.append(pos_to_cell[(cx, cy)])
 
     if not positions:
         return [], []
@@ -163,11 +189,6 @@ def render(data):
     # ---- timing ----
     def trail_time(i):
         return SNAKE_DELAY + i * SNAKE_DUR / (n_cells - 1)
-
-    # ---- build snake head keyframes ----
-    xs_vals = ";".join(f"{p[0]}" for p in snake_path)
-    ys_vals = ";".join(f"{p[1]}" for p in snake_path)
-    kt_vals = ";".join(f"{i / (n_cells - 1):.6f}" for i in range(n_cells))
 
     css = f"""
 @keyframes cell {{
@@ -235,32 +256,9 @@ def render(data):
             f'</rect>'
         )
 
-    # ---- body segments (3, staggered by 2s) ----
-    hx = snake_path[0][0]
-    hy = snake_path[0][1]
-    body_count = 3
-    body_gap  = 2.0       # seconds between each body segment
-    last_delay = SNAKE_DELAY + (body_count - 1) * body_gap
-    fade_end = (SNAKE_DUR - 0.8) / SNAKE_DUR  # start fading 0.8s before end
-
-    for seg in range(body_count):
-        offset = seg * body_gap
-        delay = SNAKE_DELAY + offset
-        is_last = (seg == body_count - 1)
-        parts.append(
-            f'<circle cx="{hx}" cy="{hy}" r="{HEAD_R}" fill="{SNAKE_COLOR}" filter="url(#glow)">'
-            f'<animate attributeName="cx" values="{xs_vals}" keyTimes="{kt_vals}" '
-            f'dur="{SNAKE_DUR:.1f}s" begin="{delay:.3f}s" fill="freeze"/>'
-            f'<animate attributeName="cy" values="{ys_vals}" keyTimes="{kt_vals}" '
-            f'dur="{SNAKE_DUR:.1f}s" begin="{delay:.3f}s" fill="freeze"/>'
-            + (f'<animate attributeName="opacity" values="1;1;0" keyTimes="0;{fade_end:.6f};1" '
-               f'dur="{SNAKE_DUR:.1f}s" begin="{delay:.3f}s" fill="freeze"/>' if is_last else '')
-            + '</circle>'
-        )
-
-    # ---- final glow pulse on last cell (timed to last body segment) ----
+    # ---- final glow pulse on last cell ----
     lx, ly = snake_path[-1]
-    pulse_start = last_delay + SNAKE_DUR - 0.3  # start slightly before last body fades
+    pulse_start = SNAKE_DELAY + SNAKE_DUR - 0.3
     pcx = lx + CELL / 2
     pcy = ly + CELL / 2
     parts.append(
