@@ -29,13 +29,13 @@ import xml.etree.ElementTree as ET
 CONFIG = {
     # ── Content ────────────────────────────────────────────────
     "USERNAME":         "Akileswaran04",
-    "COUNTDOWN_LETTERS": ["A", "K", "I"],
+    "COUNTDOWN_LETTERS": [],
     "FULL_NAME":        "AKILESWARAN",
 
     # ── Dimensions ─────────────────────────────────────────────
     "PAD":              40,
     "TITLEBAR_H":       30,
-    "H":                260,             # card height
+    "H":                130,             # card height
     "FONT_SIZE":        38,              # name font size
     "NAME_GAP":         4,               # vertical gap between stacked scroll chars
 
