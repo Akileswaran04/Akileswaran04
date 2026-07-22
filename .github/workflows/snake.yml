@@ -1,4 +1,4 @@
-name: Refresh Contribution Data
+name: Contribution Snake
 
 on:
   schedule:
@@ -9,32 +9,24 @@ permissions:
   contents: write
 
 jobs:
-  refresh-contributions:
+  generate-snake:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - name: Generate Snake (Frost & Obsidian)
+        uses: Platane/snk@v3
         with:
-          python-version: '3.11'
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-snake-dark.svg?color_snake=%23e0f2fe&color_dots=%230a0e14,%231a2533,%232d4a66,%234a7c99,%23e0f2fe
+            dist/github-snake.svg?color_snake=%234a7c99&color_dots=%23f5f0eb,%23d4c9b8,%23a8977a,%237a6046,%234a7c99
 
-      - name: Install dependencies
-        run: pip install requests beautifulsoup4
-
-      - name: Fetch contributions
-        run: python scripts/fetch_contributions.py
+      - name: Push to output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
         env:
-          GH_PROFILE_USER: Akileswaran04
-
-      - name: Render heatmap SVG (with integrated snake animation)
-        run: python scripts/render_heatmap_svg.py
-
-      - name: Commit updated contribution data
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/contributions.json contrib-heatmap.svg
-          git diff --staged --quiet || git commit -m "chore: refresh contribution data [automated]"
-          git push
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
