@@ -27,7 +27,7 @@ GREEN   = "#39d353"
 GOLD    = "#f2cc60"
 SNAKE_COLOR  = "#34d399"
 TRAIL_COLOR  = "#6ee7b7"
-TRAIL_DUR    = 0.4        # seconds for cell glow trail
+TRAIL_DUR    = 0.7        # seconds for cell glow trail
 
 CELL    = 12
 GAP     = 3
