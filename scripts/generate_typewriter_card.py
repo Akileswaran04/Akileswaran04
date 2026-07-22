@@ -208,6 +208,10 @@ def make_name_reveal():
         '</filter>'
     )
 
+    # Wave pulse timing (after all underscores have landed)
+    wave_start = start + n * stagger + scroll_dur + 0.5
+    wave_stagger = 0.08
+
     for i, target in enumerate(name):
         cx = x0 + i * CHAR_W + CHAR_W / 2
         seq = get_char_seq(i, target)
@@ -224,6 +228,8 @@ def make_name_reveal():
             f'<rect x="{clip_x:.1f}" y="{clip_y:.1f}" width="{clip_w:.1f}" height="{clip_h:.1f}" rx="2"/>'
             f'</clipPath>'
         )
+
+        wave_begin = wave_start + i * wave_stagger
 
         # If only one char (start == target), just show it directly
         if len(seq) == 1:
@@ -242,6 +248,10 @@ def make_name_reveal():
                 f'<animate attributeName="opacity" values="0;0;0.8;0.4;0.9"'
                 f' keyTimes="0;0.2;0.35;0.65;1"'
                 f' begin="{ch_start:.3f}s" dur="0.6s" fill="freeze"/>'
+                # Rhythmic wave pulse after landing
+                f'<animate attributeName="opacity" values="0.9;0.2;0.9"'
+                f' keyTimes="0;0.5;1" dur="0.8s"'
+                f' begin="{wave_begin:.3f}s" repeatCount="indefinite" fill="freeze"/>'
                 f'</rect>'
             )
             continue
@@ -279,6 +289,10 @@ def make_name_reveal():
             f'<animate attributeName="opacity" values="0;0;0.8;0.4;0.9"'
             f' keyTimes="0;0.2;0.35;0.65;1"'
             f' begin="{underscore_land:.3f}s" dur="0.6s" fill="freeze"/>'
+            # Rhythmic wave pulse after landing
+            f'<animate attributeName="opacity" values="0.9;0.2;0.9"'
+            f' keyTimes="0;0.5;1" dur="0.8s"'
+            f' begin="{wave_begin:.3f}s" repeatCount="indefinite" fill="freeze"/>'
             f'</rect>'
         )
 
