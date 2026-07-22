@@ -102,3 +102,84 @@ Currently exploring multi-agent AI systems and workflow automation.
 <sub>⚡ Profile art auto-generated — portrait SVGs refresh when source photo changes, heatmap refreshes daily via GitHub Actions.</sub>
 
 </div>
+
+<!-- ========================================================================== -->
+<!--  NEW SECTIONS — Added below this line                                     -->
+<!-- ========================================================================== -->
+
+<br>
+
+<!-- 1. Contribution Snake Animation (auto-generated every 12h via .github/workflows/snake.yml) -->
+### 🐍 Contribution Snake
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Akileswaran04/Akileswaran04/output/github-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Akileswaran04/Akileswaran04/output/github-snake.svg" />
+  <img alt="GitHub contribution snake" src="https://raw.githubusercontent.com/Akileswaran04/Akileswaran04/output/github-snake.svg" />
+</picture>
+
+<br><br>
+
+<!-- 2. GitHub Stats + Streak Stats (side-by-side, custom neon palette) -->
+### 📊 GitHub Stats
+
+<table>
+<tr>
+  <td>
+    <img src="https://github-readme-stats.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0d1117&title_color=22d3ee&text_color=c9d1d9&icon_color=22d3ee&border_color=30363d&hide_border=false" alt="GitHub Stats" />
+  </td>
+  <td>
+    <img src="https://streak-stats.demolab.com/?user=Akileswaran04&background=0d1117&ring=22d3ee&fire=22d3ee&currStreakLabel=c9d1d9&sideLabels=c9d1d9&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=30363d" alt="GitHub Streak" />
+  </td>
+</tr>
+</table>
+
+<br>
+
+<!-- 3. Skill Icons (clickable, from skillicons.dev) -->
+### 🧰 Skills & Tools
+
+<p align="center">
+  <a href="https://react.dev" target="_blank"><img src="https://skillicons.dev/icons?i=react" alt="React" width="48" /></a>&nbsp;
+  <a href="https://nodejs.org" target="_blank"><img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js" width="48" /></a>&nbsp;
+  <a href="https://firebase.google.com" target="_blank"><img src="https://skillicons.dev/icons?i=firebase" alt="Firebase" width="48" /></a>&nbsp;
+  <a href="https://www.postgresql.org" target="_blank"><img src="https://skillicons.dev/icons?i=postgres" alt="PostgreSQL" width="48" /></a>&nbsp;
+  <a href="https://www.python.org" target="_blank"><img src="https://skillicons.dev/icons?i=python" alt="Python" width="48" /></a>&nbsp;
+  <a href="https://www.tensorflow.org" target="_blank"><img src="https://skillicons.dev/icons?i=tensorflow" alt="TensorFlow" width="48" /></a>&nbsp;
+  <a href="https://pytorch.org" target="_blank"><img src="https://skillicons.dev/icons?i=pytorch" alt="PyTorch" width="48" /></a>&nbsp;
+  <a href="https://scikit-learn.org" target="_blank"><img src="https://skillicons.dev/icons?i=sklearn" alt="scikit-learn" width="48" /></a>&nbsp;
+  <a href="https://fastapi.tiangolo.com" target="_blank"><img src="https://skillicons.dev/icons?i=fastapi" alt="FastAPI" width="48" /></a>&nbsp;
+</p>
+
+<br>
+
+<!-- 4. Collapsible "Currently Building" section -->
+### 🔨 Currently Building
+
+<details>
+  <summary>Click to expand — projects in the works</summary>
+
+  <br>
+
+  - **SENTRI** — Parking Enforcement Intelligence Dashboard <br>
+    `Streamlit · FastAPI · ML Forecasting · XGBoost`
+
+  - **Riddle Rush (CSAU Project)** — Multiplayer 3D Trivia Board Game <br>
+    `React · Three.js · Socket.io · Supabase`
+
+  - **DayLog** — Real-Time Attendance Tracking System <br>
+    `React · Node.js · Firebase`
+
+  <br>
+</details>
+
+<br>
+
+<!-- 5. Typing Animation Header (rotating tagline via readme-typing-svg) -->
+### ⚡ Tagline
+
+<p align="center">
+  <a href="https://github.com/Akileswaran04">
+    <img src="https://readme-typing-svg.demolab.com/?lines=Full-Stack+Developer+%7C+Applied+ML;Full-Stack+x+AI+ML+%E2%80%94+turning+data+into+decisions&font=Fira+Code&size=22&duration=4000&pause=2000&color=22D3EE&center=true&width=500&height=60&repeat=true" alt="Typing SVG" />
+  </a>
+</p>
