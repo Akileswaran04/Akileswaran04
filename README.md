@@ -41,7 +41,7 @@
 <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white" />&nbsp;
 <img src="https://img.shields.io/badge/Three.js-000000?style=flat&logo=three.js&logoColor=white" />&nbsp;
 <img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white" />&nbsp;
-<img src="https://img.shields.io/badge/XGBoost-150458?style=flat&logo=databricks&logoColor=white" />
+<img src="https://img.shields.io/badge/XGBoost-150458?style=flat" />
 
 <br><br>
 
