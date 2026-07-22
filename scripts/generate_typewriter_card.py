@@ -258,7 +258,7 @@ def make_name_reveal():
     # Subtle glow after all chars have landed
     glow_start = start + n * stagger
     parts.append(
-        f'<ellipse cx="{W/2}" cy="{NAME_Y}" rx="170" ry="40"'
+        f'<ellipse cx="{W/2}" cy="{NAME_Y}" rx="340" ry="40"'
         f' fill="none" stroke="{NAME}" stroke-width="1" opacity="0">'
         f'<animate attributeName="opacity" values="0;0.12;0.06;0.10;0.04;0.08;0"'
         f' keyTimes="0;0.1;0.3;0.5;0.7;0.85;1"'
