@@ -90,11 +90,8 @@ Currently exploring multi-agent AI systems and workflow automation.
 
 <br>
 
-<!-- GitHub Stats -->
-### 📊 GitHub Stats
-
-<img src="https://github-readme-stats.vercel.app/api?username=Akileswaran04&show_icons=true&theme=github_dark&hide_border=true&count_private=true" width="48%" />
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Akileswaran04&layout=compact&theme=github_dark&hide_border=true&langs_count=6" width="48%" />
+<!-- GitHub Stats (using reliable badge counter instead of github-readme-stats API) -->
+<img src="https://komarev.com/ghpvc/?username=Akileswaran04&style=for-the-badge&color=22d3ee&label=PROFILE+VIEWS" />
 
 <br>
 

@@ -66,11 +66,8 @@ Your bio here — tell your story in a few lines.
 
 <br>
 
-<!-- GitHub Stats -->
-### 📊 GitHub Stats
-
-<img src="https://github-readme-stats.vercel.app/api?username=YOUR_USERNAME&show_icons=true&theme=github_dark&hide_border=true&count_private=true" width="48%" />
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=YOUR_USERNAME&layout=compact&theme=github_dark&hide_border=true&langs_count=6" width="48%" />
+<!-- Profile view counter -->
+<img src="https://komarev.com/ghpvc/?username=YOUR_USERNAME&style=for-the-badge&color=22d3ee&label=PROFILE+VIEWS" />
 
 <br>
 
