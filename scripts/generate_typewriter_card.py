@@ -80,7 +80,7 @@ def _derive(c):
     """Compute derived values from CONFIG."""
     c = c.copy()
     c["CYCLE_DUR"] = c["TYPE_DUR"] + c["HOLD_DUR"] + c["EXPLODE_DUR"] + c["CLEAN_DUR"]
-    c["CHAR_W"] = c["FONT_SIZE"] * 0.62
+    c["CHAR_W"] = c["FONT_SIZE"] * 0.80
     c["STEP"] = c["FONT_SIZE"] + c["NAME_GAP"]
     # Minimum card width: name + left/right margins + shard room
     min_w = 2 * c["PAD"] + len(c["FULL_NAME"]) * c["CHAR_W"] + 80
