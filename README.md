@@ -22,7 +22,7 @@
 
 <img src="./contrib-heatmap.svg" width="860" alt="GitHub contribution graph" />
 
-<br><br><br>
+<br><br>
 
 <img src="./typewriter-card.svg" width="860" alt="Typewriter countdown" />
 

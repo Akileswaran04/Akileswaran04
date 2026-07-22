@@ -303,8 +303,12 @@ def make_name_reveal(c):
         wave_begin = wave_start + i * wave_stagger
         underscore_y = c["Y_CENTER"] + c["FONT_SIZE"] / 2 + 4
 
-        if len(seq) == 1:
-            # Single character (start == target) — just fade in
+        # Character text — same position, no clip-path
+        # For multi-char sequences, cycle letters via opacity animation
+        # (Flipbook approach: each letter flashes briefly, last one stays)
+        n_seq = len(seq)
+        if n_seq == 1:
+            # Single char — just fade in
             parts.append(
                 f'<text x="{cx:.1f}" y="{c["Y_CENTER"]}" '
                 f'text-anchor="middle" dominant-baseline="central" '
@@ -315,50 +319,44 @@ def make_name_reveal(c):
                 f'keyTimes="0;0.1" begin="{ch_start:.3f}s" '
                 f'dur="0.2s" fill="freeze"/>'
                 f'</text>'
-                f'<rect x="{cx - c["CHAR_W"] / 2:.1f}" '
-                f'y="{underscore_y:.1f}" '
-                f'width="{c["CHAR_W"]:.1f}" height="2" rx="1" '
-                f'fill="{c["NAME"]}" filter="url(#underscore-glow)" '
-                f'opacity="0">'
-                f'<animate attributeName="opacity" '
-                f'values="0;0;0.8;0.4;0.9" '
-                f'keyTimes="0;0.2;0.35;0.65;1" '
-                f'begin="{ch_start:.3f}s" dur="0.6s" fill="freeze"/>'
-                f'<animate attributeName="opacity" '
-                f'values="0.9;0.2;0.9" keyTimes="0;0.5;1" '
-                f'dur="0.8s" begin="{wave_begin:.3f}s" '
-                f'repeatCount="indefinite"/>'
-                f'</rect>'
             )
-            continue
+        else:
+            # Multi-char: cycle through letters via opacity
+            per_step_time = scroll_dur / (n_seq - 1)
+            for ci, ch in enumerate(seq):
+                is_last = (ci == n_seq - 1)
+                t0 = ch_start + ci * per_step_time
+                if is_last:
+                    # Last letter fades in and stays
+                    parts.append(
+                        f'<text x="{cx:.1f}" y="{c["Y_CENTER"]}" '
+                        f'text-anchor="middle" dominant-baseline="central" '
+                        f'font-family="\'Courier New\',monospace" '
+                        f'font-size="{c["FONT_SIZE"]}" font-weight="bold" '
+                        f'fill="{c["NAME"]}">{ch}'
+                        f'<animate attributeName="opacity" '
+                        f'values="0;1" keyTimes="0;0.15" '
+                        f'begin="{t0:.3f}s" dur="0.15s" fill="freeze"/>'
+                        f'</text>'
+                    )
+                else:
+                    # Intermediate letter: flash briefly then disappear
+                    flash = per_step_time * 0.6
+                    parts.append(
+                        f'<text x="{cx:.1f}" y="{c["Y_CENTER"]}" '
+                        f'text-anchor="middle" dominant-baseline="central" '
+                        f'font-family="\'Courier New\',monospace" '
+                        f'font-size="{c["FONT_SIZE"]}" font-weight="bold" '
+                        f'fill="{c["NAME"]}">{ch}'
+                        f'<animate attributeName="opacity" '
+                        f'values="0;1;1;0" '
+                        f'keyTimes="0;0.08;0.3;1" '
+                        f'begin="{t0:.3f}s" dur="{flash:.3f}s" fill="freeze"/>'
+                        f'</text>'
+                    )
 
-        # Multi-character scroll stack
-        scroll_dist = (len(seq) - 1) * c["STEP"]
-        stack = ""
-        for ci, ch in enumerate(seq):
-            yp = c["Y_CENTER"] + ci * c["STEP"]
-            stack += (
-                f'<text x="{cx:.1f}" y="{yp:.1f}" '
-                f'text-anchor="middle" dominant-baseline="central" '
-                f'font-family="\'Courier New\',monospace" '
-                f'font-size="{c["FONT_SIZE"]}" font-weight="bold" '
-                f'fill="{c["NAME"]}">{ch}</text>'
-            )
-
+        # Glowing underscore (same for both branches)
         parts.append(
-            f'<g clip-path="url(#{clip_id})">'
-            f'<g opacity="0">'
-            f'<animate attributeName="opacity" values="0;1" '
-            f'keyTimes="0;0.06" begin="{ch_start:.3f}s" '
-            f'dur="{scroll_dur:.2f}s" fill="freeze"/>'
-            f'{stack}'
-            f'<animateTransform attributeName="transform" '
-            f'type="translate" from="0,0" to="0,-{scroll_dist:.1f}" '
-            f'begin="{ch_start:.3f}s" dur="{scroll_dur:.2f}s" '
-            f'fill="freeze" calcMode="spline" '
-            f'keySplines="0.4 0 0.2 1" keyTimes="0;1"/>'
-            f'</g>'
-            f'</g>'
             f'<rect x="{cx - c["CHAR_W"] / 2:.1f}" '
             f'y="{underscore_y:.1f}" '
             f'width="{c["CHAR_W"]:.1f}" height="2" rx="1" '
