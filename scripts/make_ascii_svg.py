@@ -31,9 +31,9 @@ RAMP = " .`:-=+*cs#%@"  # bright(sparse) -> dark(dense); leading space clears bg
 
 # the prepped image already has bg removed + CLAHE local contrast, so only
 # light global tuning is needed here.
-CONTRAST = 1.05
+CONTRAST = 1.12
 BRIGHTNESS = 1.0
-GAMMA = 1.18          # >1 brightens mids -> face lands in sparser chars
+GAMMA = 1.28          # >1 brightens mids -> face lands in sparser chars
 SHARPEN = False
 WHITE_FLOOR = 0.80    # luminance above this is forced to blank (space)
 
