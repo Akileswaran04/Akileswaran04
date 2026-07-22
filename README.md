@@ -94,12 +94,7 @@ Currently exploring multi-agent AI systems and workflow automation.
 
 <br>
 
-<!-- Contribution Heatmap (auto-refreshed daily) -->
-<img src="./contrib-heatmap.svg" width="860" alt="GitHub contribution graph" />
-
-<br><br>
-
-<sub>⚡ Profile art auto-generated — portrait SVGs refresh when source photo changes, heatmap refreshes daily via GitHub Actions.</sub>
+<sub>⚡ Profile art auto-generated — portrait SVGs refresh when source photo changes, contribution data refreshes daily via GitHub Actions.</sub>
 
 </div>
 
@@ -109,10 +104,10 @@ Currently exploring multi-agent AI systems and workflow automation.
 
 <br>
 
-<!-- 1. Contribution Snake Animation (auto-generated every 12h via .github/workflows/snake.yml) -->
+<!-- 1. Contribution Snake Animation (auto-generated every 6h via .github/workflows/snake.yml) -->
 <div align="center" style="border: 1px solid #30363d; border-radius: 12px; padding: 24px 20px 20px; margin-bottom: 24px; background: #0d1117; text-align: center;">
 
-### 🐍 Contribution Snake
+<p style="color:#7d8590; font-size:12px; margin-bottom:6px;"><em>chasing commits, one square at a time</em></p>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Akileswaran04/Akileswaran04/output/github-snake-dark.svg" />
