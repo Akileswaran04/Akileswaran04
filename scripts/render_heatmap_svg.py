@@ -107,25 +107,24 @@ def build_shortest_path(grid, grid_left, grid_top):
         if positions:
             lx, ly = positions[-1]
             if (lx, ly) != (cx, cy):
-                # Walk horizontally first
-                step_x = STEP if cx > lx else -STEP
-                x = lx + step_x
-                while (step_x > 0 and x < cx) or (step_x < 0 and x > cx):
-                    if (x, ly) in valid_pos and (x, ly) not in visited:
-                        visited.add((x, ly))
-                        positions.append((x, ly))
-                        cells.append(pos_cell[(x, ly)])
-                    x += step_x
-
-                # Then walk vertically
+                # Walk vertically first, then horizontally
                 step_y = STEP if cy > ly else -STEP
                 y = ly + step_y
-                while (step_y > 0 and y < cy) or (step_y < 0 and y > cy):
+                while (step_y > 0 and y <= cy) or (step_y < 0 and y >= cy):
                     if (cx, y) in valid_pos and (cx, y) not in visited:
                         visited.add((cx, y))
                         positions.append((cx, y))
                         cells.append(pos_cell[(cx, y)])
                     y += step_y
+
+                step_x = STEP if cx > lx else -STEP
+                x = lx + step_x
+                while (step_x > 0 and x <= cx) or (step_x < 0 and x >= cx):
+                    if (x, cy) in valid_pos and (x, cy) not in visited:
+                        visited.add((x, cy))
+                        positions.append((x, cy))
+                        cells.append(pos_cell[(x, cy)])
+                    x += step_x
 
         # Add the target cell itself
         if (cx, cy) not in visited:
