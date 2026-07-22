@@ -26,6 +26,8 @@ ACCENT  = "#34d399"
 GREEN   = "#39d353"
 GOLD    = "#f2cc60"
 SNAKE_COLOR  = "#34d399"
+TRAIL_COLOR  = "#6ee7b7"
+TRAIL_DUR    = 0.4        # seconds for cell glow trail
 
 CELL    = 12
 GAP     = 3
@@ -118,8 +120,12 @@ def render(data):
     gx = PAD + LEFT_LABEL_W
     gy = TITLEBAR_H + TOP_LABEL_H
 
-    snake_path, _ = build_random_path(grid, gx, gy)
+    snake_path, snake_cells = build_random_path(grid, gx, gy)
     n_cells = max(len(snake_path), 2)
+
+    # ---- timing ----
+    def trail_time(i):
+        return SNAKE_DELAY + i * SNAKE_DUR / (n_cells - 1)
 
     # ---- build snake head keyframes ----
     xs_vals = ";".join(f"{p[0]}" for p in snake_path)
@@ -176,6 +182,23 @@ def render(data):
                 f'fill="{PALETTE[lvl]}" style="animation-delay:{delay:.3f}s">'
                 f'<title>{date_s}: {count} contribution{plural}</title></rect>'
             )
+
+    # ---- glow trail overlays ----
+    pos_data = {(cx, cy): cell[2] for (cx, cy), cell in zip(snake_path, snake_cells)}
+    pos_idx  = {(cx, cy): i for i, (cx, cy) in enumerate(snake_path)}
+
+    for (cx, cy), orig_lvl in pos_data.items():
+        idx = pos_idx.get((cx, cy))
+        if idx is None:
+            continue
+        orig_color = PALETTE[orig_lvl]
+        at = trail_time(idx)
+        parts.append(
+            f'<rect x="{cx}" y="{cy}" width="{CELL}" height="{CELL}" rx="2.5" fill="{orig_color}">'
+            f'<animate attributeName="fill" values="{orig_color};{TRAIL_COLOR};{TRAIL_COLOR};{orig_color}" '
+            f'keyTimes="0;0.12;0.55;1" dur="{TRAIL_DUR:.2f}s" begin="{at:.3f}s" fill="freeze"/>'
+            f'</rect>'
+        )
 
     # ---- snake head (single, emerald) ----
     hx = snake_path[0][0]
