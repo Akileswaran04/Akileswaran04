@@ -26,7 +26,7 @@ GREEN   = "#14b8a6"
 GOLD    = "#fbbf24"
 SNAKE_COLOR  = "#2dd4bf"
 TRAIL_COLOR  = "#5eead4"
-TRAIL_DUR    = 1.2        # seconds for cell glow trail
+TRAIL_DUR    = 1.0        # seconds for cell glow trail
 
 CELL    = 12
 GAP     = 3
@@ -37,7 +37,7 @@ TOP_LABEL_H  = 20
 TITLEBAR_H   = 30
 STATS_H = 88
 SNAKE_DELAY    = 1.5      # seconds before snake starts
-SNAKE_DUR      = 20.0     # seconds for full traversal
+SNAKE_DUR      = 28.0     # seconds for full traversal
 
 
 def level_for(count):
