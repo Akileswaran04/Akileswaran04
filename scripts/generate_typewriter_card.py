@@ -19,11 +19,11 @@ HERE = os.path.dirname(__file__)
 OUT_PATH = os.path.join(HERE, "..", "typewriter-card.svg")
 
 # ── Dimensions ──────────────────────────────────────────────────────
-W, H = 640, 340
+W, H = 860, 260
 PAD = 40
-TITLEBAR_H = 34
-CONTENT_Y = 180   # y-centre for the big countdown letter
-NAME_Y = 170       # y-centre for the final name
+TITLEBAR_H = 30
+CONTENT_Y = 132   # y-centre for the big countdown letter
+NAME_Y = 128       # y-centre for the final name
 
 # ── Colors (bioluminescent teal terminal palette) ───────────────────
 BG      = "#0d1117"

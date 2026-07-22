@@ -22,6 +22,10 @@
 
 <img src="./contrib-heatmap.svg" width="860" alt="GitHub contribution graph" />
 
+<br>
+
+<img src="./typewriter-card.svg" width="860" alt="Typewriter countdown" />
+
 <br><br>
 
 <sub>⚡ Profile art auto-generated — portrait SVGs refresh when source photo changes, contribution data refreshes every 6 hours via GitHub Actions.</sub>
@@ -189,15 +193,3 @@ Currently exploring multi-agent AI systems and workflow automation.
 
 </div>
 
-<br>
-
-<!-- 6. Exploding Countdown Typewriter Card -->
-<div align="center" style="border: 1px solid #30363d; border-radius: 12px; padding: 24px 20px 20px; margin-bottom: 24px; background: #0d1117; text-align: center;">
-
-### ⏳ Countdown
-
-<p align="center">
-  <img src="./typewriter-card.svg" width="640" alt="Exploding countdown typewriter" />
-</p>
-
-</div>
