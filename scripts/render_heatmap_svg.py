@@ -243,7 +243,7 @@ def render(data):
     parts.append(
         f'<circle cx="{pcx:.1f}" cy="{pcy:.1f}" r="3" fill="{SNAKE_COLOR}" filter="url(#glow)" opacity="0">'
         f'<animate attributeName="r" values="3;14;16" keyTimes="0;0.4;1" dur="1.2s" begin="{pulse_start:.3f}s" fill="freeze"/>'
-        f'<animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.25;1" dur="1.2s" begin="{pulse_start:.3f}s" fill="freeze"/>'
+        f'<animate attributeName="opacity" values="0;1.0;0" keyTimes="0;0.25;1" dur="1.2s" begin="{pulse_start:.3f}s" fill="freeze"/>'
         f'</circle>'
     )
 
