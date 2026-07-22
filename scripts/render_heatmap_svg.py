@@ -44,11 +44,13 @@ TITLEBAR_H   = 30
 STATS_H = 88
 
 # ── Snake animation timing ─────────────────────────────────────────────
-SNAKE_DELAY   = 1.8    # wait for cells to appear before snake starts
-SNAKE_DUR     = 8.0    # total time for snake to traverse all cells
-CELL_EAT_DUR   = 0.4   # brief flash duration per cell when snake eats it
-CELL_EAT_BEGIN = 0.1   # flash starts at this fraction of CELL_EAT_DUR
-CELL_EAT_END   = 0.6   # flash fades back by this fraction of CELL_EAT_DUR
+SNAKE_DELAY     = 1.8    # wait for cells to appear before snake starts
+SNAKE_DUR       = 8.0    # total time for snake to traverse all cells
+SNAKE2_OFFSET   = 1.8    # second snake start delay after first
+SNAKE2_COLOR    = "#22d3ee"  # cyan accent for second snake
+CELL_EAT_DUR    = 0.4   # brief flash duration per cell when snake eats it
+CELL_EAT_BEGIN  = 0.1   # flash starts at this fraction of CELL_EAT_DUR
+CELL_EAT_END    = 0.6   # flash fades back by this fraction of CELL_EAT_DUR
 
 # ── Helpers ────────────────────────────────────────────────────────────
 def level_for(count):
@@ -238,54 +240,57 @@ def render(data):
 
     # ── SNAKE ANIMATION ──────────────────────────────────────────
     # Build keyTimes and values strings for the SMIL animate attributes.
-    # We have n_cells key frames, evenly spaced.
     key_times = [f"{i / max(n_cells - 1, 1):.4f}" for i in range(n_cells)]
-    x_vals = ";".join(str(p[0]) for p in snake_path)
-    y_vals = ";".join(str(p[1]) for p in snake_path)
     kt_str  = ";".join(key_times)
-
-    # Snake head — a bright green rounded rect with glow
-    snake_size = CELL + 2  # slightly larger than a cell
-    head_offset = (snake_size - CELL) / 2  # centering offset
-    # Offset the snake head positions so it's centered on each cell
+    snake_size = CELL + 2
+    head_offset = (snake_size - CELL) / 2
     x_vals_offset = ";".join(str(p[0] - head_offset) for p in snake_path)
     y_vals_offset = ";".join(str(p[1] - head_offset) for p in snake_path)
 
-    parts.append(
-        f'<rect x="{snake_path[0][0] - head_offset}" '
-        f'y="{snake_path[0][1] - head_offset}" '
-        f'width="{snake_size}" height="{snake_size}" rx="3.5" '
-        f'fill="{SNAKE_COLOR}" filter="url(#snake-glow)" opacity="0">\n'
-        f'  <animate attributeName="opacity" from="0" to="1" '
-        f'begin="{SNAKE_DELAY:.1f}s" dur="0.01s" fill="freeze"/>\n'
-        f'  <animate attributeName="x" values="{x_vals_offset}" '
-        f'keyTimes="{kt_str}" '
-        f'begin="{SNAKE_DELAY:.1f}s" dur="{SNAKE_DUR:.1f}s" fill="freeze"/>\n'
-        f'  <animate attributeName="y" values="{y_vals_offset}" '
-        f'keyTimes="{kt_str}" '
-        f'begin="{SNAKE_DELAY:.1f}s" dur="{SNAKE_DUR:.1f}s" fill="freeze"/>\n'
-        f'  <animate attributeName="opacity" from="1" to="0" '
-        f'begin="{SNAKE_DELAY + SNAKE_DUR:.1f}s" dur="0.01s" fill="freeze"/>'
-        f'</rect>'
-    )
+    def make_snake(color, delay_offset):
+        return (
+            f'<rect x="{snake_path[0][0] - head_offset}" '
+            f'y="{snake_path[0][1] - head_offset}" '
+            f'width="{snake_size}" height="{snake_size}" rx="3.5" '
+            f'fill="{color}" filter="url(#snake-glow)" opacity="0">\n'
+            f'  <animate attributeName="opacity" from="0" to="1" '
+            f'begin="{delay_offset:.1f}s" dur="0.01s" fill="freeze"/>\n'
+            f'  <animate attributeName="x" values="{x_vals_offset}" '
+            f'keyTimes="{kt_str}" '
+            f'begin="{delay_offset:.1f}s" dur="{SNAKE_DUR:.1f}s" fill="freeze"/>\n'
+            f'  <animate attributeName="y" values="{y_vals_offset}" '
+            f'keyTimes="{kt_str}" '
+            f'begin="{delay_offset:.1f}s" dur="{SNAKE_DUR:.1f}s" fill="freeze"/>\n'
+            f'  <animate attributeName="opacity" from="1" to="0" '
+            f'begin="{delay_offset + SNAKE_DUR:.1f}s" dur="0.01s" fill="freeze"/>'
+            f'</rect>'
+        )
 
-    # ── Cell "eaten" dim overlays (in snake-path order) ────────────
-    # Each cell briefly flashes bright then dims to empty (level 0) when
-    # the snake passes over it — the contribution is "consumed."
+    parts.append(make_snake(SNAKE_COLOR, SNAKE_DELAY))
+    parts.append(make_snake(SNAKE2_COLOR, SNAKE_DELAY + SNAKE2_OFFSET))
+
+    # ── Cell eaten flash overlays (in snake-path order) ────────────
+    # Each cell briefly flashes the matching snake's color when the snake
+    # passes over, then returns to its original contribution intensity.
+    # Green flash (snake 1) + cyan flash (snake 2)
     for i, (cx, cy) in enumerate(snake_path):
         _date, _count, lvl = snake_cells[i]
-        arrive = SNAKE_DELAY + i * SNAKE_DUR / max(n_cells - 1, 1)
+        arrive  = SNAKE_DELAY + i * SNAKE_DUR / max(n_cells - 1, 1)
+        arrive2 = SNAKE_DELAY + SNAKE2_OFFSET + i * SNAKE_DUR / max(n_cells - 1, 1)
         orig_color = PALETTE[lvl]
-        empty_color = PALETTE[0]
-        flash_color = EATEN_FLASH
         parts.append(
             f'<rect x="{cx}" y="{cy}" width="{CELL}" height="{CELL}" rx="2.5" '
             f'fill="{orig_color}">\n'
             f'  <animate attributeName="fill" '
-            f'values="{orig_color};{flash_color};{flash_color};{empty_color}" '
+            f'values="{orig_color};{EATEN_FLASH};{EATEN_FLASH};{orig_color}" '
             f'keyTimes="0;{CELL_EAT_BEGIN:.3f};{CELL_EAT_END:.3f};1" '
             f'dur="{CELL_EAT_DUR:.2f}s" '
             f'begin="{arrive:.3f}s" fill="freeze"/>\n'
+            f'  <animate attributeName="fill" '
+            f'values="{orig_color};{SNAKE2_COLOR};{SNAKE2_COLOR};{orig_color}" '
+            f'keyTimes="0;{CELL_EAT_BEGIN:.3f};{CELL_EAT_END:.3f};1" '
+            f'dur="{CELL_EAT_DUR:.2f}s" '
+            f'begin="{arrive2:.3f}s" fill="freeze"/>\n'
             f'</rect>'
         )
 
