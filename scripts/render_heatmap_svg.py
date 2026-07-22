@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """Render data/contributions.json as a terminal-window contribution heatmap
-SVG with two SMIL-animated snakes (emerald tide, yin-yang flow).
+SVG with a single SMIL-animated snake tracing a random path through the grid.
 
-Snake 1 (emerald #34d399): forward serpentine through grid columns.
-Snake 2 (jade #059669): reverse serpentine (start at last cell, go backward).
-Both leave a brief flash trail when passing through each cell.
+Snake (emerald #34d399): visits every cell in randomized order.
+Leaves a brief flash trail when passing through each cell.
 """
 
 import datetime
 import json
 import os
+import random
 
 HERE = os.path.dirname(__file__)
 IN_PATH = os.path.join(HERE, "..", "data", "contributions.json")
@@ -26,7 +26,6 @@ ACCENT  = "#34d399"
 GREEN   = "#39d353"
 GOLD    = "#f2cc60"
 SNAKE_COLOR  = "#34d399"
-SNAKE2_COLOR = "#059669"
 EATEN_FLASH  = "#6ee7b7"
 
 CELL    = 12
@@ -73,25 +72,26 @@ def build_grid(days):
     return grid
 
 
-def build_snake_path(grid, grid_left, grid_top):
-    """Build a serpentine path visiting every non-None cell in column order.
+def build_random_path(grid, grid_left, grid_top):
+    """Build a random path visiting every non-None cell.
+    Uses a fixed seed for reproducibility between renders.
     Returns (positions, cells) lists in visitation order.
     """
     positions = []
     cells = []
     for ci, column in enumerate(grid):
-        rng = range(len(column))
-        if ci % 2 == 1:
-            rng = reversed(rng)
-        for ri in rng:
-            cell = column[ri]
+        for ri, cell in enumerate(column):
             if cell is None:
                 continue
             cx = grid_left + ci * STEP
             cy = grid_top + ri * STEP
             positions.append((cx, cy))
             cells.append(cell)
-    return positions, cells
+    zipped = list(zip(positions, cells))
+    random.seed(42)
+    random.shuffle(zipped)
+    positions, cells = zip(*zipped) if zipped else ([], [])
+    return list(positions), list(cells)
 
 
 def render(data):
@@ -120,8 +120,7 @@ def render(data):
     gx = PAD + LEFT_LABEL_W
     gy = TITLEBAR_H + TOP_LABEL_H
 
-    snake_path, snake_cells = build_snake_path(grid, gx, gy)
-    rev_path = list(reversed(snake_path))
+    snake_path, snake_cells = build_random_path(grid, gx, gy)
     n_cells = len(snake_path)
     if n_cells < 2:
         n_cells = 2  # avoid division by zero
@@ -133,8 +132,6 @@ def render(data):
     # ---- build snake head keyframes ----
     xs_vals = ";".join(f"{p[0]}" for p in snake_path)
     ys_vals = ";".join(f"{p[1]}" for p in snake_path)
-    rev_xs  = ";".join(f"{p[0]}" for p in rev_path)
-    rev_ys  = ";".join(f"{p[1]}" for p in rev_path)
     kt_vals = ";".join(f"{i / (n_cells - 1):.6f}" for i in range(n_cells))
 
     css = f"""
@@ -188,50 +185,32 @@ def render(data):
                 f'<title>{date_s}: {count} contribution{plural}</title></rect>'
             )
 
-    # ---- cell flash overlays (position-based lookup) ----
-    pos_idx_forward = {(cx, cy): i for i, (cx, cy) in enumerate(snake_path)}
-    pos_idx_reverse = {(cx, cy): i for i, (cx, cy) in enumerate(rev_path)}
-    positions_all = {(cx, cy): cell[2] for (cx, cy), cell in zip(snake_path, snake_cells)}
+    # ---- cell flash overlays ----
+    positions_lookup = {(cx, cy): i for i, (cx, cy) in enumerate(snake_path)}
+    pos_data = {(cx, cy): cell[2] for (cx, cy), cell in zip(snake_path, snake_cells)}
 
-    for (cx, cy), orig_lvl in positions_all.items():
-        i1 = pos_idx_forward.get((cx, cy))
-        i2 = pos_idx_reverse.get((cx, cy))
-        if i1 is None or i2 is None:
+    for (cx, cy), orig_lvl in pos_data.items():
+        idx = positions_lookup.get((cx, cy))
+        if idx is None:
             continue
         orig_color = PALETTE[orig_lvl]
-        a1 = timing(i1)
-        a2 = timing(i2)
+        at = timing(idx)
         parts.append(
             f'<rect x="{cx}" y="{cy}" width="{CELL}" height="{CELL}" rx="2.5" fill="{orig_color}">'
             f'<animate attributeName="fill" values="{orig_color};{EATEN_FLASH};{EATEN_FLASH};{orig_color}" '
-            f'keyTimes="0;0.15;0.65;1" dur="{CELL_EAT_DUR:.2f}s" begin="{a1:.3f}s" fill="freeze"/>'
-            f'<animate attributeName="fill" values="{orig_color};{EATEN_FLASH};{EATEN_FLASH};{orig_color}" '
-            f'keyTimes="0;0.15;0.65;1" dur="{CELL_EAT_DUR:.2f}s" begin="{a2:.3f}s" fill="freeze"/>'
+            f'keyTimes="0;0.15;0.65;1" dur="{CELL_EAT_DUR:.2f}s" begin="{at:.3f}s" fill="freeze"/>'
             f'</rect>'
         )
 
-    # ---- snake head 1 (forward, emerald) ----
-    hx1 = snake_path[0][0]
-    hy1 = snake_path[0][1]
-    # glow filter is already inside <defs> above
+    # ---- snake head (single, emerald) ----
+    hx = snake_path[0][0]
+    hy = snake_path[0][1]
 
     parts.append(
-        f'<circle class="snake-head" cx="{hx1}" cy="{hy1}" r="{HEAD_R}" fill="{SNAKE_COLOR}" filter="url(#glow)">'
+        f'<circle class="snake-head" cx="{hx}" cy="{hy}" r="{HEAD_R}" fill="{SNAKE_COLOR}" filter="url(#glow)">'
         f'<animate attributeName="cx" values="{xs_vals}" keyTimes="{kt_vals}" '
         f'dur="{SNAKE_DUR:.1f}s" begin="{SNAKE_DELAY:.3f}s" fill="freeze"/>'
         f'<animate attributeName="cy" values="{ys_vals}" keyTimes="{kt_vals}" '
-        f'dur="{SNAKE_DUR:.1f}s" begin="{SNAKE_DELAY:.3f}s" fill="freeze"/>'
-        f'</circle>'
-    )
-
-    # ---- snake head 2 (reverse, jade) ----
-    hx2 = rev_path[0][0]
-    hy2 = rev_path[0][1]
-    parts.append(
-        f'<circle class="snake-head" cx="{hx2}" cy="{hy2}" r="{HEAD_R}" fill="{SNAKE2_COLOR}" filter="url(#glow)">'
-        f'<animate attributeName="cx" values="{rev_xs}" keyTimes="{kt_vals}" '
-        f'dur="{SNAKE_DUR:.1f}s" begin="{SNAKE_DELAY:.3f}s" fill="freeze"/>'
-        f'<animate attributeName="cy" values="{rev_ys}" keyTimes="{kt_vals}" '
         f'dur="{SNAKE_DUR:.1f}s" begin="{SNAKE_DELAY:.3f}s" fill="freeze"/>'
         f'</circle>'
     )
