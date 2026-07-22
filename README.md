@@ -108,10 +108,10 @@ Currently exploring multi-agent AI systems and workflow automation.
 
 <br>
 
-<!-- 1. Contribution Snake (frost & obsidian platane/snk, generated every 6h) -->
+<!-- 1. Contribution Snake (emerald tide platane/snk, generated every 6h) -->
 <div align="center" style="border: 1px solid #30363d; border-radius: 12px; padding: 24px 20px 20px; margin-bottom: 24px; background: #0d1117; text-align: center;">
 
-<p style="color:#7d8590; font-size:12px; margin-bottom:6px;"><em>frost chasing obsidian — contributions mapped</em></p>
+<p style="color:#7d8590; font-size:12px; margin-bottom:6px;"><em>emerald tide — contributions mapped</em></p>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Akileswaran04/Akileswaran04/output/github-snake-dark.svg" />
