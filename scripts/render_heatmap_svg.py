@@ -72,51 +72,72 @@ def build_grid(days):
     return grid
 
 
-def build_random_path(grid, grid_left, grid_top):
-    """Build a random path visiting every non-None cell.
-    The oldest cell goes first, the most recent (latest-date) cell
-    goes last so the snake starts at the earliest contribution and
-    ends at the current date. Uses fixed seed for reproducibility.
+def build_greedy_path(grid, grid_left, grid_top):
+    """Build a snake-like path visiting every non-None cell using greedy
+    nearest-neighbor traversal. Prefers adjacent cells so the path looks
+    like a real snake rather than scattered dots.
+
+    Starts at the oldest cell (earliest date), ends at the most recent
+    contribution (latest date). Uses a fixed seed for reproducibility.
     Returns (positions, cells) lists in visitation order.
     """
-    positions = []
-    cells = []
+    cells_with_pos = []
     for ci, column in enumerate(grid):
         for ri, cell in enumerate(column):
             if cell is None:
                 continue
             cx = grid_left + ci * STEP
             cy = grid_top + ri * STEP
-            positions.append((cx, cy))
-            cells.append(cell)
+            cells_with_pos.append(((cx, cy), cell))
 
-    zipped = list(zip(positions, cells))
-    if not zipped:
+    if not cells_with_pos:
         return [], []
 
-    key_fn = lambda i: zipped[i][1][0]
-    oldest_idx = min(range(len(zipped)), key=key_fn)
-    oldest_item = zipped.pop(oldest_idx)
+    # Build lookup: position → cell tuple
+    pos_to_cell = {p: c for p, c in cells_with_pos}
 
-    if len(zipped) < 2:
-        # Too few cells for oldest → shuffled → latest pattern
-        random.seed(42)
-        random.shuffle(zipped)
-        zipped = [oldest_item] + zipped
-        positions, cells = zip(*zipped)
-        return list(positions), list(cells)
+    # Find oldest and latest cells by date string (YYYY-MM-DD sorts chronologically)
+    key_fn = lambda item: item[1][0]
+    oldest_pos, _ = min(cells_with_pos, key=key_fn)
+    latest_pos, latest_cell = max(cells_with_pos, key=key_fn)
 
-    latest_idx = max(range(len(zipped)), key=key_fn)
-    latest_item = zipped.pop(latest_idx)
+    # Save latest for last
+    unvisited = set(pos_to_cell.keys())
+    unvisited.discard(latest_pos)
 
+    path = [oldest_pos]
+    cells = [pos_to_cell[oldest_pos]]
+    unvisited.discard(oldest_pos)
+
+    # Use fixed seed for reproducible ordering of tie-breaking
     random.seed(42)
-    random.shuffle(zipped)
+    current = oldest_pos
 
-    # Assemble: oldest → shuffled → latest
-    zipped = [oldest_item] + zipped + [latest_item]
+    while unvisited:
+        cx, cy = current
+        # Neighbor positions (up, down, left, right)
+        neighbors = [(cx - STEP, cy), (cx + STEP, cy), (cx, cy - STEP), (cx, cy + STEP)]
+        adj_avail = [n for n in neighbors if n in unvisited]
 
-    positions, cells = zip(*zipped) if zipped else ([], [])
-    return list(positions), list(cells)
+        if adj_avail:
+            # Shuffle adjacent candidates for organic feel, then pick first
+            random.shuffle(adj_avail)
+            next_pos = adj_avail[0]
+        else:
+            # No adjacent unvisited — jump to nearest (by Manhattan distance)
+            next_pos = min(unvisited, key=lambda p: abs(p[0] - cx) + abs(p[1] - cy))
+
+        path.append(next_pos)
+        cells.append(pos_to_cell[next_pos])
+        unvisited.remove(next_pos)
+        current = next_pos
+
+    # Append latest cell at the end (skip if it's the same as oldest — single cell)
+    if oldest_pos != latest_pos:
+        path.append(latest_pos)
+        cells.append(latest_cell)
+
+    return path, cells
 
 
 def render(data):
@@ -145,7 +166,7 @@ def render(data):
     gx = PAD + LEFT_LABEL_W
     gy = TITLEBAR_H + TOP_LABEL_H
 
-    snake_path, snake_cells = build_random_path(grid, gx, gy)
+    snake_path, snake_cells = build_greedy_path(grid, gx, gy)
     n_cells = max(len(snake_path), 2)
 
     # ---- timing ----
