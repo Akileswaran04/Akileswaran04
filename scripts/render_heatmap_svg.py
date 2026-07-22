@@ -179,8 +179,6 @@ def render(data):
   100% {{ opacity: 1; transform: translateY(0); }}
 }}
 .c {{ opacity: 0; animation: cell 0.42s cubic-bezier(.2,.8,.2,1) both; }}
-.snake-head {{ opacity: 0; animation: snake-fade 0.3s {SNAKE_DELAY}s both; }}
-@keyframes snake-fade {{ 0%{{opacity:0}} 100%{{opacity:1}} }}
     """.strip()
 
     parts = [
@@ -241,25 +239,32 @@ def render(data):
             f'</rect>'
         )
 
-    # ---- snake head (single, emerald) ----
+    # ---- body segments (3, staggered by 2s) ----
     hx = snake_path[0][0]
     hy = snake_path[0][1]
-
+    body_count = 3
+    body_gap  = 2.0       # seconds between each body segment
+    last_delay = SNAKE_DELAY + (body_count - 1) * body_gap
     fade_end = (SNAKE_DUR - 0.8) / SNAKE_DUR  # start fading 0.8s before end
-    parts.append(
-        f'<circle class="snake-head" cx="{hx}" cy="{hy}" r="{HEAD_R}" fill="{SNAKE_COLOR}" filter="url(#glow)">'
-        f'<animate attributeName="cx" values="{xs_vals}" keyTimes="{kt_vals}" '
-        f'dur="{SNAKE_DUR:.1f}s" begin="{SNAKE_DELAY:.3f}s" fill="freeze"/>'
-        f'<animate attributeName="cy" values="{ys_vals}" keyTimes="{kt_vals}" '
-        f'dur="{SNAKE_DUR:.1f}s" begin="{SNAKE_DELAY:.3f}s" fill="freeze"/>'
-        f'<animate attributeName="opacity" values="1;1;0" keyTimes="0;{fade_end:.6f};1" '
-        f'dur="{SNAKE_DUR:.1f}s" begin="{SNAKE_DELAY:.3f}s" fill="freeze"/>'
-        f'</circle>'
-    )
 
-    # ---- final glow pulse on last cell ----
+    for seg in range(body_count):
+        offset = seg * body_gap
+        delay = SNAKE_DELAY + offset
+        is_last = (seg == body_count - 1)
+        parts.append(
+            f'<circle cx="{hx}" cy="{hy}" r="{HEAD_R}" fill="{SNAKE_COLOR}" filter="url(#glow)">'
+            f'<animate attributeName="cx" values="{xs_vals}" keyTimes="{kt_vals}" '
+            f'dur="{SNAKE_DUR:.1f}s" begin="{delay:.3f}s" fill="freeze"/>'
+            f'<animate attributeName="cy" values="{ys_vals}" keyTimes="{kt_vals}" '
+            f'dur="{SNAKE_DUR:.1f}s" begin="{delay:.3f}s" fill="freeze"/>'
+            + (f'<animate attributeName="opacity" values="1;1;0" keyTimes="0;{fade_end:.6f};1" '
+               f'dur="{SNAKE_DUR:.1f}s" begin="{delay:.3f}s" fill="freeze"/>' if is_last else '')
+            + '</circle>'
+        )
+
+    # ---- final glow pulse on last cell (timed to last body segment) ----
     lx, ly = snake_path[-1]
-    pulse_start = SNAKE_DELAY + SNAKE_DUR - 0.3  # start slightly before head fully fades
+    pulse_start = last_delay + SNAKE_DUR - 0.3  # start slightly before last body fades
     pcx = lx + CELL / 2
     pcy = ly + CELL / 2
     parts.append(
