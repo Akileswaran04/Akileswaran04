@@ -74,7 +74,8 @@ def build_grid(days):
 
 def build_random_path(grid, grid_left, grid_top):
     """Build a random path visiting every non-None cell.
-    Uses a fixed seed for reproducibility between renders.
+    The most recent (latest-date) cell is placed last so the snake
+    ends at the current date. Uses fixed seed for reproducibility.
     Returns (positions, cells) lists in visitation order.
     """
     positions = []
@@ -87,9 +88,20 @@ def build_random_path(grid, grid_left, grid_top):
             cy = grid_top + ri * STEP
             positions.append((cx, cy))
             cells.append(cell)
+
     zipped = list(zip(positions, cells))
+
+    # Find the cell with the latest date (most recent contribution)
+    latest_idx = max(range(len(zipped)), key=lambda i: zipped[i][1][0])
+    latest_item = zipped.pop(latest_idx)
+
+    # Shuffle the rest
     random.seed(42)
     random.shuffle(zipped)
+
+    # Append the latest-date cell at the end
+    zipped.append(latest_item)
+
     positions, cells = zip(*zipped) if zipped else ([], [])
     return list(positions), list(cells)
 
