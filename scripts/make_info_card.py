@@ -48,7 +48,7 @@ HOST = "akileswaran04"   # shown as  you@github  in the header
 ROWS = [
     ("host",),
     ("kv", "Role", "Software Eng. Intern Candidate"),
-    ("kv", "Edu", "B.Tech IT @ CEG · CGPA 9.31"),
+    ("kv", "Edu", "B.Tech IT @ CEG | CGPA 9.31"),
     ("kv", "Loc", "Chennai, Tamil Nadu"),
     ("gap",),
     ("sec", "Skills"),
@@ -113,7 +113,7 @@ for i, row in enumerate(ROWS):
     elif kind == "sec":
         title = esc(row[1])
         inner = (f'<text x="{KEY_X}" y="{y:.1f}" fill="{SECTION}" font-size="12.5" font-weight="700">'
-                 f'&#8212; {title}</text>'
+                 f'-- {title}</text>'
                  f'<line x1="{KEY_X + 12 + len(row[1])*8}" y1="{y-4:.1f}" x2="{W-PAD}" y2="{y-4:.1f}" '
                  f'stroke="{FRAME}" stroke-opacity="0.8"/>')
     elif kind == "kv":
