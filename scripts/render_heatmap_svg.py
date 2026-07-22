@@ -250,7 +250,7 @@ def render(data):
     hx = snake_path[0][0]
     hy = snake_path[0][1]
 
-    fade_end = (SNAKE_DUR - 0.4) / SNAKE_DUR  # start fading 0.4s before end
+    fade_end = (SNAKE_DUR - 0.8) / SNAKE_DUR  # start fading 0.8s before end
     parts.append(
         f'<circle class="snake-head" cx="{hx}" cy="{hy}" r="{HEAD_R}" fill="{SNAKE_COLOR}" filter="url(#glow)">'
         f'<animate attributeName="cx" values="{xs_vals}" keyTimes="{kt_vals}" '
