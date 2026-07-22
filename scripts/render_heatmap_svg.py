@@ -26,7 +26,6 @@ ACCENT  = "#34d399"
 GREEN   = "#39d353"
 GOLD    = "#f2cc60"
 SNAKE_COLOR  = "#34d399"
-EATEN_FLASH  = "#6ee7b7"
 
 CELL    = 12
 GAP     = 3
@@ -38,7 +37,6 @@ TITLEBAR_H   = 30
 STATS_H = 88
 SNAKE_DELAY    = 1.5      # seconds before snake starts
 SNAKE_DUR      = 6.0      # seconds for full traversal
-CELL_EAT_DUR   = 0.35     # seconds for cell flash animation
 HEAD_R         = 5        # snake head circle radius
 
 
@@ -120,14 +118,8 @@ def render(data):
     gx = PAD + LEFT_LABEL_W
     gy = TITLEBAR_H + TOP_LABEL_H
 
-    snake_path, snake_cells = build_random_path(grid, gx, gy)
-    n_cells = len(snake_path)
-    if n_cells < 2:
-        n_cells = 2  # avoid division by zero
-
-    # ---- timing helpers ----
-    def timing(i):
-        return SNAKE_DELAY + i * SNAKE_DUR / (n_cells - 1)
+    snake_path, _ = build_random_path(grid, gx, gy)
+    n_cells = max(len(snake_path), 2)
 
     # ---- build snake head keyframes ----
     xs_vals = ";".join(f"{p[0]}" for p in snake_path)
@@ -184,23 +176,6 @@ def render(data):
                 f'fill="{PALETTE[lvl]}" style="animation-delay:{delay:.3f}s">'
                 f'<title>{date_s}: {count} contribution{plural}</title></rect>'
             )
-
-    # ---- cell flash overlays ----
-    positions_lookup = {(cx, cy): i for i, (cx, cy) in enumerate(snake_path)}
-    pos_data = {(cx, cy): cell[2] for (cx, cy), cell in zip(snake_path, snake_cells)}
-
-    for (cx, cy), orig_lvl in pos_data.items():
-        idx = positions_lookup.get((cx, cy))
-        if idx is None:
-            continue
-        orig_color = PALETTE[orig_lvl]
-        at = timing(idx)
-        parts.append(
-            f'<rect x="{cx}" y="{cy}" width="{CELL}" height="{CELL}" rx="2.5" fill="{orig_color}">'
-            f'<animate attributeName="fill" values="{orig_color};{EATEN_FLASH};{EATEN_FLASH};{orig_color}" '
-            f'keyTimes="0;0.15;0.65;1" dur="{CELL_EAT_DUR:.2f}s" begin="{at:.3f}s" fill="freeze"/>'
-            f'</rect>'
-        )
 
     # ---- snake head (single, emerald) ----
     hx = snake_path[0][0]
