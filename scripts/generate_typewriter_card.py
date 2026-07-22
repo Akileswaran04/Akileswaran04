@@ -165,63 +165,97 @@ def make_letter_cycle(letter, idx):
     )
 
 
-# ── Name reveal: A K I L E S W A R A N ──────────────────────────────
+# ── Name reveal: A K I L E S W A R A N (slot-machine scroll) ─────
+
+def get_char_seq(idx, target):
+    """Return list of characters for scrolling animation.
+    Even idx: start from 'A' and scroll up to target.
+    Odd idx:  start from 'Z' and scroll down to target.
+    """
+    if idx % 2 == 0:
+        return [chr(c) for c in range(ord("A"), ord(target) + 1)]
+    else:
+        return [chr(c) for c in range(ord("Z"), ord(target) - 1, -1)]
+
 
 def make_name_reveal():
-    """Flip-in each character of AKILESWARAN with stagger, then stay.
+    """Reveal AKILESWARAN with a slot-machine scroll per character.
 
-    Alternating entrance per character:
-      - Even index: flips in from above (scale Y 0→1 with slight overshoot)
-      - Odd index:  flips in from below (scale Y 0→1 with slight overshoot)
+    Each character cycles through letters (A→target or Z→target,
+    alternating per index) inside a clip-rect window, then stays.
     """
     name = "AKILESWARAN"
     n = len(name)
-    stagger = 0.12     # seconds between each character
-    flip_dur = 0.35    # duration of each character's flip
+    stagger = 0.12     # seconds between each character's scroll start
+    scroll_dur = 0.5   # duration of each character's scroll
     start = cycle_start(2) + CYCLE_DUR + 0.3  # ~7.8s after I finishes
 
     FONT_SIZE = 38
     CHAR_W = FONT_SIZE * 0.62
+    GAP = 4               # vertical gap between stacked characters
+    STEP = FONT_SIZE + GAP  # spacing between each character in the stack
     total_w = n * CHAR_W
     x0 = (W - total_w) / 2
 
     parts = []
-    for i, ch in enumerate(name):
+    defs = []
+
+    for i, target in enumerate(name):
         cx = x0 + i * CHAR_W + CHAR_W / 2
+        seq = get_char_seq(i, target)
         ch_start = start + i * stagger
 
-        # Alternating entrance: even from above (scale + translate), odd from below
-        if i % 2 == 0:
-            # Flips in from above: starts shifted up, scales into place
+        # Clip window — shows exactly one character height
+        clip_id = f"name-clip-{i}"
+        clip_x = cx - CHAR_W / 2 - 2
+        clip_y = NAME_Y - STEP / 2
+        clip_w = CHAR_W + 4
+        clip_h = STEP
+        defs.append(
+            f'<clipPath id="{clip_id}">'
+            f'<rect x="{clip_x:.1f}" y="{clip_y:.1f}" width="{clip_w:.1f}" height="{clip_h:.1f}" rx="2"/>'
+            f'</clipPath>'
+        )
+
+        # If only one char (start == target), just show it directly
+        if len(seq) == 1:
             parts.append(
                 f'<text x="{cx:.1f}" y="{NAME_Y}" text-anchor="middle" dominant-baseline="central"'
                 f' font-family="\'Courier New\',monospace" font-size="{FONT_SIZE}" font-weight="bold" fill="{NAME}">'
-                f'{ch}'
-                f'<animate attributeName="opacity" values="0;1" keyTimes="0;0.08"'
-                f' begin="{ch_start:.3f}s" dur="{flip_dur:.2f}s" fill="freeze"/>'
-                f'<animateTransform attributeName="transform" type="scale"'
-                f' values="1,0;1,1.15;1,1" keyTimes="0;0.5;1"'
-                f' begin="{ch_start:.3f}s" dur="{flip_dur:.2f}s" fill="freeze"/>'
+                f'{target}'
+                f'<animate attributeName="opacity" values="0;1" keyTimes="0;0.1"'
+                f' begin="{ch_start:.3f}s" dur="0.2s" fill="freeze"/>'
                 f'</text>'
             )
-        else:
-            # Flips in from below: starts shifted down, scales into place
-            parts.append(
-                f'<text x="{cx:.1f}" y="{NAME_Y}" text-anchor="middle" dominant-baseline="central"'
-                f' font-family="\'Courier New\',monospace" font-size="{FONT_SIZE}" font-weight="bold" fill="{NAME}">'
-                f'{ch}'
-                f'<animate attributeName="opacity" values="0;1" keyTimes="0;0.08"'
-                f' begin="{ch_start:.3f}s" dur="{flip_dur:.2f}s" fill="freeze"/>'
-                f'<animateTransform attributeName="transform" type="translate"'
-                f' values="0,{FONT_SIZE*0.6:.1f};0,0" keyTimes="0;0.5"'
-                f' begin="{ch_start:.3f}s" dur="{flip_dur:.2f}s" fill="freeze" additive="sum"/>'
-                f'<animateTransform attributeName="transform" type="scale"'
-                f' values="1,0;1,1.15;1,1" keyTimes="0;0.5;1"'
-                f' begin="{ch_start:.3f}s" dur="{flip_dur:.2f}s" fill="freeze" additive="sum"/>'
-                f'</text>'
+            continue
+
+        # Stack characters vertically (first at top, last at bottom)
+        scroll_dist = (len(seq) - 1) * STEP
+        stack = ""
+        for ci, ch in enumerate(seq):
+            y_pos = NAME_Y + ci * STEP
+            stack += (
+                f'<text x="{cx:.1f}" y="{y_pos:.1f}" text-anchor="middle" dominant-baseline="central"'
+                f' font-family="\'Courier New\',monospace" font-size="{FONT_SIZE}" font-weight="bold"'
+                f' fill="{NAME}">{ch}</text>'
             )
 
-    # Subtle glow effect on the whole name after reveal completes
+        # Two groups: outer has fixed clip-path, inner scrolls the stack
+        parts.append(
+            f'<g clip-path="url(#{clip_id})">'
+            f'<g opacity="0">'
+            f'<animate attributeName="opacity" values="0;1" keyTimes="0;0.06"'
+            f' begin="{ch_start:.3f}s" dur="{scroll_dur:.2f}s" fill="freeze"/>'
+            f'{stack}'
+            f'<animateTransform attributeName="transform" type="translate"'
+            f' from="0,0" to="0,-{scroll_dist:.1f}"'
+            f' begin="{ch_start:.3f}s" dur="{scroll_dur:.2f}s" fill="freeze"'
+            f' calcMode="spline" keySplines="0.4 0 0.2 1" keyTimes="0;1"/>'
+            f'</g>'
+            f'</g>'
+        )
+
+    # Subtle glow after all chars have landed
     glow_start = start + n * stagger
     parts.append(
         f'<ellipse cx="{W/2}" cy="{NAME_Y}" rx="170" ry="40"'
@@ -232,7 +266,7 @@ def make_name_reveal():
         f'</ellipse>'
     )
 
-    return "\n".join(parts)
+    return "\n".join(defs) + "\n" + "\n".join(parts)
 
 
 # ── Render ──────────────────────────────────────────────────────────
