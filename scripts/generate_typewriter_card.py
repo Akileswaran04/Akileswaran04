@@ -266,7 +266,7 @@ def make_name_reveal():
         f'</ellipse>'
     )
 
-    return "\n".join(defs) + "\n" + "\n".join(parts)
+    return "<defs>\n" + "\n".join(defs) + "\n</defs>\n" + "\n".join(parts)
 
 
 # ── Render ──────────────────────────────────────────────────────────
