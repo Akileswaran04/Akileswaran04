@@ -38,7 +38,7 @@ TOP_LABEL_H  = 20
 TITLEBAR_H   = 30
 STATS_H = 88
 SNAKE_DELAY    = 1.5      # seconds before snake starts
-SNAKE_DUR      = 9.0      # seconds for full traversal
+SNAKE_DUR      = 6.0      # seconds for full traversal
 CELL_EAT_DUR   = 0.35     # seconds for cell flash animation
 HEAD_R         = 5        # snake head circle radius
 
