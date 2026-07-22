@@ -14,18 +14,18 @@ HERE = os.path.dirname(__file__)
 IN_PATH = os.path.join(HERE, "..", "data", "contributions.json")
 OUT_PATH = os.path.join(HERE, "..", "contrib-heatmap.svg")
 
-PALETTE = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353", "#4ade80"]
+PALETTE = ["#0d1117", "#042f2e", "#115e59", "#0d9488", "#14b8a6", "#2dd4bf"]
 
-BG      = "#0a0e14"
-BG2     = "#0d1420"
-FRAME   = "#1f6feb"
-MUTED   = "#7d8590"
+BG      = "#0d1117"
+BG2     = "#0f172a"
+FRAME   = "#2dd4bf"
+MUTED   = "#5eead4"
 TEXT    = "#e6edf3"
-ACCENT  = "#34d399"
-GREEN   = "#39d353"
-GOLD    = "#f2cc60"
-SNAKE_COLOR  = "#34d399"
-TRAIL_COLOR  = "#6ee7b7"
+ACCENT  = "#2dd4bf"
+GREEN   = "#14b8a6"
+GOLD    = "#fbbf24"
+SNAKE_COLOR  = "#2dd4bf"
+TRAIL_COLOR  = "#5eead4"
 TRAIL_DUR    = 0.7        # seconds for cell glow trail
 
 CELL    = 12
@@ -71,66 +71,62 @@ def build_grid(days):
     return grid
 
 
-def build_shortest_path(grid, grid_left, grid_top):
-    """Build a path visiting all cells in chronological date order,
-    using the shortest Manhattan (L-shaped) path between consecutive
-    dates. Starts at the oldest cell, ends at the most recent.
+def build_wave_path(grid, grid_left, grid_top):
+    """Build a serpentine wave path sweeping across bands of 3 rows.
+    Wave 1 (rows 0-2): left-to-right across all columns.
+    Wave 2 (rows 3-5): right-to-left across all columns.
+    Wave 3 (row 6): left-to-right across all columns.
+    Rotated to start at the oldest cell and end at the latest.
     Returns (positions, cells) lists in visitation order.
     """
-    entries = []
+    n_cols = len(grid)
+    pos_to_cell = {}
     for ci, column in enumerate(grid):
         for ri, cell in enumerate(column):
             if cell is None:
                 continue
             cx = grid_left + ci * STEP
             cy = grid_top + ri * STEP
-            entries.append((cell[0], cx, cy, cell))
+            pos_to_cell[(cx, cy)] = cell
 
-    if not entries:
+    if not pos_to_cell:
         return [], []
 
-    # Sort by date ascending (chronological order)
-    entries.sort(key=lambda x: x[0])
-
-    valid_pos = {(cx, cy) for _, cx, cy, _ in entries}
-    pos_cell = {(cx, cy): cell for _, cx, cy, cell in entries}
-
+    all_positions = set(pos_to_cell.keys())
+    WAVE_ROWS = 3
     positions = []
     cells = []
     visited = set()
 
-    for date_str, cx, cy, cell_data in entries:
-        if (cx, cy) in visited:
-            continue
+    for wave_start in range(0, 7, WAVE_ROWS):
+        wave_end = min(wave_start + WAVE_ROWS, 7)
+        is_reverse = (wave_start // WAVE_ROWS) % 2 == 1
+        col_range = range(n_cols)
+        if is_reverse:
+            col_range = reversed(col_range)
 
-        # Walk the shortest L-shaped path from the last position to this cell
-        if positions:
-            lx, ly = positions[-1]
-            if (lx, ly) != (cx, cy):
-                # Walk vertically first, then horizontally
-                step_y = STEP if cy > ly else -STEP
-                y = ly + step_y
-                while (step_y > 0 and y <= cy) or (step_y < 0 and y >= cy):
-                    if (cx, y) in valid_pos and (cx, y) not in visited:
-                        visited.add((cx, y))
-                        positions.append((cx, y))
-                        cells.append(pos_cell[(cx, y)])
-                    y += step_y
+        for ci in col_range:
+            cx = grid_left + ci * STEP
+            for ri in range(wave_start, wave_end):
+                cy = grid_top + ri * STEP
+                if (cx, cy) in all_positions and (cx, cy) not in visited:
+                    visited.add((cx, cy))
+                    positions.append((cx, cy))
+                    cells.append(pos_to_cell[(cx, cy)])
 
-                step_x = STEP if cx > lx else -STEP
-                x = lx + step_x
-                while (step_x > 0 and x <= cx) or (step_x < 0 and x >= cx):
-                    if (x, cy) in valid_pos and (x, cy) not in visited:
-                        visited.add((x, cy))
-                        positions.append((x, cy))
-                        cells.append(pos_cell[(x, cy)])
-                    x += step_x
+    if not positions:
+        return [], []
 
-        # Add the target cell itself
-        if (cx, cy) not in visited:
-            visited.add((cx, cy))
-            positions.append((cx, cy))
-            cells.append(cell_data)
+    # Rotate to start at oldest cell
+    oldest_idx = min(range(len(cells)), key=lambda i: cells[i][0])
+    positions = positions[oldest_idx:] + positions[:oldest_idx]
+    cells = cells[oldest_idx:] + cells[:oldest_idx]
+
+    # Move latest to end
+    latest_idx = max(range(len(cells)), key=lambda i: cells[i][0])
+    if latest_idx < len(positions) - 1:
+        positions.append(positions.pop(latest_idx))
+        cells.append(cells.pop(latest_idx))
 
     return positions, cells
 
@@ -161,7 +157,7 @@ def render(data):
     gx = PAD + LEFT_LABEL_W
     gy = TITLEBAR_H + TOP_LABEL_H
 
-    snake_path, snake_cells = build_shortest_path(grid, gx, gy)
+    snake_path, snake_cells = build_wave_path(grid, gx, gy)
     n_cells = max(len(snake_path), 2)
 
     # ---- timing ----
