@@ -39,7 +39,7 @@ TITLEBAR_H   = 30
 STATS_H = 88
 SNAKE_DELAY    = 1.5      # seconds before snake starts
 SNAKE_DUR      = 6.0      # seconds for full traversal
-HEAD_R         = 5        # snake head circle radius
+HEAD_R         = 7        # snake head circle radius
 
 
 def level_for(count):
