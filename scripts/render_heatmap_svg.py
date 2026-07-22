@@ -262,6 +262,18 @@ def render(data):
         f'</circle>'
     )
 
+    # ---- final glow pulse on last cell ----
+    lx, ly = snake_path[-1]
+    pulse_start = SNAKE_DELAY + SNAKE_DUR - 0.3  # start slightly before head fully fades
+    pcx = lx + CELL / 2
+    pcy = ly + CELL / 2
+    parts.append(
+        f'<circle cx="{pcx:.1f}" cy="{pcy:.1f}" r="3" fill="{SNAKE_COLOR}" filter="url(#glow)" opacity="0">'
+        f'<animate attributeName="r" values="3;14;16" keyTimes="0;0.4;1" dur="1.2s" begin="{pulse_start:.3f}s" fill="freeze"/>'
+        f'<animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.25;1" dur="1.2s" begin="{pulse_start:.3f}s" fill="freeze"/>'
+        f'</circle>'
+    )
+
     # ---- legend ----
     leg_y = gy + art_h + 6
     leg_x = canvas_w - PAD - (len(PALETTE) * (CELL - 1) + 70)
