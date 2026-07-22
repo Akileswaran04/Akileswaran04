@@ -70,9 +70,10 @@ def build_grid(days):
     return grid
 
 
-def build_wave_path(grid, grid_left, grid_top):
-    """Build a serpentine wave path sweeping across bands of 2 rows,
-    with L-shaped smoothing walks between columns within each wave.
+def build_row_path(grid, grid_left, grid_top):
+    """Build a single continuous line moving row by row across all columns.
+    Even rows: left-to-right. Odd rows: right-to-left.
+    Every step is to an adjacent cell — perfectly smooth.
     Rotated to start at the oldest cell and end at the latest.
     Returns (positions, cells) lists in visitation order.
     """
@@ -89,56 +90,23 @@ def build_wave_path(grid, grid_left, grid_top):
     if not pos_to_cell:
         return [], []
 
-    all_pos = set(pos_to_cell.keys())
-    WAVE_ROWS = 2
     positions = []
     cells = []
     visited = set()
 
-    def walk_horiz(src_x, y, tgt_x):
-        """Walk horizontally from src_x to tgt_x at row y, adding cells."""
-        step = STEP if tgt_x > src_x else -STEP
-        x = src_x + step
-        while (step > 0 and x <= tgt_x) or (step < 0 and x >= tgt_x):
-            if (x, y) in all_pos and (x, y) not in visited:
-                visited.add((x, y))
-                positions.append((x, y))
-                cells.append(pos_to_cell[(x, y)])
-            x += step
-
-    def walk_vert(x, src_y, tgt_y):
-        """Walk vertically from src_y to tgt_y at column x, adding cells."""
-        step = STEP if tgt_y > src_y else -STEP
-        y = src_y + step
-        while (step > 0 and y <= tgt_y) or (step < 0 and y >= tgt_y):
-            if (x, y) in all_pos and (x, y) not in visited:
-                visited.add((x, y))
-                positions.append((x, y))
-                cells.append(pos_to_cell[(x, y)])
-            y += step
-
-    for wave_start in range(0, 7, WAVE_ROWS):
-        wave_end = min(wave_start + WAVE_ROWS, 7)
-        is_reverse = (wave_start // WAVE_ROWS) % 2 == 1
-        col_range = list(range(n_cols))
+    for ri in range(7):
+        is_reverse = ri % 2 == 1
+        col_range = range(n_cols)
         if is_reverse:
-            col_range.reverse()
+            col_range = reversed(col_range)
 
         for ci in col_range:
             cx = grid_left + ci * STEP
-            for ri in range(wave_start, wave_end):
-                cy = grid_top + ri * STEP
-                if (cx, cy) in all_pos and (cx, cy) not in visited:
-                    # Smooth transition from previous cell via L-shaped walk
-                    if positions:
-                        lx, ly = positions[-1]
-                        if abs(lx - cx) + abs(ly - cy) > STEP:
-                            walk_horiz(lx, ly, cx)
-                            walk_vert(cx, ly, cy)
-                    if (cx, cy) not in visited:
-                        visited.add((cx, cy))
-                        positions.append((cx, cy))
-                        cells.append(pos_to_cell[(cx, cy)])
+            cy = grid_top + ri * STEP
+            if (cx, cy) in pos_to_cell and (cx, cy) not in visited:
+                visited.add((cx, cy))
+                positions.append((cx, cy))
+                cells.append(pos_to_cell[(cx, cy)])
 
     if not positions:
         return [], []
@@ -183,7 +151,7 @@ def render(data):
     gx = PAD + LEFT_LABEL_W
     gy = TITLEBAR_H + TOP_LABEL_H
 
-    snake_path, snake_cells = build_wave_path(grid, gx, gy)
+    snake_path, snake_cells = build_row_path(grid, gx, gy)
     n_cells = max(len(snake_path), 2)
 
     # ---- timing ----
