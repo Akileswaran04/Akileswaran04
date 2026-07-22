@@ -71,44 +71,67 @@ def build_grid(days):
     return grid
 
 
-def build_smooth_path(grid, grid_left, grid_top):
-    """Build a perfectly smooth serpentine path visiting every non-None cell.
-    Every single step moves to an adjacent cell — no jumps at all.
-    Starts at the oldest cell (earliest date).
+def build_shortest_path(grid, grid_left, grid_top):
+    """Build a path visiting all cells in chronological date order,
+    using the shortest Manhattan (L-shaped) path between consecutive
+    dates. Starts at the oldest cell, ends at the most recent.
     Returns (positions, cells) lists in visitation order.
     """
-    # Build path in column-by-column serpentine order (all adjacent moves)
-    positions = []
-    cells = []
+    entries = []
     for ci, column in enumerate(grid):
-        rng = range(len(column))
-        if ci % 2 == 1:
-            rng = reversed(rng)
-        for ri in rng:
-            cell = column[ri]
+        for ri, cell in enumerate(column):
             if cell is None:
                 continue
             cx = grid_left + ci * STEP
             cy = grid_top + ri * STEP
-            positions.append((cx, cy))
-            cells.append(cell)
+            entries.append((cell[0], cx, cy, cell))
 
-    if not cells:
+    if not entries:
         return [], []
 
-    # Find oldest cell index (earliest date string)
-    oldest_idx = min(range(len(cells)), key=lambda i: cells[i][0])
+    # Sort by date ascending (chronological order)
+    entries.sort(key=lambda x: x[0])
 
-    # Rotate so the path starts at the oldest cell
-    positions = positions[oldest_idx:] + positions[:oldest_idx]
-    cells = cells[oldest_idx:] + cells[:oldest_idx]
+    valid_pos = {(cx, cy) for _, cx, cy, _ in entries}
+    pos_cell = {(cx, cy): cell for _, cx, cy, cell in entries}
 
-    # Move the latest-date cell to the very end so the snake
-    # finishes and fades out at the current date's cell
-    latest_idx = max(range(len(cells)), key=lambda i: cells[i][0])
-    if latest_idx < len(positions) - 1:
-        positions.append(positions.pop(latest_idx))
-        cells.append(cells.pop(latest_idx))
+    positions = []
+    cells = []
+    visited = set()
+
+    for date_str, cx, cy, cell_data in entries:
+        if (cx, cy) in visited:
+            continue
+
+        # Walk the shortest L-shaped path from the last position to this cell
+        if positions:
+            lx, ly = positions[-1]
+            if (lx, ly) != (cx, cy):
+                # Walk horizontally first
+                step_x = STEP if cx > lx else -STEP
+                x = lx + step_x
+                while (step_x > 0 and x < cx) or (step_x < 0 and x > cx):
+                    if (x, ly) in valid_pos and (x, ly) not in visited:
+                        visited.add((x, ly))
+                        positions.append((x, ly))
+                        cells.append(pos_cell[(x, ly)])
+                    x += step_x
+
+                # Then walk vertically
+                step_y = STEP if cy > ly else -STEP
+                y = ly + step_y
+                while (step_y > 0 and y < cy) or (step_y < 0 and y > cy):
+                    if (cx, y) in valid_pos and (cx, y) not in visited:
+                        visited.add((cx, y))
+                        positions.append((cx, y))
+                        cells.append(pos_cell[(cx, y)])
+                    y += step_y
+
+        # Add the target cell itself
+        if (cx, cy) not in visited:
+            visited.add((cx, cy))
+            positions.append((cx, cy))
+            cells.append(cell_data)
 
     return positions, cells
 
@@ -139,7 +162,7 @@ def render(data):
     gx = PAD + LEFT_LABEL_W
     gy = TITLEBAR_H + TOP_LABEL_H
 
-    snake_path, snake_cells = build_smooth_path(grid, gx, gy)
+    snake_path, snake_cells = build_shortest_path(grid, gx, gy)
     n_cells = max(len(snake_path), 2)
 
     # ---- timing ----
