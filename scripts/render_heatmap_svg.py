@@ -37,7 +37,7 @@ TOP_LABEL_H  = 20
 TITLEBAR_H   = 30
 STATS_H = 88
 SNAKE_DELAY    = 1.5      # seconds before snake starts
-SNAKE_DUR      = 18.0     # seconds for full traversal
+SNAKE_DUR      = 20.0     # seconds for full traversal
 
 
 def level_for(count):
