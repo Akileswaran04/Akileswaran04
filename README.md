@@ -19,7 +19,6 @@
 **Software Engineering Intern Candidate · Full-Stack & Applied ML**
 
 <!-- Contact & Social Badges -->
-<a href="mailto:akileswaranammamuthu@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
 <a href="https://linkedin.com/in/akileswaran-ammamuthu"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
 <a href="https://github.com/Akileswaran04"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
 <a href="https://leetcode.com/u/Akileswaran04/"><img src="https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black" /></a>
@@ -49,7 +48,7 @@
 ### 👨‍💻 About Me
 
 ```
-B.Tech IT student @ CEG, Anna University | CGPA 9.31/10
+B.Tech IT student @ CEG, Anna University
 Passionate about full-stack development, applied ML, and building
 real-world systems that solve meaningful problems.
 

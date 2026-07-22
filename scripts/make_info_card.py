@@ -48,7 +48,7 @@ HOST = "akileswaran04"   # shown as  you@github  in the header
 ROWS = [
     ("host",),
     ("kv", "Role", "Software Eng. Intern Candidate"),
-    ("kv", "Edu", "B.Tech IT @ CEG | CGPA 9.31"),
+    ("kv", "Edu", "B.Tech IT @ CEG, Anna University"),
     ("kv", "Loc", "Chennai, Tamil Nadu"),
     ("gap",),
     ("sec", "Skills"),
