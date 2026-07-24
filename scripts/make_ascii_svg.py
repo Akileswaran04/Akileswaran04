@@ -45,12 +45,12 @@ ART_H = ROWS * CELL_H
 CANVAS_W = ART_W + PAD * 2
 CANVAS_H = TITLEBAR_H + ART_H + STATUS_H + PAD
 
-BG = "#0a0a0a"
-BG2 = "#111111"
-FRAME = "#e10600"
-TITLE_TEXT = "#888888"
-INK = "#f5f5f5"      # the single ascii color
-CURSOR = "#e10600"
+BG = "#0d1117"
+BG2 = "#0f172a"
+FRAME = "#22D3EE"
+TITLE_TEXT = "#38BDF8"
+INK = "#e6edf3"      # the single ascii color
+CURSOR = "#22D3EE"
 
 # ---- reveal timing (one-shot; a cursor rasters top -> bottom) -------------
 ROW_DUR = 0.11
@@ -100,7 +100,7 @@ parts.append(f'<rect x="0.5" y="0.5" width="{CANVAS_W-1}" height="{CANVAS_H-1}" 
              f'fill="none" stroke="{FRAME}" stroke-width="1"/>')
 
 parts.append(f'<line x1="0" y1="{TITLEBAR_H}" x2="{CANVAS_W}" y2="{TITLEBAR_H}" stroke="{FRAME}"/>')
-for i, dotcol in enumerate(["#e10600", "#e10600", "#e10600"]):
+for i, dotcol in enumerate(["#22D3EE", "#22D3EE", "#22D3EE"]):
     parts.append(f'<circle cx="{PAD + i*16}" cy="{TITLEBAR_H/2}" r="5" fill="{dotcol}"/>')
 parts.append(f'<text x="{CANVAS_W/2}" y="{TITLEBAR_H/2 + 4}" fill="{TITLE_TEXT}" font-size="12" '
              f'text-anchor="middle">avi@github: ~$ ./portrait.sh</text>')

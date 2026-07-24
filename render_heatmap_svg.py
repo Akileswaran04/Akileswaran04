@@ -3,11 +3,11 @@
 SVG with a single SMIL-animated drone patrolling the bottom rail and shooting
 upward at contribution cells.
 
-System-critical terminal theme:
-  bg  #0a0a0a  (near-black)
-  txt #f5f5f5  (off-white)
-  red #e10600  (single accent)
-  gray         (muted lines)
+Cyber Cyan theme:
+  bg  #0d1117  (GitHub dark)
+  acc #22D3EE  (neon cyan border/accent)
+  sec #38BDF8  (secondary blue)
+  txt #e6edf3  (high-contrast text)
 
 Drone: sits on a horizontal rail at the bottom of the SVG, moves left→right
 in one dimension.  For each column it passes, it fires a burst of bullets
@@ -28,26 +28,26 @@ IN_PATH = os.path.join(HERE, "data", "contributions.json")
 OUT_PATH = os.path.join(HERE, "contrib-heatmap.svg")
 
 # ═══════════════════════════════════════════════════════════════════
-#  SYSTEM-CRITICAL TERMINAL THEME  —  sharp, no competing colours
+#  CYBER CYAN THEME  —  Dark GitHub, neon cyan, clean terminal
 # ═══════════════════════════════════════════════════════════════════
 
 PALETTE = [
-    "#0a0a0a",   # 0  — invisible (matches bg)
-    "#2d0a08",   # 1-5  — visible dark red
-    "#5a1414",   # 6-15
-    "#882020",   # 16-30
-    "#b83030",   # 31-50
-    "#e10600",   # 50+  — full accent
+    "#0d1117",   # 0  — invisible (matches bg)
+    "#085a50",   # 1-5  — visible dark teal
+    "#1a7a70",   # 6-15  — medium teal
+    "#0d9488",   # 16-30 — cyan-teal
+    "#14b8a6",   # 31-50 — bright teal
+    "#22d3ee",   # 50+  — full neon cyan
 ]
 
-BG           = "#0a0a0a"
-BG2          = "#111111"
-FRAME        = "#e10600"
-MUTED        = "#888888"
-TEXT         = "#f5f5f5"
-ACCENT       = "#e10600"
-DRONE_COLOR  = "#e10600"
-TRAIL_COLOR  = "#f5f5f5"
+BG           = "#0d1117"
+BG2          = "#0f172a"
+FRAME        = "#22D3EE"
+MUTED        = "#38BDF8"
+TEXT         = "#e6edf3"
+ACCENT       = "#22D3EE"
+DRONE_COLOR  = "#22D3EE"
+TRAIL_COLOR  = "#e6edf3"
 SHOTS_CAP    = 6           # max rendered shots per cell (tooltip + stats real)
 SHOT_SPREAD  = 3           # horiz spread of bullets (pixels) for visual variety
 
@@ -155,7 +155,7 @@ def render(data):
         # title bar
         f'<line x1="0" y1="{TITLEBAR_H}" x2="{canvas_w}" y2="{TITLEBAR_H}" stroke="{FRAME}" stroke-opacity="0.35"/>',
         *[f'<circle cx="{PAD + i*16}" cy="{TITLEBAR_H / 2}" r="5" fill="{dotcol}"/>'
-          for i, dotcol in enumerate(["#e10600", "#e10600", "#e10600"])],
+          for i, dotcol in enumerate(["#22D3EE", "#22D3EE", "#22D3EE"])],
         f'<text x="{canvas_w / 2}" y="{TITLEBAR_H / 2 + 4}" fill="{MUTED}" font-size="12" '
         f'text-anchor="middle">{data["username"]}@github: ~/contributions --graph</text>',
     ]
@@ -385,8 +385,8 @@ def render(data):
         f'begin="{DRONE_DELAY:.2f}s" fill="freeze"/>'
         f'{drone_sprite()}'
         f'<animateTransform attributeName="transform" type="translate" '
-        f'values={"; ".join(motion_vals)} '
-        f'keyTimes={"; ".join(f"{t:.4f}" for t in motion_kts)} '
+        f'values="{"; ".join(motion_vals)}" '
+        f'keyTimes="{"; ".join(f"{t:.4f}" for t in motion_kts)}" '
         f'dur="{DRONE_DUR:.2f}s" begin="{DRONE_DELAY:.3f}s" fill="freeze"/>'
         f'</g>'
     )

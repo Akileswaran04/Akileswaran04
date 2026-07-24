@@ -21,15 +21,15 @@ KEY_X = PAD
 VAL_X = PAD + 92
 LINE_H = 20.5
 
-BG = "#0a0a0a"
-BG2 = "#111111"
-FRAME = "#e10600"
-MUTED = "#888888"
-INK = "#f5f5f5"
-KEY = "#e10600"      # red keys
-SECTION = "#e10600"  # red section headers
-GREEN = "#e10600"
-ACCENT = "#f5f5f5"
+BG = "#0d1117"
+BG2 = "#0f172a"
+FRAME = "#22D3EE"
+MUTED = "#38BDF8"
+INK = "#e6edf3"
+KEY = "#22D3EE"      # cyan keys
+SECTION = "#22D3EE"  # cyan section headers
+GREEN = "#14b8a6"
+ACCENT = "#22D3EE"
 
 # ===========================================================================
 #  EDIT THIS  -- your info panel. It re-lays-out automatically; if it gets too
@@ -91,7 +91,7 @@ parts = [
     f'<rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="12" fill="none" stroke="{FRAME}"/>',
     f'<line x1="0" y1="{TITLEBAR_H}" x2="{W}" y2="{TITLEBAR_H}" stroke="{FRAME}"/>',
 ]
-for i, dotcol in enumerate(["#ff5f56", "#ffbd2e", "#27c93f"]):
+for i, dotcol in enumerate(["#22D3EE", "#22D3EE", "#22D3EE"]):
     parts.append(f'<circle cx="{PAD + i*16}" cy="{TITLEBAR_H/2}" r="5" fill="{dotcol}"/>')
 parts.append(f'<text x="{W/2}" y="{TITLEBAR_H/2 + 4}" fill="{MUTED}" font-size="12" '
              f'text-anchor="middle">{esc(HOST)}@github: ~$ neofetch</text>')

@@ -59,16 +59,16 @@ CONFIG = {
     "SHARD_MIN_DIST":    60,
     "SHARD_MAX_DIST":    150,
 
-    # ── Colors (system-critical terminal palette) ──────────
-    "BG":               "#0a0a0a",
-    "FRAME":            "#e10600",
-    "MUTED":            "#888888",
-    "LETTER":           "#e10600",       # countdown letter
-    "PIPE":             "#e10600",       # pipe cursor
-    "SHARD":            "#e10600",       # explosion fragments
-    "NAME":             "#f5f5f5",       # final name
-    "DOT_COLORS":       ["#e10600", "#e10600", "#e10600"],
-    "TITLE_BG":         "#111111",
+    # ── Colors (Cyber Cyan palette) ────────────────────────
+    "BG":               "#0d1117",
+    "FRAME":            "#22D3EE",
+    "MUTED":            "#38BDF8",
+    "LETTER":           "#22D3EE",       # countdown letter
+    "PIPE":             "#22D3EE",       # pipe cursor
+    "SHARD":            "#22D3EE",       # explosion fragments
+    "NAME":             "#e6edf3",       # final name
+    "DOT_COLORS":       ["#22D3EE", "#22D3EE", "#22D3EE"],
+    "TITLE_BG":         "#0f172a",
 }
 
 
