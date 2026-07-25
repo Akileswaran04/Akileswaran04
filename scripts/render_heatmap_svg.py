@@ -59,7 +59,7 @@ LEFT_LABEL_W = 30
 TOP_LABEL_H  = 20
 TITLEBAR_H   = 30
 STATS_H      = 88
-DRONE_RAIL_H = 50          # extra height for the drone track at bottom
+DRONE_RAIL_H = 42          # extra height for the drone track at bottom
 
 DRONE_DELAY = 1.5          # seconds before drone starts
 DRONE_DUR   = 16.0         # seconds for full left→right sweep (slower pace)
