@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="860" height="206" viewBox="0 0 860 206" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="384" viewBox="0 0 860 384" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
   <defs>
     <linearGradient id="card-bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#0f172a"/>
@@ -6,30 +6,35 @@
     </linearGradient>
   </defs>
   <!-- Gradient background (matching contrib-heatmap) -->
-  <rect width="860" height="206" rx="12" fill="url(#card-bg)"/>
+  <rect width="860" height="384" rx="12" fill="url(#card-bg)"/>
   <!-- Cyan border (matching contrib-heatmap) -->
-  <rect x="0.5" y="0.5" width="859" height="205" rx="12" fill="none" stroke="#22D3EE" stroke-width="1" stroke-opacity="0.55"/>
+  <rect x="0.5" y="0.5" width="859" height="383" rx="12" fill="none" stroke="#22D3EE" stroke-width="1" stroke-opacity="0.55"/>
   <line x1="0" y1="30" x2="860" y2="30" stroke="#22D3EE" stroke-opacity="0.35"/>
   <circle cx="20" cy="15.0" r="5" fill="#22D3EE"/>
   <circle cx="36" cy="15.0" r="5" fill="#22D3EE"/>
   <circle cx="52" cy="15.0" r="5" fill="#22D3EE"/>
   <text x="430.0" y="19.0" fill="#38BDF8" font-size="12" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">akileswaran04@github: ~$ skills</text>
   <text x="20" y="60.0" font-size="14" font-weight="700"><tspan fill="#14b8a6">akileswaran04</tspan><tspan fill="#38BDF8">@</tspan><tspan fill="#22D3EE">github</tspan></text><line x1="188" y1="56.0" x2="840" y2="56.0" stroke="#22D3EE" stroke-opacity="0.6"/>
-  <text x="20" y="84.0" fill="#22D3EE" font-size="12.5" font-weight="700">-- Technologies</text><line x1="140" y1="80.0" x2="840" y2="80.0" stroke="#22D3EE" stroke-opacity="0.6"/>
-  <g><rect x="204" y="109" width="50" height="24" rx="12" fill="#00599C"/><text x="229" y="122" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">C++</text></g>
-  <g><rect x="264" y="109" width="75" height="24" rx="12" fill="#3776AB"/><text x="301" y="122" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">Python</text></g>
-  <g><rect x="348" y="109" width="109" height="24" rx="12" fill="#F7DF1E"/><text x="403" y="122" fill="#000" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">JavaScript</text></g>
-  <g><rect x="468" y="109" width="66" height="24" rx="12" fill="#61DAFB"/><text x="501" y="122" fill="#000" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">React</text></g>
-  <g><rect x="544" y="109" width="92" height="24" rx="12" fill="#000000"/><text x="590" y="122" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">Three.js</text></g>
-  <g><rect x="166" y="137" width="84" height="24" rx="12" fill="#339933"/><text x="208" y="150" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">Node.js</text></g>
-  <g><rect x="259" y="137" width="84" height="24" rx="12" fill="#009688"/><text x="301" y="150" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">FastAPI</text></g>
-  <g><rect x="353" y="137" width="100" height="24" rx="12" fill="#FF4B4B"/><text x="403" y="150" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">Streamlit</text></g>
-  <g><rect x="463" y="137" width="109" height="24" rx="12" fill="#4169E1"/><text x="518" y="150" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">PostgreSQL</text></g>
-  <g><rect x="582" y="137" width="92" height="24" rx="12" fill="#FFCA28"/><text x="628" y="150" fill="#000" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">Firebase</text></g>
-  <g><rect x="174" y="165" width="84" height="24" rx="12" fill="#150458"/><text x="216" y="178" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">XGBoost</text></g>
-  <g><rect x="268" y="165" width="109" height="24" rx="12" fill="#FF6F00"/><text x="322" y="178" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">TensorFlow</text></g>
-  <g><rect x="387" y="165" width="84" height="24" rx="12" fill="#EE4C2C"/><text x="428" y="178" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">PyTorch</text></g>
-  <g><rect x="480" y="165" width="126" height="24" rx="12" fill="#F7931E"/><text x="543" y="178" fill="#000" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">scikit-learn</text></g>
-  <g><rect x="616" y="165" width="50" height="24" rx="12" fill="#F05032"/><text x="641" y="178" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">Git</text></g>
-  <g><rect x="390" y="193" width="75" height="24" rx="12" fill="#2496ED"/><text x="428" y="206" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">Docker</text></g>
+  <text x="20" y="84.0" fill="#22D3EE" font-size="12.5" font-weight="700">-- Languages</text><line x1="116" y1="80.0" x2="840" y2="80.0" stroke="#22D3EE" stroke-opacity="0.6"/>
+  <g><rect x="20" y="109" width="50" height="24" rx="12" fill="#00599C"/><text x="45" y="122" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">C++</text></g>
+  <g><rect x="80" y="109" width="75" height="24" rx="12" fill="#3776AB"/><text x="117" y="122" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">Python</text></g>
+  <g><rect x="164" y="109" width="109" height="24" rx="12" fill="#F7DF1E"/><text x="219" y="122" fill="#000" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">JavaScript</text></g>
+  <text x="20" y="132.0" fill="#22D3EE" font-size="12.5" font-weight="700">-- Frontend</text><line x1="108" y1="128.0" x2="840" y2="128.0" stroke="#22D3EE" stroke-opacity="0.6"/>
+  <g><rect x="20" y="157" width="66" height="24" rx="12" fill="#61DAFB"/><text x="53" y="170" fill="#000" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">React</text></g>
+  <g><rect x="96" y="157" width="92" height="24" rx="12" fill="#000000"/><text x="142" y="170" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">Three.js</text></g>
+  <text x="20" y="180.0" fill="#22D3EE" font-size="12.5" font-weight="700">-- Backend</text><line x1="100" y1="176.0" x2="840" y2="176.0" stroke="#22D3EE" stroke-opacity="0.6"/>
+  <g><rect x="20" y="205" width="84" height="24" rx="12" fill="#339933"/><text x="62" y="218" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">Node.js</text></g>
+  <g><rect x="114" y="205" width="84" height="24" rx="12" fill="#009688"/><text x="155" y="218" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">FastAPI</text></g>
+  <g><rect x="207" y="205" width="100" height="24" rx="12" fill="#FF4B4B"/><text x="257" y="218" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">Streamlit</text></g>
+  <text x="20" y="228.0" fill="#22D3EE" font-size="12.5" font-weight="700">-- Database</text><line x1="108" y1="224.0" x2="840" y2="224.0" stroke="#22D3EE" stroke-opacity="0.6"/>
+  <g><rect x="20" y="253" width="109" height="24" rx="12" fill="#4169E1"/><text x="74" y="266" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">PostgreSQL</text></g>
+  <g><rect x="139" y="253" width="92" height="24" rx="12" fill="#FFCA28"/><text x="185" y="266" fill="#000" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">Firebase</text></g>
+  <text x="20" y="276.0" fill="#22D3EE" font-size="12.5" font-weight="700">-- ML/AI</text><line x1="84" y1="272.0" x2="840" y2="272.0" stroke="#22D3EE" stroke-opacity="0.6"/>
+  <g><rect x="20" y="301" width="84" height="24" rx="12" fill="#150458"/><text x="62" y="314" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">XGBoost</text></g>
+  <g><rect x="114" y="301" width="109" height="24" rx="12" fill="#FF6F00"/><text x="168" y="314" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">TensorFlow</text></g>
+  <g><rect x="232" y="301" width="84" height="24" rx="12" fill="#EE4C2C"/><text x="274" y="314" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">PyTorch</text></g>
+  <g><rect x="326" y="301" width="126" height="24" rx="12" fill="#F7931E"/><text x="389" y="314" fill="#000" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">scikit-learn</text></g>
+  <text x="20" y="324.0" fill="#22D3EE" font-size="12.5" font-weight="700">-- Tools</text><line x1="84" y1="320.0" x2="840" y2="320.0" stroke="#22D3EE" stroke-opacity="0.6"/>
+  <g><rect x="20" y="349" width="50" height="24" rx="12" fill="#F05032"/><text x="45" y="362" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">Git</text></g>
+  <g><rect x="80" y="349" width="75" height="24" rx="12" fill="#2496ED"/><text x="117" y="362" fill="#ffffff" font-size="12.5" font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">Docker</text></g>
 </svg>
