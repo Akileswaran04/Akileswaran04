@@ -267,28 +267,6 @@ def render_projects():
 
 
 # ═══════════════════════════════════════════════════════════════════
-#  PANEL 4 —  STATS
-# ═══════════════════════════════════════════════════════════════════
-
-def render_stats():
-    # Decorative frame only — actual stat images are HTML <img> in README
-    content_h = 140
-    inner_h = TITLE_H + 12 + content_h
-    h = inner_h + PAD + EXTRA
-
-    parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
-    parts.append(card_defs())
-    parts.append(card_bg(h))
-    parts.append(title_bar(h, "github-stats"))
-    parts.append("  " + host_line(TITLE_H + 30))
-    # Show a placeholder message since images load via HTML
-    parts.append(f'  <text x="{W/2}" y="{TITLE_H + 70}" fill="{DIM}" font-size="13" text-anchor="middle">— stat images rendered via HTML below —</text>')
-
-    parts.append("</svg>")
-    return "stats", "\n".join(parts)
-
-
-# ═══════════════════════════════════════════════════════════════════
 #  PANEL 5 —  STACK  (skill pills)
 # ═══════════════════════════════════════════════════════════════════
 
@@ -420,7 +398,6 @@ if __name__ == "__main__":
         render_whoami(),
         render_netstat(),
         render_projects(),
-        render_stats(),
         render_stack(),
         render_building(),
         render_tagline(),

@@ -49,13 +49,21 @@
 
 <br><br>
 
-<img src="./glass-stats.svg" width="860" alt="GitHub Stats" />
+<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="24" cellspacing="0" width="860" style="border-radius:12px">
+<tr><td>
+
+<pre><font color="#22D3EE">│ <font color="#38BDF8">akileswaran04@github</font>:<font color="#22D3EE">~</font>$ <font color="#e6edf3">github-stats</font></font>
+</pre>
+
+<br>
 
 <div align="center">
-<br>
 <img src="https://github-stats-extended.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" />&nbsp;&nbsp;&nbsp;
 <img src="https://streak-stats.demolab.com/?user=Akileswaran04&background=0f172a&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE" />
 </div>
+
+</td></tr>
+</table>
 
 <br>
 
