@@ -32,46 +32,82 @@
 </div>
 
 <!-- ========================================================================== -->
-<!--  Below: clean typography-led vertical flow — no boxes, no borders           -->
+<!--  Below: consistent card system — uniform styling, no box-drawing chars     -->
 <!-- ========================================================================== -->
 
 <br>
 
----
+<!-- ── CARD: CONNECT ────────────────────────────────────────────────────── -->
+<table align="center" bgcolor="#0f172a" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
+<tr><td>
 
-### 🔗 Connect
+<h3 align="center"><font color="#22D3EE">🔗 Connect</font></h3>
+
+<br>
+
+<div align="center">
 
 <a href="https://linkedin.com/in/akileswaran-ammamuthu"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /></a>&nbsp;
 <a href="https://github.com/Akileswaran04"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /></a>&nbsp;
 <a href="https://leetcode.com/u/Akileswaran04/"><img src="https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black" /></a>&nbsp;
 <a href="https://sentri-final.streamlit.app"><img src="https://img.shields.io/badge/SENTRI-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" /></a>
 
----
+</div>
 
-### 📌 Projects
+</td></tr>
+</table>
 
-| ID | Name | Stack | Status |
-| -- | ---- | ----- | ------ |
-| 01 | **ODYSSEY** | LLM · EBM · LangChain | <font color="#22D3EE">● build</font> |
-| 02 | **[SENTRI ▸](https://sentri-final.streamlit.app)** | Streamlit · FastAPI · XGBoost | <font color="#22D3EE">● live</font> |
-| 03 | **Gridlock** | LightGBM · XGBoost · Hackathon | <font color="#38BDF8">○ archive</font> |
-| 04 | **[Riddle Rush ▸](https://csau.vercel.app)** | React · Three.js · Supabase | <font color="#22D3EE">● live</font> |
-| 05 | **DayLog** | React · Node.js · Firebase | <font color="#38BDF8">○ pending</font> |
+<br>
 
----
+<!-- ── CARD: PROJECTS ───────────────────────────────────────────────────── -->
+<table align="center" bgcolor="#0f172a" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
+<tr><td>
 
-### 📊 GitHub Stats
+<h3 align="center"><font color="#22D3EE">📌 Projects</font></h3>
+
+<br>
+
+<table width="100%" cellpadding="6" cellspacing="0">
+<tr><th align="left"><font color="#38BDF8">ID</font></th><th align="left"><font color="#38BDF8">Name</font></th><th align="left"><font color="#38BDF8">Stack</font></th><th align="left"><font color="#38BDF8">Status</font></th></tr>
+<tr><td><font color="#7d8590">01</font></td><td><font color="#e6edf3"><b>ODYSSEY</b></font></td><td><font color="#e6edf3">LLM · EBM · LangChain</font></td><td><font color="#22D3EE">● build</font></td></tr>
+<tr><td><font color="#7d8590">02</font></td><td><a href="https://sentri-final.streamlit.app"><font color="#22D3EE"><b>SENTRI ▸</b></font></a></td><td><font color="#e6edf3">Streamlit · FastAPI · XGBoost</font></td><td><font color="#22D3EE">● live</font></td></tr>
+<tr><td><font color="#7d8590">03</font></td><td><font color="#e6edf3"><b>Gridlock</b></font></td><td><font color="#e6edf3">LightGBM · XGBoost · Hackathon</font></td><td><font color="#38BDF8">○ archive</font></td></tr>
+<tr><td><font color="#7d8590">04</font></td><td><a href="https://csau.vercel.app"><font color="#22D3EE"><b>Riddle Rush ▸</b></font></a></td><td><font color="#e6edf3">React · Three.js · Supabase</font></td><td><font color="#22D3EE">● live</font></td></tr>
+<tr><td><font color="#7d8590">05</font></td><td><font color="#e6edf3"><b>DayLog</b></font></td><td><font color="#e6edf3">React · Node.js · Firebase</font></td><td><font color="#38BDF8">○ pending</font></td></tr>
+</table>
+
+</td></tr>
+</table>
+
+<br>
+
+<!-- ── CARD: GITHUB STATS ───────────────────────────────────────────────── -->
+<table align="center" bgcolor="#0f172a" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
+<tr><td>
+
+<h3 align="center"><font color="#22D3EE">📊 GitHub Stats</font></h3>
+
+<br>
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0d1117&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" />&nbsp;&nbsp;
-<img src="https://streak-stats.demolab.com/?user=Akileswaran04&background=0d1117&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE" />
+<img src="https://github-stats-extended.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" />&nbsp;&nbsp;
+<img src="https://streak-stats.demolab.com/?user=Akileswaran04&background=0f172a&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE" />
 
 </div>
 
----
+</td></tr>
+</table>
 
-### 🛠️ Stack
+<br>
+
+<!-- ── CARD: STACK ──────────────────────────────────────────────────────── -->
+<table align="center" bgcolor="#0f172a" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
+<tr><td>
+
+<h3 align="center"><font color="#22D3EE">🛠️ Stack</font></h3>
+
+<br>
 
 <div align="center">
 
@@ -94,19 +130,38 @@
 
 </div>
 
----
+</td></tr>
+</table>
 
-### 🚧 Building now
+<br>
 
-| PID | Process | Stack | CPU |
-| --- | ------- | ----- | --- |
-| 001 | **SENTRI** | Streamlit · FastAPI · XGBoost | 42% |
-| 002 | **Riddle Rush** | React · Three.js · Supabase | 35% |
-| 003 | **DayLog** | React · Node.js · Firebase | 23% |
+<!-- ── CARD: BUILDING NOW ──────────────────────────────────────────────── -->
+<table align="center" bgcolor="#0f172a" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
+<tr><td>
 
----
+<h3 align="center"><font color="#22D3EE">🚧 Building now</font></h3>
 
-### 💬 Tagline
+<br>
+
+<table width="100%" cellpadding="6" cellspacing="0">
+<tr><th align="left"><font color="#38BDF8">PID</font></th><th align="left"><font color="#38BDF8">Process</font></th><th align="left"><font color="#38BDF8">Stack</font></th><th align="left"><font color="#38BDF8">CPU</font></th></tr>
+<tr><td><font color="#7d8590">001</font></td><td><font color="#e6edf3"><b>SENTRI</b></font></td><td><font color="#e6edf3">Streamlit · FastAPI · XGBoost</font></td><td><font color="#22D3EE">42%</font></td></tr>
+<tr><td><font color="#7d8590">002</font></td><td><font color="#e6edf3"><b>Riddle Rush</b></font></td><td><font color="#e6edf3">React · Three.js · Supabase</font></td><td><font color="#22D3EE">35%</font></td></tr>
+<tr><td><font color="#7d8590">003</font></td><td><font color="#e6edf3"><b>DayLog</b></font></td><td><font color="#e6edf3">React · Node.js · Firebase</font></td><td><font color="#22D3EE">23%</font></td></tr>
+</table>
+
+</td></tr>
+</table>
+
+<br>
+
+<!-- ── CARD: TAGLINE ───────────────────────────────────────────────────── -->
+<table align="center" bgcolor="#0f172a" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
+<tr><td>
+
+<h3 align="center"><font color="#22D3EE">💬 Tagline</font></h3>
+
+<br>
 
 <div align="center">
 
@@ -115,6 +170,9 @@
 </a>
 
 </div>
+
+</td></tr>
+</table>
 
 <br>
 
