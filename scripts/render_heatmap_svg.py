@@ -268,16 +268,16 @@ def render(data):
                     f'dur="{shot_dur_:.2f}s" begin="{shot_at:.3f}s" fill="freeze"/>'
                     f'</circle>'
                 )
-            # Glow pulse (cyan ring that expands and fades)
+            # Glow pulse (cyan expanding ring — fires on EVERY cell, even single-contribution)
             gcx = cell_cx + CELL / 2
             gcy = cell_cy + CELL / 2
             parts.append(
                 f'<circle cx="{gcx:.1f}" cy="{gcy:.1f}" r="2" fill="none" stroke="{ACCENT}" '
-                f'stroke-width="2" filter="url(#glow)" opacity="0">'
-                f'<animate attributeName="r" values="2;{CELL*0.8:.0f};{CELL:.0f}" '
-                f'keyTimes="0;0.3;1" dur="0.8s" begin="{base:.3f}s" fill="freeze"/>'
-                f'<animate attributeName="opacity" values="0;0.9;0" '
-                f'keyTimes="0;0.2;1" dur="0.8s" begin="{base:.3f}s" fill="freeze"/>'
+                f'stroke-width="2.5" filter="url(#glow)" opacity="0">'
+                f'<animate attributeName="r" values="2;{CELL*0.9:.0f};{CELL*1.2:.0f}" '
+                f'keyTimes="0;0.3;1" dur="1.0s" begin="{base:.3f}s" fill="freeze"/>'
+                f'<animate attributeName="opacity" values="0;1.0;0" '
+                f'keyTimes="0;0.25;1" dur="1.0s" begin="{base:.3f}s" fill="freeze"/>'
                 f'</circle>'
             )
             # Impact flash
