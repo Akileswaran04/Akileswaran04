@@ -61,9 +61,9 @@ TITLEBAR_H   = 30
 STATS_H      = 88
 DRONE_RAIL_H = 50          # extra height for the drone track at bottom
 
-DRONE_DELAY = 1.0          # seconds before drone starts
-DRONE_DUR   = 9.0          # seconds for full left→right sweep (2× speed, no holds)
-HOLD_DUR    = 0.0          # no rest — continuous patrol
+DRONE_DELAY = 1.5          # seconds before drone starts
+DRONE_DUR   = 16.0         # seconds for full left→right sweep (slower pace)
+HOLD_DUR    = 0.45         # seconds to hover at each column with contributions — stop and shoot
 
 
 def level_for(count):
