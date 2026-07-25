@@ -1,6 +1,13 @@
 name: Refresh Contribution Heatmap
 
 on:
+  push:
+    branches: ["main"]
+    paths:
+      - "scripts/fetch_contributions.py"
+      - "scripts/render_heatmap_svg.py"
+      - "scripts/generate_typewriter_card.py"
+      - "data/contributions.json"
   schedule:
     - cron: "0 */6 * * *"
   workflow_dispatch:
