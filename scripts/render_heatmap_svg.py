@@ -257,55 +257,50 @@ def render(data):
         motion_vals.append(fwd_vals[i])
         motion_kts.append(0.5 + (1.0 - fwd_kts[i]) * 0.5)
 
-    # ──── bullets — fire as the drone passes each column ──────────────
-    # Forward pass takes DRONE_DUR/2 (keyTimes scaled to 0→0.5), so
-    # scale arrival times by 0.5 to sync bullets with drone position.
-    for ci in range(n_cols):
-        if not col_cells[ci]:
-            continue
-
+    # ──── helper: emit bullets & flash for a given column and base time ─
+    def fire_column(ci, base):
         col_cx = col_cx_list[ci]
-        # Fire on forward pass — sync with scaled keyTimes
-        shoot_base = DRONE_DELAY + col_arrival[ci] * 0.5
-
         for ri, cell_cx, cell_cy, count in col_cells[ci]:
             n_shots = min(count, SHOTS_CAP)
             for s in range(n_shots):
-                shot_dur = 0.15
+                shot_dur_ = 0.15
                 shot_offset = s * (0.12 / max(n_shots, 1))
-                shot_at = shoot_base + shot_offset
+                shot_at = base + shot_offset
                 spread_x = (s - n_shots / 2) * 1.8 + random.uniform(-1, 1)
                 start_x = col_cx + spread_x
                 end_x = col_cx + spread_x * 0.3
                 start_y = drone_cy
                 end_y = cell_cy + CELL / 2
-
                 parts.append(
                     f'<circle r="2.2" fill="{TRAIL_COLOR}" opacity="0">'
                     f'<animate attributeName="opacity" values="0;1;1;0" '
-                    f'keyTimes="0;0.15;0.6;1" dur="{shot_dur:.2f}s" '
+                    f'keyTimes="0;0.15;0.6;1" dur="{shot_dur_:.2f}s" '
                     f'begin="{shot_at:.3f}s" fill="freeze"/>'
                     f'<animateMotion path="M{start_x:.1f},{start_y:.1f} L{end_x:.1f},{end_y:.1f}" '
-                    f'dur="{shot_dur:.2f}s" begin="{shot_at:.3f}s" fill="freeze"/>'
+                    f'dur="{shot_dur_:.2f}s" begin="{shot_at:.3f}s" fill="freeze"/>'
                     f'</circle>'
                 )
-
-    # ──── impact flash on cells (white flash when hit) ────────────────
-    for ci in range(n_cols):
-        if not col_cells[ci]:
-            continue
-        shoot_base = DRONE_DELAY + col_arrival[ci] * 0.5
-
-        for ri, cell_cx, cell_cy, count in col_cells[ci]:
-            orig_color = PALETTE[level_for(count)]
+            # Impact flash
+            orig_color_ = PALETTE[level_for(count)]
             parts.append(
                 f'<rect x="{cell_cx}" y="{cell_cy}" width="{CELL}" height="{CELL}" rx="2.5" '
-                f'fill="{orig_color}">'
+                f'fill="{orig_color_}">'
                 f'<animate attributeName="fill" '
-                f'values="{orig_color};{TRAIL_COLOR};{TRAIL_COLOR};{orig_color}" '
-                f'keyTimes="0;0.12;0.45;1" dur="0.6s" begin="{shoot_base:.3f}s" fill="freeze"/>'
+                f'values="{orig_color_};{TRAIL_COLOR};{TRAIL_COLOR};{orig_color_}" '
+                f'keyTimes="0;0.12;0.45;1" dur="0.6s" begin="{base:.3f}s" fill="freeze"/>'
                 f'</rect>'
             )
+
+    # ──── bullets on forward pass (left→right) ───────────────────────
+    for ci in range(n_cols):
+        if col_cells[ci]:
+            fire_column(ci, DRONE_DELAY + col_arrival[ci] * 0.5)
+
+    # ──── bullets on reverse pass (right→left) ───────────────────────
+    # Drone reaches column ci on return at: DRONE_DELAY + DRONE_DUR - col_arrival[ci] * 0.5
+    for ci in range(n_cols):
+        if col_cells[ci]:
+            fire_column(ci, DRONE_DELAY + DRONE_DUR - col_arrival[ci] * 0.5)
 
     # ──── drone sprite on a horizontal rail ───────────────────────────
     def drone_sprite():

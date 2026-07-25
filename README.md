@@ -37,7 +37,11 @@
 
 <br>
 
-<img src="./glass-connect.svg" width="860" alt="Connect" />
+<img src="./glass-whoami.svg" width="860" alt="whoami" />
+
+<br><br>
+
+<img src="./glass-netstat.svg" width="860" alt="Connections" />
 
 <br><br>
 
