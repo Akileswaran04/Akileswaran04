@@ -214,7 +214,7 @@ def render_stack():
         elif kind == "pills":
             skills = row[1]
             tw = sum(len(s[0]) * 8.5 + 28 for s in skills) + (len(skills) - 1) * 10
-            bx = KEY_X
+            bx = (W - tw) / 2
             by = y + 10  # badge vertical centre
             for s in skills:
                 label, colour = s[0], s[1]
