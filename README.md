@@ -41,7 +41,7 @@
 <!--  SYSTEM BANNER                                                      -->
 <!-- ─────────────────────────────────────────────────────────────────── -->
 
-<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="16" cellspacing="0" width="860" style="border-radius:8px">
+<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
 <tr><td>
 
 <pre><font color="#22D3EE">
@@ -70,7 +70,7 @@
 <!--  $ whoami — IDENTITY PANEL                                        -->
 <!-- ─────────────────────────────────────────────────────────────────── -->
 
-<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="20" cellspacing="0" width="860" style="border-radius:8px">
+<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
 <tr><td>
 
 <pre><font color="#22D3EE">│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#38BDF8">~</font>$ <font color="#e6edf3">whoami</font>
@@ -93,7 +93,7 @@
 <!--  $ netstat --connections — SOCIAL LINKS                             -->
 <!-- ─────────────────────────────────────────────────────────────────── -->
 
-<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="20" cellspacing="0" width="860" style="border-radius:8px">
+<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
 <tr><td>
 
 <pre><font color="#22D3EE">│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#38BDF8">~</font>$ <font color="#e6edf3">netstat --connections</font>
@@ -115,7 +115,7 @@
 <!--  $ cat /proc/projects — FEATURED PROJECTS                          -->
 <!-- ─────────────────────────────────────────────────────────────────── -->
 
-<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="20" cellspacing="0" width="860" style="border-radius:8px">
+<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
 <tr><td>
 
 <pre><font color="#22D3EE">│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#38BDF8">~</font>$ <font color="#e6edf3">cat /proc/projects</font>
@@ -137,121 +137,87 @@
 <br>
 
 <!-- ═══════════════════════════════════════════════════════════════════ -->
-<!--  CYBER CYAN CARD GRID  —  Four cards in a 2×2 layout               -->
+<!--  CYBER CYAN TERMINAL SESSION  —  One continuous pane               -->
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 
-<table align="center" cellpadding="0" cellspacing="10" width="860">
-<tr>
-
-<!-- ── CARD 1: GITHUB STATS ──────────────────────────────────────── -->
-<td width="50%" valign="top">
-
-<table bgcolor="#0f172a" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="100%" style="border-radius:8px">
+<table align="center" bgcolor="#0f172a" border="1" bordercolor="#22D3EE" cellpadding="20" cellspacing="0" width="860" style="border-radius:8px">
 <tr><td>
 
-<h3 align="center">
-  <font color="#22D3EE">📊 GitHub Stats</font>
-</h3>
-
-<br>
-
-<pre><font color="#22D3EE">│ <font color="#38BDF8">REPOSITORY</font>    <font color="#22D3EE">│</font> <font color="#38BDF8">STATISTICS</font>
-│ ───────────── <font color="#22D3EE">┼</font> ──────────────────────────────────────
-│ <font color="#e6edf3">Profile</font>       <font color="#22D3EE">│</font> <img src="https://github-readme-stats.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" />
-│ <font color="#e6edf3">Streak</font>        <font color="#22D3EE">│</font> <img src="https://streak-stats.demolab.com/?user=Akileswaran04&background=0f172a&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE" /></font>
+<pre><font color="#22D3EE">│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#38BDF8">~</font>$ <font color="#e6edf3">cat ~/.github/session</font>
+│
+│
+│                     <font color="#22D3EE">📊  GitHub Stats</font>
+│</font>
 </pre>
-
-</td></tr>
-</table>
-
-</td>
-
-<!-- ── CARD 2: SKILLS & TOOLS ─────────────────────────────────────── -->
-<td width="50%" valign="top">
-
-<table bgcolor="#0f172a" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="100%" style="border-radius:8px">
-<tr><td>
-
-<h3 align="center">
-  <font color="#22D3EE">🛠️ Skills &amp; Tools</font>
-</h3>
-
-<br>
 
 <div align="center">
 
-<pre><font color="#22D3EE">│ <font color="#38BDF8">LANGUAGES</font>     │ <img src="https://img.shields.io/badge/C++-00599C?style=flat&logo=c%2B%2B&logoColor=white" /> <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" /> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black" />
-│ <font color="#38BDF8">FRONTEND</font>      │ <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black" /> <img src="https://img.shields.io/badge/Three.js-000000?style=flat&logo=three.js&logoColor=white" />
-│ <font color="#38BDF8">BACKEND</font>       │ <img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white" /> <img src="https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white" /> <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white" />
-│ <font color="#38BDF8">DATABASE</font>      │ <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white" /> <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=firebase&logoColor=black" />
-│ <font color="#38BDF8">ML / AI</font>       │ <img src="https://img.shields.io/badge/XGBoost-150458?style=flat" /> <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=flat&logo=tensorflow&logoColor=white" /> <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat&logo=pytorch&logoColor=white" /> <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=flat&logo=scikit-learn&logoColor=white" />
-│ <font color="#38BDF8">TOOLS</font>         │ <img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white" /> <img src="https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white" /></font>
-</pre>
+<img src="https://github-readme-stats.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" />&nbsp;&nbsp;
+<img src="https://streak-stats.demolab.com/?user=Akileswaran04&background=0f172a&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE" />
 
 </div>
 
-</td></tr>
-</table>
-
-</td>
-</tr>
-
-<tr>
-
-<!-- ── CARD 3: CURRENTLY BUILDING ─────────────────────────────────── -->
-<td width="50%" valign="top">
-
-<table bgcolor="#0f172a" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="100%" style="border-radius:8px">
-<tr><td>
-
-<h3 align="center">
-  <font color="#22D3EE">🚧 Currently Building</font>
-</h3>
-
-<br>
-
-<pre><font color="#22D3EE">│ <font color="#38BDF8">PID</font>  <font color="#22D3EE">│</font> <font color="#38BDF8">PROCESS</font>              <font color="#22D3EE">│</font> <font color="#38BDF8">STACK</font>                                <font color="#22D3EE">│</font> <font color="#38BDF8">CPU%</font>
-│ ──── <font color="#22D3EE">┼</font> ──────────────────── <font color="#22D3EE">┼</font> ─────────────────────────────────── <font color="#22D3EE">┼</font> ─────
-│ 001 <font color="#22D3EE">│</font> <font color="#e6edf3">SENTRI</font>               <font color="#22D3EE">│</font> Streamlit · FastAPI · XGBoost          <font color="#22D3EE">│</font> 42%
-│ 002 <font color="#22D3EE">│</font> <font color="#e6edf3">Riddle Rush</font>          <font color="#22D3EE">│</font> React · Three.js · Supabase           <font color="#22D3EE">│</font> 35%
-│ 003 <font color="#22D3EE">│</font> <font color="#e6edf3">DayLog</font>               <font color="#22D3EE">│</font> React · Node.js · Firebase            <font color="#22D3EE">│</font> 23%</font>
+<pre><font color="#22D3EE">
+│ <font color="#38BDF8">──────────────────────────────────────────────────────────────────────</font>
+│
+│                     <font color="#22D3EE">🛠️  Skills &amp; Tools</font>
+│</font>
 </pre>
 
-</td></tr>
-</table>
+<div align="center">
 
-</td>
+<img src="https://img.shields.io/badge/C++-00599C?style=flat&logo=c%2B%2B&logoColor=white" />&nbsp;
+<img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" />&nbsp;
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black" />&nbsp;
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black" />&nbsp;
+<img src="https://img.shields.io/badge/Three.js-000000?style=flat&logo=three.js&logoColor=white" />&nbsp;
+<img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white" />&nbsp;
+<img src="https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white" />&nbsp;
+<img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white" />&nbsp;
+<img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white" />&nbsp;
+<img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=firebase&logoColor=black" />&nbsp;
+<img src="https://img.shields.io/badge/XGBoost-150458?style=flat" />&nbsp;
+<img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=flat&logo=tensorflow&logoColor=white" />&nbsp;
+<img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat&logo=pytorch&logoColor=white" />&nbsp;
+<img src="https://img.shields.io/badge/scikit--learn-F7931E?style=flat&logo=scikit-learn&logoColor=white" />&nbsp;
+<img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white" />&nbsp;
+<img src="https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white" />
 
-<!-- ── CARD 4: TAGLINE ────────────────────────────────────────────── -->
-<td width="50%" valign="top">
+</div>
 
-<table bgcolor="#0f172a" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="100%" style="border-radius:8px">
-<tr><td>
-
-<h3 align="center">
-  <font color="#22D3EE">💬 Tagline</font>
-</h3>
-
-<br>
-
-<pre><font color="#22D3EE">│ <font color="#38BDF8">$TAGLINE</font> = <font color="#22D3EE">"Full-Stack × AI/ML — turning data into decisions"</font></font>
+<pre><font color="#22D3EE">
+│ <font color="#38BDF8">──────────────────────────────────────────────────────────────────────</font>
+│
+│                     <font color="#22D3EE">🚧  Currently Building</font>
+│
+│ <font color="#38BDF8">PID</font>   <font color="#22D3EE">│</font> <font color="#38BDF8">PROCESS</font>              <font color="#22D3EE">│</font> <font color="#38BDF8">STACK</font>                                <font color="#22D3EE">│</font> <font color="#38BDF8">CPU%</font>
+│ ────  <font color="#22D3EE">┼</font> ──────────────────── <font color="#22D3EE">┼</font> ─────────────────────────────────── <font color="#22D3EE">┼</font> ─────
+│ 001   <font color="#22D3EE">│</font> <font color="#e6edf3">SENTRI</font>               <font color="#22D3EE">│</font> Streamlit · FastAPI · XGBoost          <font color="#22D3EE">│</font> 42%
+│ 002   <font color="#22D3EE">│</font> <font color="#e6edf3">Riddle Rush</font>          <font color="#22D3EE">│</font> React · Three.js · Supabase           <font color="#22D3EE">│</font> 35%
+│ 003   <font color="#22D3EE">│</font> <font color="#e6edf3">DayLog</font>               <font color="#22D3EE">│</font> React · Node.js · Firebase            <font color="#22D3EE">│</font> 23%
+│
+│ <font color="#38BDF8">──────────────────────────────────────────────────────────────────────</font>
+│
+│                     <font color="#22D3EE">💬  Tagline</font>
+│
+│ <font color="#38BDF8">$TAGLINE</font>  <font color="#e6edf3">=  Full-Stack × AI/ML — turning data into decisions</font>
+│</font>
 </pre>
-
-<br>
 
 <div align="center">
 
 <a href="https://github.com/Akileswaran04">
-  <img src="https://readme-typing-svg.demolab.com/?lines=Full-Stack+Developer+%7C+Applied+ML;Full-Stack+x+AI+ML+%E2%80%94+turning+data+into+decisions&font=Fira+Code&size=18&duration=4000&pause=2000&color=22D3EE&center=true&width=360&height=50&repeat=true" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com/?lines=Full-Stack+Developer+%7C+Applied+ML;Full-Stack+x+AI+ML+%E2%80%94+turning+data+into+decisions&font=Fira+Code&size=20&duration=4000&pause=2000&color=22D3EE&center=true&width=600&height=50&repeat=true" alt="Typing SVG" />
 </a>
 
 </div>
 
-</td></tr>
-</table>
+<pre><font color="#22D3EE">│
+│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#38BDF8">~</font>$ <img src="./cursor.svg" width="12" height="18" alt="_" style="vertical-align:middle" />
+│</font>
+</pre>
 
-</td>
-</tr>
+</td></tr>
 </table>
 
 <br>
@@ -260,7 +226,7 @@
 <!--  FOOTER — System Status                                             -->
 <!-- ─────────────────────────────────────────────────────────────────── -->
 
-<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="12" cellspacing="0" width="860" style="border-radius:8px">
+<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
 <tr><td>
 
 <pre><font color="#38BDF8">┌────────────────────────────────────────────────────────────────────────────┐

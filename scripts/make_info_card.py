@@ -38,16 +38,16 @@ ACCENT = "#22D3EE"
 #
 #  row types:
 #    ("host",)              -> "you@github" header + rule
-#    ("kv", key, value)     -> orange key + light value
-#    ("sec", title)         -> blue "— title —" section rule
-#    ("bul", text)          -> green dot + light bullet
+#    ("kv", key, value)     -> cyan key + light value
+#    ("sec", title)         -> cyan "— title —" section rule
+#    ("bul", text)          -> teal dot + light bullet
 #    ("gap",)               -> a little vertical space
 # ===========================================================================
 HOST = "akileswaran04"   # shown as  you@github  in the header
 
 ROWS = [
     ("host",),
-    ("kv", "Role", "Software Eng. Intern Candidate"),
+    ("kv", "Role", "Software Engineering Intern"),
     ("kv", "Edu", "B.Tech IT @ CEG, Anna University"),
     ("kv", "Loc", "Chennai, Tamil Nadu"),
     ("gap",),
