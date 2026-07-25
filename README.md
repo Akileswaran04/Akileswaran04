@@ -91,7 +91,7 @@
 
 <div align="center">
 
-<img src="https://github-stats-extended.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" />&nbsp;&nbsp;
+<img src="https://github-stats-extended.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" />&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="https://streak-stats.demolab.com/?user=Akileswaran04&background=0f172a&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE" />
 
 </div>
@@ -176,21 +176,5 @@
 
 <br>
 
-<sub>
-  <font color="#7d8590">
-  ● profile.github — systemd (1) — ● active (running)  
-  ├─ portrait → avi-ascii.svg  ├─ heatmap → contrib-heatmap.svg  
-  ├─ typewriter → typewriter-card.svg  ├─ info-card → info-card.svg  
-  └─ drone → contrib-heatmap.svg  
-  <img src="https://img.shields.io/badge/%E2%9C%A6-generated%20with%20%E2%99%A5%20by%20Akileswaran04-22D3EE?style=flat&labelColor=0d1117" alt="generated with love" />  
-  ● last generated: 2026-07-24 · v3.0.0
-  </font>
-</sub>
-
-<br>
-
-<div align="center">
-  <img src="./cursor.svg" width="12" height="18" alt="_" />
-</div>
 
 <br>

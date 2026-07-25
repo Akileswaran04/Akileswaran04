@@ -61,9 +61,9 @@ TITLEBAR_H   = 30
 STATS_H      = 88
 DRONE_RAIL_H = 50          # extra height for the drone track at bottom
 
-DRONE_DELAY = 2.0          # seconds before drone starts
-DRONE_DUR   = 18.0         # seconds for full left→right sweep (includes hold time)
-HOLD_DUR    = 0.35         # seconds to hover at each column with contributions
+DRONE_DELAY = 1.0          # seconds before drone starts
+DRONE_DUR   = 9.0          # seconds for full left→right sweep (2× speed, no holds)
+HOLD_DUR    = 0.0          # no rest — continuous patrol
 
 
 def level_for(count):
@@ -387,7 +387,7 @@ def render(data):
         f'<animateTransform attributeName="transform" type="translate" '
         f'values="{"; ".join(motion_vals)}" '
         f'keyTimes="{"; ".join(f"{t:.4f}" for t in motion_kts)}" '
-        f'dur="{DRONE_DUR:.2f}s" begin="{DRONE_DELAY:.3f}s" fill="freeze"/>'
+        f'dur="{DRONE_DUR:.2f}s" begin="{DRONE_DELAY:.3f}s" repeatCount="indefinite"/>'
         f'</g>'
     )
 
@@ -456,13 +456,11 @@ def render(data):
         f'text-anchor="middle" opacity="0.5">'
         f'[ drone sweep — firing {SHOTS_CAP} rounds max per cell ]</text>')
 
-    # ──── blinking terminal cursor at bottom ──────────────────────────
+    # ──── static terminal cursor at bottom ────────────────────────────
     cursor_x = canvas_w - PAD
     cursor_y = rail_label_y
     parts.append(
-        f'<rect x="{cursor_x}" y="{cursor_y - 10}" width="7" height="13" fill="{ACCENT}" opacity="0.7">'
-        f'<animate attributeName="opacity" values="0.7;0.7;0;0" '
-        f'keyTimes="0;0.45;0.5;1" dur="1s" repeatCount="indefinite"/></rect>'
+        f'<rect x="{cursor_x}" y="{cursor_y - 10}" width="7" height="13" fill="{ACCENT}" opacity="0.4"/>'
     )
 
     parts.append("</svg>")
