@@ -25,7 +25,7 @@ random.seed(42)
 
 HERE = os.path.dirname(__file__)
 IN_PATH = os.path.join(HERE, "..", "data", "contributions.json")
-OUT_PATH = os.path.join(HERE, "contrib-heatmap.svg")
+OUT_PATH = os.path.join(HERE, "..", "contrib-heatmap.svg")
 
 # ════════════════════════════════════════════════════════════════[...]
 #  CYBER CYAN THEME  —  Dark GitHub, neon cyan, clean terminal

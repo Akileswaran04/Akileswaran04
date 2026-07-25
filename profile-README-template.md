@@ -1,6 +1,7 @@
 <!--
   Profile README Template
   Repo: github.com/YOUR_USERNAME/YOUR_USERNAME
+  Theme: Cyber Cyan Terminal — matching the SVG heatmap (#0d1117 bg, #22D3EE accent, #38BDF8 secondary)
   Replace ALL-CAPS placeholders with your info.
 -->
 
