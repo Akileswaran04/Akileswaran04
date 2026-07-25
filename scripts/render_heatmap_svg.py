@@ -245,19 +245,7 @@ def render(data):
         motion_kts.append(1.0)
         motion_vals.append(motion_vals[-1])
 
-    # ──── ping-pong: append reverse path (right→left) ────────────────
-    fwd_kts = list(motion_kts)
-    fwd_vals = list(motion_vals)
-    n_fwd = len(fwd_vals)
-    # Scale forward keyTimes to 0 → 0.5
-    motion_kts = [kt * 0.5 for kt in fwd_kts]
-    motion_vals = list(fwd_vals)
-    # Append reverse positions (v{n-1} down to v0) with mirrored timing
-    for i in range(n_fwd - 2, -1, -1):
-        motion_vals.append(fwd_vals[i])
-        motion_kts.append(0.5 + (1.0 - fwd_kts[i]) * 0.5)
-
-    # ──── helper: emit bullets & flash for a given column and base time ─
+    # ──── helper: emit bullets & glow for a given column and base time ─
     def fire_column(ci, base):
         col_cx = col_cx_list[ci]
         for ri, cell_cx, cell_cy, count in col_cells[ci]:
@@ -280,6 +268,18 @@ def render(data):
                     f'dur="{shot_dur_:.2f}s" begin="{shot_at:.3f}s" fill="freeze"/>'
                     f'</circle>'
                 )
+            # Glow pulse (cyan ring that expands and fades)
+            gcx = cell_cx + CELL / 2
+            gcy = cell_cy + CELL / 2
+            parts.append(
+                f'<circle cx="{gcx:.1f}" cy="{gcy:.1f}" r="2" fill="none" stroke="{ACCENT}" '
+                f'stroke-width="2" filter="url(#glow)" opacity="0">'
+                f'<animate attributeName="r" values="2;{CELL*0.8:.0f};{CELL:.0f}" '
+                f'keyTimes="0;0.3;1" dur="0.8s" begin="{base:.3f}s" fill="freeze"/>'
+                f'<animate attributeName="opacity" values="0;0.9;0" '
+                f'keyTimes="0;0.2;1" dur="0.8s" begin="{base:.3f}s" fill="freeze"/>'
+                f'</circle>'
+            )
             # Impact flash
             orig_color_ = PALETTE[level_for(count)]
             parts.append(
@@ -291,16 +291,10 @@ def render(data):
                 f'</rect>'
             )
 
-    # ──── bullets on forward pass (left→right) ───────────────────────
+    # ──── bullets on single forward pass (left→right) ────────────────
     for ci in range(n_cols):
         if col_cells[ci]:
-            fire_column(ci, DRONE_DELAY + col_arrival[ci] * 0.5)
-
-    # ──── bullets on reverse pass (right→left) ───────────────────────
-    # Drone reaches column ci on return at: DRONE_DELAY + DRONE_DUR - col_arrival[ci] * 0.5
-    for ci in range(n_cols):
-        if col_cells[ci]:
-            fire_column(ci, DRONE_DELAY + DRONE_DUR - col_arrival[ci] * 0.5)
+            fire_column(ci, DRONE_DELAY + col_arrival[ci])
 
     # ──── drone sprite on a horizontal rail ───────────────────────────
     def drone_sprite():
@@ -396,13 +390,13 @@ def render(data):
         f'<animateTransform attributeName="transform" type="translate" '
         f'values="{"; ".join(motion_vals)}" '
         f'keyTimes="{"; ".join(f"{t:.4f}" for t in motion_kts)}" '
-        f'dur="{DRONE_DUR:.2f}s" begin="{DRONE_DELAY:.3f}s" repeatCount="indefinite"/>'
+        f'dur="{DRONE_DUR:.2f}s" begin="{DRONE_DELAY:.3f}s" fill="freeze"/>'
         f'</g>'
     )
 
     # ──── final pulse on last cell ────────────────────────────────────
     last_col = n_cols - 1
-    last_arrival = DRONE_DELAY + col_arrival[n_cols - 1] * 0.5
+    last_arrival = DRONE_DELAY + col_arrival[n_cols - 1]
     pulse_start = last_arrival + 0.1
     for ri, cell_cx, cell_cy, count in col_cells.get(last_col, []):
         pcx = cell_cx + CELL / 2

@@ -31,6 +31,7 @@ R       = 12           # corner radius (matches info-card)
 LINE_H  = 20.5         # line height (matches info-card)
 KEY_X   = PAD
 VAL_X   = PAD + 92     # value offset (matches info-card)
+EXTRA   = 12           # extra bottom padding for breathing room
 
 # ── Title bar dot colour (matching contrib-heatmap) ───────────────
 DOT = ACCENT  # solid cyan #22D3EE
@@ -122,7 +123,7 @@ def render_whoami():
         ("kv-tspan", "STATUS", ACCENT, "● actively building"),
         ("kv", "FOCUS",    "Multi-agent AI systems · Full-stack · Applied ML"),
     ]
-    h = TITLE_H + LINE_H * (len(rows) + 0.5) + PAD
+    h = TITLE_H + LINE_H * (len(rows) + 0.5) + PAD + EXTRA
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
     parts.append(card_defs())
     parts.append(card_bg(h))
@@ -180,7 +181,7 @@ def render_netstat():
     ]
     # One row for pill badges
     n_rows = 3  # host + section header + badge row
-    h = TITLE_H + LINE_H * n_rows + PAD + 12
+    h = TITLE_H + LINE_H * n_rows + PAD + 12 + EXTRA
 
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
     parts.append(card_defs())
@@ -229,7 +230,7 @@ def render_projects():
         rows_data.append(("proj", p))
 
     n_rows = len(rows_data)
-    h = TITLE_H + LINE_H * n_rows + PAD
+    h = TITLE_H + LINE_H * n_rows + PAD + EXTRA
 
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
     parts.append(card_defs())
@@ -274,7 +275,7 @@ def render_stats():
     streak_w, streak_h = 380, 195
     content_h = stats_h + 16 + streak_h
     inner_h = TITLE_H + 12 + content_h
-    h = inner_h + PAD
+    h = inner_h + PAD + EXTRA
 
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
     parts.append(card_defs())
@@ -313,7 +314,7 @@ def render_stack():
     per_row = 5
     rows = [SKILLS[i:i+per_row] for i in range(0, len(SKILLS), per_row)]
     n_rows = 2 + len(rows)  # host + section + skill rows
-    h = TITLE_H + LINE_H * n_rows + PAD
+    h = TITLE_H + LINE_H * n_rows + PAD + EXTRA
 
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
     parts.append(card_defs())
@@ -357,7 +358,7 @@ def render_building():
     for b in BUILDING:
         rows_data.append(("proc", b))
     n_rows = len(rows_data)
-    h = TITLE_H + LINE_H * n_rows + PAD
+    h = TITLE_H + LINE_H * n_rows + PAD + EXTRA
 
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
     parts.append(card_defs())
@@ -398,7 +399,7 @@ def render_tagline():
         'Full-Stack x AI/ML — turning data into decisions',
     ]
     n_rows = 3  # host + 2 text lines
-    h = TITLE_H + LINE_H * n_rows + PAD
+    h = TITLE_H + LINE_H * n_rows + PAD + EXTRA
 
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
     parts.append(card_defs())
