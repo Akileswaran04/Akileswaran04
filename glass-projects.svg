@@ -4,9 +4,12 @@
       <stop offset="0" stop-color="#0f172a"/>
       <stop offset="1" stop-color="#0d1117"/>
     </linearGradient>
+    <filter id="card-shadow" x="-5%" y="-5%" width="110%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
   </defs>
   <!-- Gradient background (matching contrib-heatmap) -->
-  <rect width="860" height="240" rx="12" fill="url(#card-bg)"/>
+  <rect width="860" height="240" rx="12" fill="url(#card-bg)" filter="url(#card-shadow)"/>
   <!-- Cyan border (matching contrib-heatmap) -->
   <rect x="0.5" y="0.5" width="859" height="239" rx="12" fill="none" stroke="#22D3EE" stroke-width="1" stroke-opacity="0.55"/>
   <line x1="0" y1="30" x2="860" y2="30" stroke="#22D3EE" stroke-opacity="0.35"/>

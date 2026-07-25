@@ -52,6 +52,9 @@ def card_defs():
       <stop offset="0" stop-color="{BG2}"/>
       <stop offset="1" stop-color="{BG}"/>
     </linearGradient>
+    <filter id="card-shadow" x="-5%" y="-5%" width="110%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
   </defs>"""
 
 
@@ -59,7 +62,7 @@ def card_bg(h):
     """Return the terminal-window background (matching contrib-heatmap)."""
     return f"""\
   <!-- Gradient background (matching contrib-heatmap) -->
-  <rect width="{W}" height="{h}" rx="{R}" fill="url(#card-bg)"/>
+  <rect width="{W}" height="{h}" rx="{R}" fill="url(#card-bg)" filter="url(#card-shadow)"/>
   <!-- Cyan border (matching contrib-heatmap) -->
   <rect x="0.5" y="0.5" width="{W-1}" height="{h-1}" rx="{R}" fill="none" stroke="{ACCENT}" stroke-width="1" stroke-opacity="0.55"/>"""
 
