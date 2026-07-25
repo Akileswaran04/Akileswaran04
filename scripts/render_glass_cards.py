@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Generate glassmorphism panel SVGs — exactly matching info-card.svg's
-card structure (title bar, padding, font sizes, section headers, key/value
-alignment) with a liquid-glass surface treatment applied on top.
+"""Generate terminal-window card SVGs matching contrib-heatmap's style.
 
-Each panel is a standalone SVG stacked vertically in the README.
+Each panel replicates the heatmap's solid Cyber Cyan terminal look:
+  - Gradient bg (#0d1117 -> #0f172a)
+  - Cyan (#22D3EE) border, dots, and separators
+  - Same card structure as info-card.svg (title bar, padding, fonts)
+
 Call without arguments to regenerate all panels.
 """
 
@@ -30,10 +32,8 @@ LINE_H  = 20.5         # line height (matches info-card)
 KEY_X   = PAD
 VAL_X   = PAD + 92     # value offset (matches info-card)
 
-# ── Traffic-light dot colours (macOS chrome) ─────────────────────
-DOT_R = "#ff5f56"
-DOT_Y = "#ffbd2e"
-DOT_G = "#27c93f"
+# ── Title bar dot colour (matching contrib-heatmap) ───────────────
+DOT = ACCENT  # solid cyan #22D3EE
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -45,53 +45,33 @@ def esc(s):
     return html.escape(s)
 
 
-def glass_defs():
+def card_defs():
     return f"""\
   <defs>
-    <linearGradient id="g-bg" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="card-bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="{BG2}"/>
       <stop offset="1" stop-color="{BG}"/>
     </linearGradient>
-    <linearGradient id="g-top" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ffffff" stop-opacity="0.18"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
-    </linearGradient>
-    <filter id="g-blur-lg" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="50"/>
-    </filter>
-    <filter id="g-blur-sm" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="24"/>
-    </filter>
   </defs>"""
 
 
-def glass_bg(h):
-    """Return glass surface elements — gradient bg, blobs, glass pane,
-    white border, top highlight — placed BEFORE the card chrome."""
+def card_bg(h):
+    """Return the terminal-window background (matching contrib-heatmap)."""
     return f"""\
-  <!-- Gradient background -->
-  <rect width="{W}" height="{h}" rx="{R}" fill="url(#g-bg)"/>
-  <!-- Colour blobs -->
-  <circle cx="{W*0.18:.0f}" cy="{h*0.35:.0f}" r="{W*0.14:.0f}" fill="{ACCENT}" opacity="0.12" filter="url(#g-blur-lg)"/>
-  <circle cx="{W*0.78:.0f}" cy="{h*0.65:.0f}" r="{W*0.10:.0f}" fill="{MUTED}"  opacity="0.10" filter="url(#g-blur-lg)"/>
-  <circle cx="{W*0.50:.0f}" cy="{h*0.15:.0f}" r="{W*0.07:.0f}" fill="{ACCENT}" opacity="0.08" filter="url(#g-blur-sm)"/>
-  <!-- Glass pane surface (8% white) -->
-  <rect x="0" y="0" width="{W}" height="{h}" rx="{R}" fill="#ffffff" fill-opacity="0.08"/>
-  <!-- Glass border (18% white) -->
-  <rect x="0.5" y="0.5" width="{W-1}" height="{h-1}" rx="{R}" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1"/>
-  <!-- Top light-catching highlight -->
-  <rect x="2" y="2" width="{W-4}" height="6" rx="{R}" fill="url(#g-top)"/>"""
+  <!-- Gradient background (matching contrib-heatmap) -->
+  <rect width="{W}" height="{h}" rx="{R}" fill="url(#card-bg)"/>
+  <!-- Cyan border (matching contrib-heatmap) -->
+  <rect x="0.5" y="0.5" width="{W-1}" height="{h-1}" rx="{R}" fill="none" stroke="{ACCENT}" stroke-width="1" stroke-opacity="0.55"/>"""
 
 
 def title_bar(h, cmd):
-    """Traffic-light dots + separator line + centred command label."""
+    """Title bar — cyan dots + separator line + centred command label."""
     cy = TITLE_H / 2
     return f"""\
-  <!-- Title bar chrome (solid, not glass) -->
-  <line x1="0" y1="{TITLE_H}" x2="{W}" y2="{TITLE_H}" stroke="{MUTED}" stroke-opacity="0.35"/>
-  <circle cx="{PAD}" cy="{cy:.1f}" r="5" fill="{DOT_R}"/>
-  <circle cx="{PAD+16}" cy="{cy:.1f}" r="5" fill="{DOT_Y}"/>
-  <circle cx="{PAD+32}" cy="{cy:.1f}" r="5" fill="{DOT_G}"/>
+  <line x1="0" y1="{TITLE_H}" x2="{W}" y2="{TITLE_H}" stroke="{ACCENT}" stroke-opacity="0.35"/>
+  <circle cx="{PAD}" cy="{cy:.1f}" r="5" fill="{DOT}"/>
+  <circle cx="{PAD+16}" cy="{cy:.1f}" r="5" fill="{DOT}"/>
+  <circle cx="{PAD+32}" cy="{cy:.1f}" r="5" fill="{DOT}"/>
   <text x="{W/2}" y="{cy+4:.1f}" fill="{MUTED}" font-size="12" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">akileswaran04@github: ~$ {esc(cmd)}</text>"""
 
 
@@ -144,8 +124,8 @@ def render_whoami():
     ]
     h = TITLE_H + LINE_H * (len(rows) + 0.5) + PAD
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
-    parts.append(glass_defs())
-    parts.append(glass_bg(h))
+    parts.append(card_defs())
+    parts.append(card_bg(h))
     parts.append(title_bar(h, "whoami"))
 
     y = TITLE_H + 30
@@ -203,8 +183,8 @@ def render_netstat():
     h = TITLE_H + LINE_H * n_rows + PAD + 12
 
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
-    parts.append(glass_defs())
-    parts.append(glass_bg(h))
+    parts.append(card_defs())
+    parts.append(card_bg(h))
     parts.append(title_bar(h, "netstat --connections"))
 
     y = TITLE_H + 30
@@ -252,8 +232,8 @@ def render_projects():
     h = TITLE_H + LINE_H * n_rows + PAD
 
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
-    parts.append(glass_defs())
-    parts.append(glass_bg(h))
+    parts.append(card_defs())
+    parts.append(card_bg(h))
     parts.append(title_bar(h, "cat /proc/projects"))
 
     col_w = [40, 140, 380, 140]
@@ -297,8 +277,8 @@ def render_stats():
     h = inner_h + PAD
 
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
-    parts.append(glass_defs())
-    parts.append(glass_bg(h))
+    parts.append(card_defs())
+    parts.append(card_bg(h))
     parts.append(title_bar(h, "github-stats"))
 
     stats_url = "https://github-stats-extended.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true"
@@ -336,8 +316,8 @@ def render_stack():
     h = TITLE_H + LINE_H * n_rows + PAD
 
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
-    parts.append(glass_defs())
-    parts.append(glass_bg(h))
+    parts.append(card_defs())
+    parts.append(card_bg(h))
     parts.append(title_bar(h, "skills"))
 
     y = TITLE_H + 30
@@ -380,8 +360,8 @@ def render_building():
     h = TITLE_H + LINE_H * n_rows + PAD
 
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
-    parts.append(glass_defs())
-    parts.append(glass_bg(h))
+    parts.append(card_defs())
+    parts.append(card_bg(h))
     parts.append(title_bar(h, "ps aux | grep building"))
 
     col_w = [40, 130, 420, 80]
@@ -421,8 +401,8 @@ def render_tagline():
     h = TITLE_H + LINE_H * n_rows + PAD
 
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
-    parts.append(glass_defs())
-    parts.append(glass_bg(h))
+    parts.append(card_defs())
+    parts.append(card_bg(h))
     parts.append(title_bar(h, 'echo $TAGLINE'))
 
     y = TITLE_H + 30
