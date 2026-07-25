@@ -32,147 +32,46 @@
 </div>
 
 <!-- ========================================================================== -->
-<!--  CYBER CYAN TERMINAL — Everything below matches the heatmap SVG theme      -->
+<!--  Below: clean typography-led vertical flow — no boxes, no borders           -->
 <!-- ========================================================================== -->
 
 <br>
 
-<!-- ═══════════════════════════════════════════════════════════════════ -->
-<!--  ASYMMETRIC BENTO GRID  —  Row 1: Banner (full width)             -->
-<!-- ═══════════════════════════════════════════════════════════════════ -->
+---
 
-<!-- ── ROW 1: SYSTEM BANNER (full width) ────────────────────────────── -->
-<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
-<tr><td>
+### 🔗 Connect
 
-<pre><font color="#22D3EE">
-┌─────────────────────────────────────────────────────────────┐
-│  █████╗ ██╗  ██╗██╗██╗     ███████╗███████╗██╗    ██╗      │
-│ ██╔══██╗██║ ██╔╝██║██║     ██╔════╝██╔════╝██║    ██║      │
-│ ███████║█████╔╝ ██║██║     █████╗  █████╗  ██║ █╗ ██║      │
-│ ██╔══██║██╔═██╗ ██║██║     ██╔══╝  ██╔══╝  ██║███╗██║      │
-│ ██║  ██║██║  ██╗██║███████╗███████╗███████╗╚███╔███╔╝      │
-│ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝ ╚══╝╚══╝       │
-│                                                             │
-│   ╔═══════════════════════════════════════════════════════╗  │
-│   ║  PROFILE :: v3.0.0  │  STATUS: ONLINE  │  UPTIME: ∞  ║  │
-│   ╚═══════════════════════════════════════════════════════╝  │
-│                                                             │
-│   [<font color="#22D3EE">●</font>] system ready — <font color="#38BDF8">cyber cyan terminal</font> initialized         │
-└─────────────────────────────────────────────────────────────┘</font>
-</pre>
+<a href="https://linkedin.com/in/akileswaran-ammamuthu"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /></a>&nbsp;
+<a href="https://github.com/Akileswaran04"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /></a>&nbsp;
+<a href="https://leetcode.com/u/Akileswaran04/"><img src="https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black" /></a>&nbsp;
+<a href="https://sentri-final.streamlit.app"><img src="https://img.shields.io/badge/SENTRI-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" /></a>
 
-</td></tr>
-</table>
+---
 
-<br>
+### 📌 Projects
 
-<!-- ═══════════════════════════════════════════════════════════════════ -->
-<!--  ROW 2: whoami (~60%) + netstat (~40%) side by side               -->
-<!-- ═══════════════════════════════════════════════════════════════════ -->
+| ID | Name | Stack | Status |
+| -- | ---- | ----- | ------ |
+| 01 | **ODYSSEY** | LLM · EBM · LangChain | <font color="#22D3EE">● build</font> |
+| 02 | **[SENTRI ▸](https://sentri-final.streamlit.app)** | Streamlit · FastAPI · XGBoost | <font color="#22D3EE">● live</font> |
+| 03 | **Gridlock** | LightGBM · XGBoost · Hackathon | <font color="#38BDF8">○ archive</font> |
+| 04 | **[Riddle Rush ▸](https://csau.vercel.app)** | React · Three.js · Supabase | <font color="#22D3EE">● live</font> |
+| 05 | **DayLog** | React · Node.js · Firebase | <font color="#38BDF8">○ pending</font> |
 
-<table align="center" cellpadding="0" cellspacing="10" width="860">
-<tr>
+---
 
-<!-- ── IDENTITY PANEL (wider, ~60%) ──────────────────────────────── -->
-<td width="60%" valign="top">
-
-<table bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="100%" style="border-radius:8px">
-<tr><td>
-
-<pre><font color="#22D3EE">│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#38BDF8">~</font>$ <font color="#e6edf3">whoami</font>
-│
-│ <font color="#38BDF8">NAME</font>     :: <font color="#e6edf3"><b>Akileswaran A</b></font>
-│ <font color="#38BDF8">TITLE</font>    :: <font color="#e6edf3">Software Engineering Intern · Full-Stack &amp; Applied ML</font>
-│ <font color="#38BDF8">LOCATION</font> :: <font color="#e6edf3">CEG, Anna University · B.Tech IT</font>
-│ <font color="#38BDF8">STATUS</font>   :: <font color="#22D3EE">● actively building</font>
-│ <font color="#38BDF8">FOCUS</font>    :: <font color="#e6edf3">Multi-agent AI systems · Full-stack development · Applied ML</font>
-│
-│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#38BDF8">~</font>$ _</font>
-</pre>
-
-</td></tr>
-</table>
-
-</td>
-
-<!-- ── SOCIAL LINKS (narrower, ~40%, secondary accent) ──────────── -->
-<td width="40%" valign="top">
-
-<table bgcolor="#0d1117" border="1" bordercolor="#38BDF8" cellpadding="18" cellspacing="0" width="100%" style="border-radius:8px">
-<tr><td>
-
-<pre><font color="#38BDF8">│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#38BDF8">~</font>$ <font color="#e6edf3">netstat --connections</font>
-│
-│ <font color="#38BDF8">PROTOCOL</font>  │ <font color="#38BDF8">ADDRESS</font>              │ <font color="#38BDF8">STATUS</font>
-│ ────────── ┼ ───────────────────── ┼ ──────────
-│ <font color="#22D3EE">linkedin</font>  │ <a href="https://linkedin.com/in/akileswaran-ammamuthu"><font color="#e6edf3">/in/akileswaran-ammamuthu</font></a>  │ <font color="#22D3EE">● active</font>
-│ <font color="#22D3EE">github</font>    │ <a href="https://github.com/Akileswaran04"><font color="#e6edf3">/Akileswaran04</font></a>              │ <font color="#22D3EE">● active</font>
-│ <font color="#22D3EE">leetcode</font>  │ <a href="https://leetcode.com/u/Akileswaran04/"><font color="#e6edf3">/u/Akileswaran04</font></a>            │ <font color="#22D3EE">● active</font>
-│ <font color="#22D3EE">sentri</font>    │ <a href="https://sentri-final.streamlit.app"><font color="#e6edf3">sentri-final.streamlit.app</font></a>   │ <font color="#22D3EE">● deployed</font></font>
-</pre>
-
-</td></tr>
-</table>
-
-</td>
-</tr>
-</table>
-
-<br>
-
-<!-- ═══════════════════════════════════════════════════════════════════ -->
-<!--  ROW 3: cat /proc/projects (full width, violet accent)            -->
-<!-- ═══════════════════════════════════════════════════════════════════ -->
-
-<table align="center" bgcolor="#0d1117" border="1" bordercolor="#A78BFA" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
-<tr><td>
-
-<pre><font color="#A78BFA">│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#A78BFA">~</font>$ <font color="#e6edf3">cat /proc/projects</font>
-│
-│ <font color="#A78BFA">┌─── PROJECT DATABASE ───────────────────────────────────────────┐</font>
-│ <font color="#A78BFA">│</font> <font color="#38BDF8">ID</font>  <font color="#A78BFA">│</font> <font color="#38BDF8">NAME</font>           <font color="#A78BFA">│</font> <font color="#38BDF8">STACK</font>                           <font color="#A78BFA">│</font> <font color="#38BDF8">STATUS</font>    <font color="#A78BFA">│</font>
-│ <font color="#A78BFA">├───┼─────────────────┼─────────────────────────────────┼───────────┤</font>
-│ <font color="#A78BFA">│</font> 01 <font color="#A78BFA">│</font> <font color="#e6edf3">ODYSSEY</font>         <font color="#A78BFA">│</font> LLM · EBM · LangChain            <font color="#A78BFA">│</font> <font color="#22D3EE">● build</font>   <font color="#A78BFA">│</font>
-│ <font color="#A78BFA">│</font> 02 <font color="#A78BFA">│</font> <a href="https://sentri-final.streamlit.app"><font color="#e6edf3">SENTRI ▸</font></a>       <font color="#A78BFA">│</font> Streamlit · FastAPI · XGBoost     <font color="#A78BFA">│</font> <font color="#22D3EE">● live</font>    <font color="#A78BFA">│</font>
-│ <font color="#A78BFA">│</font> 03 <font color="#A78BFA">│</font> <font color="#e6edf3">Gridlock</font>         <font color="#A78BFA">│</font> LightGBM · XGBoost · Hackathon   <font color="#A78BFA">│</font> <font color="#38BDF8">○ archive</font> <font color="#A78BFA">│</font>
-│ <font color="#A78BFA">│</font> 04 <font color="#A78BFA">│</font> <a href="https://csau.vercel.app"><font color="#e6edf3">Riddle Rush ▸</font></a>   <font color="#A78BFA">│</font> React · Three.js · Supabase      <font color="#A78BFA">│</font> <font color="#22D3EE">● live</font>    <font color="#A78BFA">│</font>
-│ <font color="#A78BFA">│</font> 05 <font color="#A78BFA">│</font> <font color="#e6edf3">DayLog</font>           <font color="#A78BFA">│</font> React · Node.js · Firebase        <font color="#A78BFA">│</font> <font color="#38BDF8">○ pending</font> <font color="#A78BFA">│</font>
-│ <font color="#A78BFA">└───┴─────────────────┴─────────────────────────────────┴───────────┘</font></font>
-</pre>
-
-</td></tr>
-</table>
-
-<br>
-
-<!-- ═══════════════════════════════════════════════════════════════════ -->
-<!--  CYBER CYAN TERMINAL SESSION  —  One continuous pane               -->
-<!-- ═══════════════════════════════════════════════════════════════════ -->
-
-<table align="center" bgcolor="#0f172a" border="1" bordercolor="#22D3EE" cellpadding="20" cellspacing="0" width="860" style="border-radius:8px">
-<tr><td>
-
-<pre><font color="#22D3EE">│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#38BDF8">~</font>$ <font color="#e6edf3">cat ~/.github/session</font>
-│
-│
-│                     <font color="#22D3EE">📊  GitHub Stats</font>
-│</font>
-</pre>
+### 📊 GitHub Stats
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" />&nbsp;&nbsp;
-<img src="https://streak-stats.demolab.com/?user=Akileswaran04&background=0f172a&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE" />
+<img src="https://github-readme-stats.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0d1117&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" />&nbsp;&nbsp;
+<img src="https://streak-stats.demolab.com/?user=Akileswaran04&background=0d1117&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE" />
 
 </div>
 
-<pre><font color="#22D3EE">
-│ <font color="#38BDF8">──────────────────────────────────────────────────────────────────────</font>
-│
-│                     <font color="#22D3EE">🛠️  Skills &amp; Tools</font>
-│</font>
-</pre>
+---
+
+### 🛠️ Stack
 
 <div align="center">
 
@@ -195,24 +94,19 @@
 
 </div>
 
-<pre><font color="#22D3EE">
-│ <font color="#38BDF8">──────────────────────────────────────────────────────────────────────</font>
-│
-│                     <font color="#22D3EE">🚧  Currently Building</font>
-│
-│ <font color="#38BDF8">PID</font>   <font color="#22D3EE">│</font> <font color="#38BDF8">PROCESS</font>              <font color="#22D3EE">│</font> <font color="#38BDF8">STACK</font>                                <font color="#22D3EE">│</font> <font color="#38BDF8">CPU%</font>
-│ ────  <font color="#22D3EE">┼</font> ──────────────────── <font color="#22D3EE">┼</font> ─────────────────────────────────── <font color="#22D3EE">┼</font> ─────
-│ 001   <font color="#22D3EE">│</font> <font color="#e6edf3">SENTRI</font>               <font color="#22D3EE">│</font> Streamlit · FastAPI · XGBoost          <font color="#22D3EE">│</font> 42%
-│ 002   <font color="#22D3EE">│</font> <font color="#e6edf3">Riddle Rush</font>          <font color="#22D3EE">│</font> React · Three.js · Supabase           <font color="#22D3EE">│</font> 35%
-│ 003   <font color="#22D3EE">│</font> <font color="#e6edf3">DayLog</font>               <font color="#22D3EE">│</font> React · Node.js · Firebase            <font color="#22D3EE">│</font> 23%
-│
-│ <font color="#38BDF8">──────────────────────────────────────────────────────────────────────</font>
-│
-│                     <font color="#22D3EE">💬  Tagline</font>
-│
-│ <font color="#38BDF8">$TAGLINE</font>  <font color="#e6edf3">=  Full-Stack × AI/ML — turning data into decisions</font>
-│</font>
-</pre>
+---
+
+### 🚧 Building now
+
+| PID | Process | Stack | CPU |
+| --- | ------- | ----- | --- |
+| 001 | **SENTRI** | Streamlit · FastAPI · XGBoost | 42% |
+| 002 | **Riddle Rush** | React · Three.js · Supabase | 35% |
+| 003 | **DayLog** | React · Node.js · Firebase | 23% |
+
+---
+
+### 💬 Tagline
 
 <div align="center">
 
@@ -222,39 +116,23 @@
 
 </div>
 
-<pre><font color="#22D3EE">│
-│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#38BDF8">~</font>$ <img src="./cursor.svg" width="12" height="18" alt="_" style="vertical-align:middle" />
-│</font>
-</pre>
+<br>
 
-</td></tr>
-</table>
+<sub>
+  <font color="#7d8590">
+  ● profile.github — systemd (1) — ● active (running)  
+  ├─ portrait → avi-ascii.svg  ├─ heatmap → contrib-heatmap.svg  
+  ├─ typewriter → typewriter-card.svg  ├─ info-card → info-card.svg  
+  └─ drone → contrib-heatmap.svg  
+  <img src="https://img.shields.io/badge/%E2%9C%A6-generated%20with%20%E2%99%A5%20by%20Akileswaran04-22D3EE?style=flat&labelColor=0d1117" alt="generated with love" />  
+  ● last generated: 2026-07-24 · v3.0.0
+  </font>
+</sub>
 
 <br>
 
-<!-- ─────────────────────────────────────────────────────────────────── -->
-<!--  FOOTER — System Status                                             -->
-<!-- ─────────────────────────────────────────────────────────────────── -->
-
-<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
-<tr><td>
-
-<pre><font color="#38BDF8">┌────────────────────────────────────────────────────────────────────────────┐
-│  <font color="#22D3EE">●</font> <font color="#e6edf3">profile.github</font> — <font color="#38BDF8">systemd</font> (1) — <font color="#22D3EE">●</font> <font color="#e6edf3">active</font> (running)              │
-│                                                                            │
-│    <font color="#38BDF8">├─</font> <font color="#e6edf3">portrait</font>    <font color="#22D3EE">→</font> <font color="#38BDF8">avi-ascii.svg</font>     <font color="#7d8590">[auto-generated from photo]</font>      │
-│    <font color="#38BDF8">├─</font> <font color="#e6edf3">heatmap</font>     <font color="#22D3EE">→</font> <font color="#38BDF8">contrib-heatmap.svg</font> <font color="#7d8590">[refreshes every 6h via GHA]</font>     │
-│    <font color="#38BDF8">├─</font> <font color="#e6edf3">typewriter</font>  <font color="#22D3EE">→</font> <font color="#38BDF8">typewriter-card.svg</font>  <font color="#7d8590">[countdown engine]</font>           │
-│    <font color="#38BDF8">├─</font> <font color="#e6edf3">info-card</font>   <font color="#22D3EE">→</font> <font color="#38BDF8">info-card.svg</font>       <font color="#7d8590">[experience &amp; highlights]</font>       │
-│    <font color="#38BDF8">└─</font> <font color="#e6edf3">drone</font>       <font color="#22D3EE">→</font> <font color="#38BDF8">contrib-heatmap.svg</font> <font color="#7d8590">[stop-and-shoot animation]</font>        │
-│                                                                            │
-│  <img src="https://img.shields.io/badge/%E2%9C%A6-generated%20with%20%E2%99%A5%20by%20Akileswaran04-22D3EE?style=flat&labelColor=0d1117" alt="generated with love" />                           │
-│                                                                            │
-│  <font color="#7d8590">● last generated: 2026-07-24  ·  theme: cyber-cyan-terminal  ·  v3.0.0</font>    │
-└────────────────────────────────────────────────────────────────────────────┘</font>
-</pre>
-
-</td></tr>
-</table>
+<div align="center">
+  <img src="./cursor.svg" width="12" height="18" alt="_" />
+</div>
 
 <br>
