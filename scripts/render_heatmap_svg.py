@@ -52,7 +52,7 @@ SHOTS_CAP    = 6           # max rendered shots per cell (tooltip + stats real)
 SHOT_SPREAD  = 3           # horiz spread of bullets (pixels) for visual variety
 
 CELL    = 12
-GAP     = 3
+GAP     = 1
 STEP    = CELL + GAP
 PAD     = 22
 LEFT_LABEL_W = 30
