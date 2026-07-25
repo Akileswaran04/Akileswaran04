@@ -280,14 +280,23 @@ def render(data):
                 f'keyTimes="0;0.25;1" dur="1.0s" begin="{base:.3f}s" fill="freeze"/>'
                 f'</circle>'
             )
-            # Impact flash
+            # Impact flash — cyan pop on EVERY cell, even single-contribution
             orig_color_ = PALETTE[level_for(count)]
             parts.append(
                 f'<rect x="{cell_cx}" y="{cell_cy}" width="{CELL}" height="{CELL}" rx="2.5" '
                 f'fill="{orig_color_}">'
                 f'<animate attributeName="fill" '
-                f'values="{orig_color_};{TRAIL_COLOR};{TRAIL_COLOR};{orig_color_}" '
-                f'keyTimes="0;0.12;0.45;1" dur="0.6s" begin="{base:.3f}s" fill="freeze"/>'
+                f'values="{orig_color_};{ACCENT};{ACCENT};{orig_color_}" '
+                f'keyTimes="0;0.08;0.45;1" dur="0.9s" begin="{base:.3f}s" fill="freeze"/>'
+                # Pop: expand 1.3× from centre and back
+                f'<animate attributeName="width" values="{CELL};{CELL*1.3:.0f};{CELL}" '
+                f'keyTimes="0;0.12;1" dur="0.8s" begin="{base:.3f}s" fill="freeze"/>'
+                f'<animate attributeName="height" values="{CELL};{CELL*1.3:.0f};{CELL}" '
+                f'keyTimes="0;0.12;1" dur="0.8s" begin="{base:.3f}s" fill="freeze"/>'
+                f'<animate attributeName="x" values="{cell_cx};{cell_cx - CELL*0.15:.1f};{cell_cx}" '
+                f'keyTimes="0;0.12;1" dur="0.8s" begin="{base:.3f}s" fill="freeze"/>'
+                f'<animate attributeName="y" values="{cell_cy};{cell_cy - CELL*0.15:.1f};{cell_cy}" '
+                f'keyTimes="0;0.12;1" dur="0.8s" begin="{base:.3f}s" fill="freeze"/>'
                 f'</rect>'
             )
 
