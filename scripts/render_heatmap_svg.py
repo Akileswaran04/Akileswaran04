@@ -245,14 +245,28 @@ def render(data):
         motion_kts.append(1.0)
         motion_vals.append(motion_vals[-1])
 
-    # ──── bullets — fire during the hover window at each column ───────
+    # ──── ping-pong: append reverse path (right→left) ────────────────
+    fwd_kts = list(motion_kts)
+    fwd_vals = list(motion_vals)
+    n_fwd = len(fwd_vals)
+    # Scale forward keyTimes to 0 → 0.5
+    motion_kts = [kt * 0.5 for kt in fwd_kts]
+    motion_vals = list(fwd_vals)
+    # Append reverse positions (v{n-1} down to v0) with mirrored timing
+    for i in range(n_fwd - 2, -1, -1):
+        motion_vals.append(fwd_vals[i])
+        motion_kts.append(0.5 + (1.0 - fwd_kts[i]) * 0.5)
+
+    # ──── bullets — fire as the drone passes each column ──────────────
+    # Forward pass takes DRONE_DUR/2 (keyTimes scaled to 0→0.5), so
+    # scale arrival times by 0.5 to sync bullets with drone position.
     for ci in range(n_cols):
         if not col_cells[ci]:
             continue
 
         col_cx = col_cx_list[ci]
-        # Fire mid-hover or on arrival (whichever has cells)
-        shoot_base = DRONE_DELAY + col_arrival[ci]
+        # Fire on forward pass — sync with scaled keyTimes
+        shoot_base = DRONE_DELAY + col_arrival[ci] * 0.5
 
         for ri, cell_cx, cell_cy, count in col_cells[ci]:
             n_shots = min(count, SHOTS_CAP)
@@ -280,7 +294,7 @@ def render(data):
     for ci in range(n_cols):
         if not col_cells[ci]:
             continue
-        shoot_base = DRONE_DELAY + col_arrival[ci]
+        shoot_base = DRONE_DELAY + col_arrival[ci] * 0.5
 
         for ri, cell_cx, cell_cy, count in col_cells[ci]:
             orig_color = PALETTE[level_for(count)]
@@ -393,7 +407,7 @@ def render(data):
 
     # ──── final pulse on last cell ────────────────────────────────────
     last_col = n_cols - 1
-    last_arrival = DRONE_DELAY + col_arrival[n_cols - 1]
+    last_arrival = DRONE_DELAY + col_arrival[n_cols - 1] * 0.5
     pulse_start = last_arrival + 0.1
     for ri, cell_cx, cell_cy, count in col_cells.get(last_col, []):
         pcx = cell_cx + CELL / 2
