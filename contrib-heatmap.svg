@@ -397,7 +397,7 @@
 <rect class="c" x="832" y="95" width="12" height="12" rx="2.5" fill="#1a7a70" style="animation-delay:1.071s"><title>2026-07-22: 15 contributions</title></rect>
 <rect class="c" x="832" y="110" width="12" height="12" rx="2.5" fill="#14b8a6" style="animation-delay:1.116s"><title>2026-07-23: 46 contributions</title></rect>
 <rect class="c" x="832" y="125" width="12" height="12" rx="2.5" fill="#085a50" style="animation-delay:1.161s"><title>2026-07-24: 3 contributions</title></rect>
-<rect class="c" x="832" y="140" width="12" height="12" rx="2.5" fill="#1a7a70" style="animation-delay:1.206s"><title>2026-07-25: 10 contributions</title></rect>
+<rect class="c" x="832" y="140" width="12" height="12" rx="2.5" fill="#1a7a70" style="animation-delay:1.206s"><title>2026-07-25: 12 contributions</title></rect>
 <line x1="52" y1="290.0" x2="847" y2="290.0" stroke="#22D3EE" stroke-width="1" stroke-dasharray="4,4" stroke-opacity="0.25"/>
 <circle r="2.2" fill="#e6edf3" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.15;0.6;1" dur="0.15s" begin="1.952s" fill="freeze"/><animateMotion path="M219.7,294.0 L222.0,71.0" dur="0.15s" begin="1.952s" fill="freeze"/></circle>
 <circle r="2.2" fill="#e6edf3" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.15;0.6;1" dur="0.15s" begin="1.982s" fill="freeze"/><animateMotion path="M220.3,294.0 L222.2,71.0" dur="0.15s" begin="1.982s" fill="freeze"/></circle>
@@ -480,7 +480,7 @@
 <rect x="779" y="161" width="11" height="11" rx="2.2" fill="#22d3ee"/>
 <text x="795" y="170.6" fill="#38BDF8" font-size="10">More</text>
 <line x1="0" y1="187" x2="869" y2="187" stroke="#22D3EE" stroke-opacity="0.25"/>
-<text x="22" y="211" font-size="13" fill="#22D3EE"><tspan font-weight="700">115</tspan><tspan fill="#38BDF8"> contributions in the last year</tspan></text>
+<text x="22" y="211" font-size="13" fill="#22D3EE"><tspan font-weight="700">117</tspan><tspan fill="#38BDF8"> contributions in the last year</tspan></text>
 <text x="847" y="211" font-size="12" fill="#38BDF8" text-anchor="end">2025-07-20 → 2026-07-25</text>
 <text x="22" y="235" font-size="13" fill="#38BDF8">current streak <tspan fill="#22D3EE" font-weight="700">4 days</tspan><tspan fill="#38BDF8">   ·   longest </tspan><tspan fill="#22D3EE" font-weight="700">4 days</tspan></text>
 <text x="847" y="235" font-size="12" fill="#38BDF8" text-anchor="end">best day <tspan fill="#22D3EE" font-weight="700">46</tspan> on 2026-07-23</text>
