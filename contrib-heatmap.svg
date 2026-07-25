@@ -4,7 +4,7 @@
   100% { opacity: 1; transform: translateY(0); }
 }
 .c { opacity: 0; animation: cell 0.42s cubic-bezier(.2,.8,.2,1) both; }</style>
-<defs><linearGradient id="hbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#0d1117"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<defs><linearGradient id="hbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#0d1117"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
 <rect width="869" height="333" rx="12" fill="url(#hbg)"/>
 <rect x="0.5" y="0.5" width="868" height="332" rx="12" fill="none" stroke="#22D3EE" stroke-width="1" stroke-opacity="0.55"/>
 <line x1="0" y1="30" x2="869" y2="30" stroke="#22D3EE" stroke-opacity="0.35"/>

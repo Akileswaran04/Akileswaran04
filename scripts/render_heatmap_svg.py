@@ -145,7 +145,7 @@ def render(data):
         '<defs>'
         f'<linearGradient id="hbg" x1="0" y1="0" x2="0" y2="1">'
         f'<stop offset="0" stop-color="{BG2}"/><stop offset="1" stop-color="{BG}"/></linearGradient>'
-        '<filter id="glow"><feGaussianBlur stdDeviation="1.5" result="blur"/>'
+        '<filter id="glow"><feGaussianBlur stdDeviation="2.5" result="blur"/>'
         '<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
         '</defs>',
         # overall background
