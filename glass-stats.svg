@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="860" height="455" viewBox="0 0 860 455" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="214" viewBox="0 0 860 214" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
   <defs>
     <linearGradient id="card-bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#0f172a"/>
@@ -6,14 +6,14 @@
     </linearGradient>
   </defs>
   <!-- Gradient background (matching contrib-heatmap) -->
-  <rect width="860" height="455" rx="12" fill="url(#card-bg)"/>
+  <rect width="860" height="214" rx="12" fill="url(#card-bg)"/>
   <!-- Cyan border (matching contrib-heatmap) -->
-  <rect x="0.5" y="0.5" width="859" height="454" rx="12" fill="none" stroke="#22D3EE" stroke-width="1" stroke-opacity="0.55"/>
+  <rect x="0.5" y="0.5" width="859" height="213" rx="12" fill="none" stroke="#22D3EE" stroke-width="1" stroke-opacity="0.55"/>
   <line x1="0" y1="30" x2="860" y2="30" stroke="#22D3EE" stroke-opacity="0.35"/>
   <circle cx="20" cy="15.0" r="5" fill="#22D3EE"/>
   <circle cx="36" cy="15.0" r="5" fill="#22D3EE"/>
   <circle cx="52" cy="15.0" r="5" fill="#22D3EE"/>
   <text x="430.0" y="19.0" fill="#38BDF8" font-size="12" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">akileswaran04@github: ~$ github-stats</text>
-  <image href="https://github-stats-extended.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" xlink:href="https://github-stats-extended.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" x="240" y="42" width="380" height="170" preserveAspectRatio="xMidYMid meet"/>
-  <image href="https://streak-stats.demolab.com/?user=Akileswaran04&background=0f172a&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE" xlink:href="https://streak-stats.demolab.com/?user=Akileswaran04&background=0f172a&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE" x="240" y="228" width="380" height="195" preserveAspectRatio="xMidYMid meet"/>
+  <text x="20" y="60.0" font-size="14" font-weight="700"><tspan fill="#14b8a6">akileswaran04</tspan><tspan fill="#38BDF8">@</tspan><tspan fill="#22D3EE">github</tspan></text><line x1="188" y1="56.0" x2="840" y2="56.0" stroke="#22D3EE" stroke-opacity="0.6"/>
+  <text x="430.0" y="100" fill="#7d8590" font-size="13" text-anchor="middle">— stat images rendered via HTML below —</text>
 </svg>

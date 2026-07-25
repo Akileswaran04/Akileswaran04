@@ -28,7 +28,7 @@ W       = 860          # panel width
 TITLE_H = 30           # title bar height
 PAD     = 20           # internal padding (matches info-card KEY_X)
 R       = 12           # corner radius (matches info-card)
-LINE_H  = 20.5         # line height (matches info-card)
+LINE_H  = 24           # line height (increased for breathing room)
 KEY_X   = PAD
 VAL_X   = PAD + 92     # value offset (matches info-card)
 EXTRA   = 12           # extra bottom padding for breathing room
@@ -271,9 +271,8 @@ def render_projects():
 # ═══════════════════════════════════════════════════════════════════
 
 def render_stats():
-    stats_w, stats_h = 380, 170
-    streak_w, streak_h = 380, 195
-    content_h = stats_h + 16 + streak_h
+    # Decorative frame only — actual stat images are HTML <img> in README
+    content_h = 140
     inner_h = TITLE_H + 12 + content_h
     h = inner_h + PAD + EXTRA
 
@@ -281,17 +280,9 @@ def render_stats():
     parts.append(card_defs())
     parts.append(card_bg(h))
     parts.append(title_bar(h, "github-stats"))
-
-    stats_url = "https://github-stats-extended.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true"
-    streak_url = "https://streak-stats.demolab.com/?user=Akileswaran04&background=0f172a&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE"
-
-    ix = (W - stats_w) / 2
-    iy = TITLE_H + 12
-    parts.append(f'  <image href="{stats_url}" xlink:href="{stats_url}" x="{ix:.0f}" y="{iy}" width="{stats_w}" height="{stats_h}" preserveAspectRatio="xMidYMid meet"/>')
-
-    sy = iy + stats_h + 16
-    sx = (W - streak_w) / 2
-    parts.append(f'  <image href="{streak_url}" xlink:href="{streak_url}" x="{sx:.0f}" y="{sy}" width="{streak_w}" height="{streak_h}" preserveAspectRatio="xMidYMid meet"/>')
+    parts.append("  " + host_line(TITLE_H + 30))
+    # Show a placeholder message since images load via HTML
+    parts.append(f'  <text x="{W/2}" y="{TITLE_H + 70}" fill="{DIM}" font-size="13" text-anchor="middle">— stat images rendered via HTML below —</text>')
 
     parts.append("</svg>")
     return "stats", "\n".join(parts)
