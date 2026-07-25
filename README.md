@@ -37,10 +37,11 @@
 
 <br>
 
-<!-- ─────────────────────────────────────────────────────────────────── -->
-<!--  SYSTEM BANNER                                                      -->
-<!-- ─────────────────────────────────────────────────────────────────── -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!--  ASYMMETRIC BENTO GRID  —  Row 1: Banner (full width)             -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
 
+<!-- ── ROW 1: SYSTEM BANNER (full width) ────────────────────────────── -->
 <table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
 <tr><td>
 
@@ -66,11 +67,17 @@
 
 <br>
 
-<!-- ─────────────────────────────────────────────────────────────────── -->
-<!--  $ whoami — IDENTITY PANEL                                        -->
-<!-- ─────────────────────────────────────────────────────────────────── -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!--  ROW 2: whoami (~60%) + netstat (~40%) side by side               -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
 
-<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
+<table align="center" cellpadding="0" cellspacing="10" width="860">
+<tr>
+
+<!-- ── IDENTITY PANEL (wider, ~60%) ──────────────────────────────── -->
+<td width="60%" valign="top">
+
+<table bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="100%" style="border-radius:8px">
 <tr><td>
 
 <pre><font color="#22D3EE">│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#38BDF8">~</font>$ <font color="#e6edf3">whoami</font>
@@ -87,48 +94,51 @@
 </td></tr>
 </table>
 
-<br>
+</td>
 
-<!-- ─────────────────────────────────────────────────────────────────── -->
-<!--  $ netstat --connections — SOCIAL LINKS                             -->
-<!-- ─────────────────────────────────────────────────────────────────── -->
+<!-- ── SOCIAL LINKS (narrower, ~40%, secondary accent) ──────────── -->
+<td width="40%" valign="top">
 
-<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
+<table bgcolor="#0d1117" border="1" bordercolor="#38BDF8" cellpadding="18" cellspacing="0" width="100%" style="border-radius:8px">
 <tr><td>
 
-<pre><font color="#22D3EE">│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#38BDF8">~</font>$ <font color="#e6edf3">netstat --connections</font>
+<pre><font color="#38BDF8">│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#38BDF8">~</font>$ <font color="#e6edf3">netstat --connections</font>
 │
-│ <font color="#38BDF8">PROTOCOL</font>  <font color="#22D3EE">│</font> <font color="#38BDF8">ADDRESS</font>              <font color="#22D3EE">│</font> <font color="#38BDF8">STATUS</font>
-│ ────────── <font color="#22D3EE">┼</font> ───────────────────── <font color="#22D3EE">┼</font> ──────────
-│ <font color="#22D3EE">linkedin</font>  <font color="#22D3EE">│</font> <a href="https://linkedin.com/in/akileswaran-ammamuthu"><font color="#e6edf3">/in/akileswaran-ammamuthu</font></a>  <font color="#22D3EE">│</font> <font color="#22D3EE">● active</font>
-│ <font color="#22D3EE">github</font>    <font color="#22D3EE">│</font> <a href="https://github.com/Akileswaran04"><font color="#e6edf3">/Akileswaran04</font></a>              <font color="#22D3EE">│</font> <font color="#22D3EE">● active</font>
-│ <font color="#22D3EE">leetcode</font>  <font color="#22D3EE">│</font> <a href="https://leetcode.com/u/Akileswaran04/"><font color="#e6edf3">/u/Akileswaran04</font></a>            <font color="#22D3EE">│</font> <font color="#22D3EE">● active</font>
-│ <font color="#22D3EE">sentri</font>    <font color="#22D3EE">│</font> <a href="https://sentri-final.streamlit.app"><font color="#e6edf3">sentri-final.streamlit.app</font></a>   <font color="#22D3EE">│</font> <font color="#22D3EE">● deployed</font></font>
+│ <font color="#38BDF8">PROTOCOL</font>  │ <font color="#38BDF8">ADDRESS</font>              │ <font color="#38BDF8">STATUS</font>
+│ ────────── ┼ ───────────────────── ┼ ──────────
+│ <font color="#22D3EE">linkedin</font>  │ <a href="https://linkedin.com/in/akileswaran-ammamuthu"><font color="#e6edf3">/in/akileswaran-ammamuthu</font></a>  │ <font color="#22D3EE">● active</font>
+│ <font color="#22D3EE">github</font>    │ <a href="https://github.com/Akileswaran04"><font color="#e6edf3">/Akileswaran04</font></a>              │ <font color="#22D3EE">● active</font>
+│ <font color="#22D3EE">leetcode</font>  │ <a href="https://leetcode.com/u/Akileswaran04/"><font color="#e6edf3">/u/Akileswaran04</font></a>            │ <font color="#22D3EE">● active</font>
+│ <font color="#22D3EE">sentri</font>    │ <a href="https://sentri-final.streamlit.app"><font color="#e6edf3">sentri-final.streamlit.app</font></a>   │ <font color="#22D3EE">● deployed</font></font>
 </pre>
 
 </td></tr>
 </table>
 
+</td>
+</tr>
+</table>
+
 <br>
 
-<!-- ─────────────────────────────────────────────────────────────────── -->
-<!--  $ cat /proc/projects — FEATURED PROJECTS                          -->
-<!-- ─────────────────────────────────────────────────────────────────── -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!--  ROW 3: cat /proc/projects (full width, violet accent)            -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
 
-<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
+<table align="center" bgcolor="#0d1117" border="1" bordercolor="#A78BFA" cellpadding="18" cellspacing="0" width="860" style="border-radius:8px">
 <tr><td>
 
-<pre><font color="#22D3EE">│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#38BDF8">~</font>$ <font color="#e6edf3">cat /proc/projects</font>
+<pre><font color="#A78BFA">│ <font color="#22D3EE">akileswaran04@github</font>:<font color="#A78BFA">~</font>$ <font color="#e6edf3">cat /proc/projects</font>
 │
-│ <font color="#22D3EE">┌─── PROJECT DATABASE ───────────────────────────────────────────┐</font>
-│ <font color="#22D3EE">│</font> <font color="#38BDF8">ID</font>  <font color="#22D3EE">│</font> <font color="#38BDF8">NAME</font>           <font color="#22D3EE">│</font> <font color="#38BDF8">STACK</font>                           <font color="#22D3EE">│</font> <font color="#38BDF8">STATUS</font>    <font color="#22D3EE">│</font>
-│ <font color="#22D3EE">├───┼─────────────────┼─────────────────────────────────┼───────────┤</font>
-│ <font color="#22D3EE">│</font> 01 <font color="#22D3EE">│</font> <font color="#e6edf3">ODYSSEY</font>         <font color="#22D3EE">│</font> LLM · EBM · LangChain            <font color="#22D3EE">│</font> <font color="#22D3EE">● build</font>   <font color="#22D3EE">│</font>
-│ <font color="#22D3EE">│</font> 02 <font color="#22D3EE">│</font> <a href="https://sentri-final.streamlit.app"><font color="#e6edf3">SENTRI ▸</font></a>       <font color="#22D3EE">│</font> Streamlit · FastAPI · XGBoost     <font color="#22D3EE">│</font> <font color="#22D3EE">● live</font>    <font color="#22D3EE">│</font>
-│ <font color="#22D3EE">│</font> 03 <font color="#22D3EE">│</font> <font color="#e6edf3">Gridlock</font>         <font color="#22D3EE">│</font> LightGBM · XGBoost · Hackathon   <font color="#22D3EE">│</font> <font color="#38BDF8">○ archive</font> <font color="#22D3EE">│</font>
-│ <font color="#22D3EE">│</font> 04 <font color="#22D3EE">│</font> <a href="https://csau.vercel.app"><font color="#e6edf3">Riddle Rush ▸</font></a>   <font color="#22D3EE">│</font> React · Three.js · Supabase      <font color="#22D3EE">│</font> <font color="#22D3EE">● live</font>    <font color="#22D3EE">│</font>
-│ <font color="#22D3EE">│</font> 05 <font color="#22D3EE">│</font> <font color="#e6edf3">DayLog</font>           <font color="#22D3EE">│</font> React · Node.js · Firebase        <font color="#22D3EE">│</font> <font color="#38BDF8">○ pending</font> <font color="#22D3EE">│</font>
-│ <font color="#22D3EE">└───┴─────────────────┴─────────────────────────────────┴───────────┘</font></font>
+│ <font color="#A78BFA">┌─── PROJECT DATABASE ───────────────────────────────────────────┐</font>
+│ <font color="#A78BFA">│</font> <font color="#38BDF8">ID</font>  <font color="#A78BFA">│</font> <font color="#38BDF8">NAME</font>           <font color="#A78BFA">│</font> <font color="#38BDF8">STACK</font>                           <font color="#A78BFA">│</font> <font color="#38BDF8">STATUS</font>    <font color="#A78BFA">│</font>
+│ <font color="#A78BFA">├───┼─────────────────┼─────────────────────────────────┼───────────┤</font>
+│ <font color="#A78BFA">│</font> 01 <font color="#A78BFA">│</font> <font color="#e6edf3">ODYSSEY</font>         <font color="#A78BFA">│</font> LLM · EBM · LangChain            <font color="#A78BFA">│</font> <font color="#22D3EE">● build</font>   <font color="#A78BFA">│</font>
+│ <font color="#A78BFA">│</font> 02 <font color="#A78BFA">│</font> <a href="https://sentri-final.streamlit.app"><font color="#e6edf3">SENTRI ▸</font></a>       <font color="#A78BFA">│</font> Streamlit · FastAPI · XGBoost     <font color="#A78BFA">│</font> <font color="#22D3EE">● live</font>    <font color="#A78BFA">│</font>
+│ <font color="#A78BFA">│</font> 03 <font color="#A78BFA">│</font> <font color="#e6edf3">Gridlock</font>         <font color="#A78BFA">│</font> LightGBM · XGBoost · Hackathon   <font color="#A78BFA">│</font> <font color="#38BDF8">○ archive</font> <font color="#A78BFA">│</font>
+│ <font color="#A78BFA">│</font> 04 <font color="#A78BFA">│</font> <a href="https://csau.vercel.app"><font color="#e6edf3">Riddle Rush ▸</font></a>   <font color="#A78BFA">│</font> React · Three.js · Supabase      <font color="#A78BFA">│</font> <font color="#22D3EE">● live</font>    <font color="#A78BFA">│</font>
+│ <font color="#A78BFA">│</font> 05 <font color="#A78BFA">│</font> <font color="#e6edf3">DayLog</font>           <font color="#A78BFA">│</font> React · Node.js · Firebase        <font color="#A78BFA">│</font> <font color="#38BDF8">○ pending</font> <font color="#A78BFA">│</font>
+│ <font color="#A78BFA">└───┴─────────────────┴─────────────────────────────────┴───────────┘</font></font>
 </pre>
 
 </td></tr>
