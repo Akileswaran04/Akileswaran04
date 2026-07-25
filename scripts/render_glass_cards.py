@@ -154,50 +154,28 @@ def render_projects():
 
 
 # ═══════════════════════════════════════════════════════════════════
-#  PANEL 2 —  STACK  (categorised skills)
+#  PANEL 2 —  STACK  (table format like projects/building)
 # ═══════════════════════════════════════════════════════════════════
 
-def pill(x, y, text, bg, tc="#ffffff"):
-    tw = len(text) * 8.5 + 24
-    return (
-        f'<g>'
-        f'<rect x="{x:.0f}" y="{y-9:.0f}" width="{tw:.0f}" height="24" rx="12" fill="{bg}"/>'
-        f'<text x="{x+tw/2:.0f}" y="{y+4:.0f}" fill="{tc}" font-size="12.5" '
-        f'font-weight="600" text-anchor="middle" font-family="ui-monospace,monospace">'
-        f'{esc(text)}</text></g>'
-    ), tw
-
-
-SKILL_CATS = [
-    ("Languages", [
-        ("C++", "#00599C"), ("Python", "#3776AB"), ("JavaScript", "#F7DF1E", "#000"),
-    ]),
-    ("Frontend", [
-        ("React", "#61DAFB", "#000"), ("Three.js", "#000000"),
-    ]),
-    ("Backend", [
-        ("Node.js", "#339933"), ("FastAPI", "#009688"), ("Streamlit", "#FF4B4B"),
-    ]),
-    ("Database", [
-        ("PostgreSQL", "#4169E1"), ("Firebase", "#FFCA28", "#000"),
-    ]),
-    ("ML/AI", [
-        ("XGBoost", "#150458"), ("TensorFlow", "#FF6F00"),
-        ("PyTorch", "#EE4C2C"), ("scikit-learn", "#F7931E", "#000"),
-    ]),
-    ("Tools", [
-        ("Git", "#F05032"), ("Docker", "#2496ED"),
-    ]),
+STACK_ROWS = [
+    ("Languages", "C++, Python, JavaScript"),
+    ("Frontend",  "React, Three.js"),
+    ("Backend",   "Node.js, FastAPI, Streamlit"),
+    ("Database",  "PostgreSQL, Firebase"),
+    ("ML/AI",     "XGBoost, TensorFlow, PyTorch, scikit-learn"),
+    ("Tools",     "Git, Docker"),
 ]
 
 
 def render_stack():
-    rows_data = [("host",)]
-    for cat_name, skills in SKILL_CATS:
-        rows_data.append(("section", cat_name))
-        rows_data.append(("pills", skills))
+    rows_data = [("host",), ("section", "Stack")]
+    for cat, skills in STACK_ROWS:
+        rows_data.append(("skill_row", cat, skills))
     n_rows = len(rows_data)
     h = TITLE_H + LINE_H * n_rows + PAD + EXTRA
+
+    col_w = [130, 660]
+    col_x = [KEY_X, KEY_X + col_w[0]]
 
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" viewBox="0 0 {W} {h}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">']
     parts.append(card_defs())
@@ -211,17 +189,10 @@ def render_stack():
             parts.append("  " + host_line(y))
         elif kind == "section":
             parts.append("  " + section_header(y, row[1]))
-        elif kind == "pills":
-            skills = row[1]
-            tw = sum(len(s[0]) * 8.5 + 28 for s in skills) + (len(skills) - 1) * 10
-            bx = (W - tw) / 2
-            by = y + 10  # badge vertical centre
-            for s in skills:
-                label, colour = s[0], s[1]
-                tc = s[2] if len(s) > 2 else "#ffffff"
-                piece, bw = pill(bx, by, label, colour, tc)
-                parts.append("  " + piece)
-                bx += bw + 10
+        elif kind == "skill_row":
+            cat, skills = row[1], row[2]
+            parts.append(f'  <text x="{col_x[0]}" y="{y:.1f}" fill="{ACCENT}" font-size="12.5" font-weight="700">{esc(cat)}</text>')
+            parts.append(f'  <text x="{col_x[1]}" y="{y:.1f}" fill="{INK}" font-size="12.5">{esc(skills)}</text>')
         y += LINE_H
 
     parts.append("</svg>")
