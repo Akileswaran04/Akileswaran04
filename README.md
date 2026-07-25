@@ -69,11 +69,11 @@
 
 <table width="100%" cellpadding="6" cellspacing="0">
 <tr><th align="left"><font color="#38BDF8">ID</font></th><th align="left"><font color="#38BDF8">Name</font></th><th align="left"><font color="#38BDF8">Stack</font></th><th align="left"><font color="#38BDF8">Status</font></th></tr>
-<tr><td><font color="#7d8590">01</font></td><td><font color="#e6edf3"><b>ODYSSEY</b></font></td><td><font color="#e6edf3">LLM · EBM · LangChain</font></td><td><font color="#22D3EE">● build</font></td></tr>
+<tr><td><font color="#7d8590">01</font></td><td><font color="#e6edf3"><b>ODYSSEY</b></font></td><td><font color="#e6edf3">LLM · EBM · LangChain</font></td><td><font color="#38BDF8">○ processing</font></td></tr>
 <tr><td><font color="#7d8590">02</font></td><td><a href="https://sentri-final.streamlit.app"><font color="#22D3EE"><b>SENTRI ▸</b></font></a></td><td><font color="#e6edf3">Streamlit · FastAPI · XGBoost</font></td><td><font color="#22D3EE">● live</font></td></tr>
 <tr><td><font color="#7d8590">03</font></td><td><font color="#e6edf3"><b>Gridlock</b></font></td><td><font color="#e6edf3">LightGBM · XGBoost · Hackathon</font></td><td><font color="#38BDF8">○ archive</font></td></tr>
 <tr><td><font color="#7d8590">04</font></td><td><a href="https://csau.vercel.app"><font color="#22D3EE"><b>Riddle Rush ▸</b></font></a></td><td><font color="#e6edf3">React · Three.js · Supabase</font></td><td><font color="#22D3EE">● live</font></td></tr>
-<tr><td><font color="#7d8590">05</font></td><td><font color="#e6edf3"><b>DayLog</b></font></td><td><font color="#e6edf3">React · Node.js · Firebase</font></td><td><font color="#38BDF8">○ pending</font></td></tr>
+<tr><td><font color="#7d8590">05</font></td><td><font color="#e6edf3"><b>DayLog</b></font></td><td><font color="#e6edf3">React · Node.js · Firebase</font></td><td><font color="#34D399">✓ done</font></td></tr>
 </table>
 
 </td></tr>
@@ -147,7 +147,7 @@
 <tr><th align="left"><font color="#38BDF8">PID</font></th><th align="left"><font color="#38BDF8">Process</font></th><th align="left"><font color="#38BDF8">Stack</font></th><th align="left"><font color="#38BDF8">CPU</font></th></tr>
 <tr><td><font color="#7d8590">001</font></td><td><font color="#e6edf3"><b>SENTRI</b></font></td><td><font color="#e6edf3">Streamlit · FastAPI · XGBoost</font></td><td><font color="#22D3EE">42%</font></td></tr>
 <tr><td><font color="#7d8590">002</font></td><td><font color="#e6edf3"><b>Riddle Rush</b></font></td><td><font color="#e6edf3">React · Three.js · Supabase</font></td><td><font color="#22D3EE">35%</font></td></tr>
-<tr><td><font color="#7d8590">003</font></td><td><font color="#e6edf3"><b>DayLog</b></font></td><td><font color="#e6edf3">React · Node.js · Firebase</font></td><td><font color="#22D3EE">23%</font></td></tr>
+<tr><td><font color="#7d8590">003</font></td><td><font color="#e6edf3"><b>ODYSSEY</b></font></td><td><font color="#e6edf3">LLM · EBM · LangChain</font></td><td><font color="#22D3EE">38%</font></td></tr>
 </table>
 
 </td></tr>
