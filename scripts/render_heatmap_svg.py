@@ -24,12 +24,12 @@ import random
 random.seed(42)
 
 HERE = os.path.dirname(__file__)
-IN_PATH = os.path.join(HERE, "data", "contributions.json")
+IN_PATH = os.path.join(HERE, "..", "data", "contributions.json")
 OUT_PATH = os.path.join(HERE, "contrib-heatmap.svg")
 
-# ═══════════════════════════════════════════════════════════════════
+# ════════════════════════════════════════════════════════════════[...]
 #  CYBER CYAN THEME  —  Dark GitHub, neon cyan, clean terminal
-# ═══════════════════════════════════════════════════════════════════
+# ════════════════════════════════════════════════════════════════[...]
 
 PALETTE = [
     "#0d1117",   # 0  — invisible (matches bg)
@@ -127,7 +127,7 @@ def render(data):
     rail_y = stats_bottom_y + DRONE_RAIL_H / 2         # rail centre Y
     drone_cy = rail_y + 4                              # drone centre Y (slightly below centre of rail)
 
-    # ──── CSS ──────────────────────────────────────────────────────────
+    # ──── CSS ─────────────────────────────────────────────────────────[...]
     css = f"""
 @keyframes cell {{
   0%   {{ opacity: 0; transform: translateY(-6px); }}
