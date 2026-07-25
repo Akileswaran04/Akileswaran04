@@ -52,9 +52,9 @@
 <br>
 
 <div align="center">
-<img src="https://github-stats-extended.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" />
+<img src="https://github-stats-extended.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" width="100%" style="max-width:860px;height:auto" />
 <br><br>
-<img src="https://streak-stats.demolab.com/?user=Akileswaran04&background=0f172a&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE" />
+<img src="https://streak-stats.demolab.com/?user=Akileswaran04&background=0f172a&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE" width="100%" style="max-width:860px;height:auto" />
 </div>
 
 </td></tr>
