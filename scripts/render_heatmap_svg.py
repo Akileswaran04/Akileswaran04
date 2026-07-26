@@ -97,7 +97,14 @@ def build_grid(days):
 
 
 def render(data):
-    days = data["days"]
+    # Show only the last ~405 days (standard GitHub contribution calendar view)
+    all_days = data["days"]
+    today = datetime.date.today()
+    today_str = today.isoformat()
+    cutoff = (today - datetime.timedelta(days=405)).isoformat()
+    days = [d for d in all_days if cutoff <= d["date"] <= today_str]
+    if not days:
+        days = all_days
     grid = build_grid(days)
     n_cols = len(grid)
     art_w = n_cols * STEP
@@ -447,7 +454,7 @@ def render(data):
     parts.append(
         f'<text x="{PAD}" y="{ly}" font-size="13" fill="{ACCENT}">'
         f'<tspan font-weight="700">{total:,}</tspan>'
-        f'<tspan fill="{MUTED}"> contributions in the last year</tspan></text>')
+        f'<tspan fill="{MUTED}"> total contributions</tspan></text>')
     parts.append(
         f'<text x="{canvas_w - PAD}" y="{ly}" font-size="12" fill="{MUTED}" text-anchor="end">'
         f'{rng["start"]} → {rng["end"]}</text>')

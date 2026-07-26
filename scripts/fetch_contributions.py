@@ -21,16 +21,22 @@ USERNAME = os.environ.get("GH_PROFILE_USER", "YOUR_GITHUB_USERNAME")
 URL = f"https://github.com/users/{USERNAME}/contributions"
 OUT_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "contributions.json")
 
+START_YEAR = 2020  # earliest year to check for contributions
 
-def fetch_days():
-    resp = requests.get(URL, headers={"User-Agent": "profile-readme-bot/1.0"}, timeout=30)
+
+def fetch_year_range(from_date, to_date):
+    """Fetch contributions for a specific date range.
+    Returns list of {"date": ..., "count": ...} dicts, or empty list if no
+    calendar cells are found (no data for that period).
+    """
+    url = f"{URL}?from={from_date}&to={to_date}"
+    resp = requests.get(url, headers={"User-Agent": "profile-readme-bot/1.0"}, timeout=30)
     resp.raise_for_status()
     soup = BeautifulSoup(resp.text, "html.parser")
 
     cells = soup.select("td.ContributionCalendar-day")
     if not cells:
-        print("no calendar cells found -- github markup may have changed", file=sys.stderr)
-        sys.exit(1)
+        return []
 
     days = []
     for td in cells:
@@ -49,6 +55,48 @@ def fetch_days():
 
     days.sort(key=lambda d: d["date"])
     return days
+
+
+def fetch_all_days():
+    """Fetch ALL contributions by iterating year by year from START_YEAR
+    through the current year. Uses the from/to query parameters that GitHub's
+    public contributions endpoint supports.
+    """
+    now = datetime.datetime.utcnow()
+    current_year = now.year
+
+    all_days = []
+
+    for year in range(START_YEAR, current_year + 1):
+        if year == current_year:
+            from_date = f"{year}-01-01"
+            to_date = now.strftime("%Y-%m-%d")
+        else:
+            from_date = f"{year}-01-01"
+            to_date = f"{year}-12-31"
+
+        days = fetch_year_range(from_date, to_date)
+        if not days:
+            print(f"  {year}: no calendar data returned", file=sys.stderr)
+            continue
+
+        total = sum(d["count"] for d in days)
+        print(f"  {year}: {total} contributions over {len(days)} days")
+        all_days.extend(days)
+
+    if not all_days:
+        print("no calendar cells found -- github markup may have changed", file=sys.stderr)
+        sys.exit(1)
+
+    all_days.sort(key=lambda d: d["date"])
+    # Deduplicate by date (keep the last occurrence)
+    seen = {}
+    for d in all_days:
+        seen[d["date"]] = d
+    all_days = list(seen.values())
+    all_days.sort(key=lambda d: d["date"])
+
+    return all_days
 
 
 def compute_current_streak(days):
@@ -113,11 +161,14 @@ def build_data(days):
 
 
 if __name__ == "__main__":
-    days = fetch_days()
+    print(f"fetching ALL contributions for {USERNAME} from {START_YEAR} to present...")
+    days = fetch_all_days()
     data = build_data(days)
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
     with open(OUT_PATH, "w") as f:
         json.dump(data, f, indent=2)
+    rng = data["range"]
     print(f"wrote {OUT_PATH}: {data['total_contributions']} contributions, "
+          f"{rng['start']} to {rng['end']}, "
           f"current streak {data['current_streak']['length']}, "
           f"longest streak {data['longest_streak']['length']}")
