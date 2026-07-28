@@ -16,6 +16,8 @@ import sys
 
 import requests
 from bs4 import BeautifulSoup
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 USERNAME = os.environ.get("GH_PROFILE_USER", "YOUR_GITHUB_USERNAME")
 URL = f"https://github.com/users/{USERNAME}/contributions"
@@ -24,17 +26,65 @@ OUT_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "contributions.
 START_YEAR = 2020  # earliest year to check for contributions
 
 
-def fetch_year_range(from_date, to_date):
+def _make_session():
+    """Create a requests session with retry logic for transient failures."""
+    session = requests.Session()
+    retry = Retry(total=3, backoff_factor=1, status_forcelist=[429, 500, 502, 503, 504])
+    session.mount("https://", HTTPAdapter(max_retries=retry))
+    session.headers.update({"User-Agent": "profile-readme-bot/1.0"})
+    return session
+
+
+def _parse_count(td, soup):
+    """Extract contribution count from a calendar cell.
+
+    Checks multiple data sources in order of reliability:
+    1. aria-label on the <td> itself (most stable)
+    2. <tool-tip> element referenced by the cell's id
+    3. Falls back to 0
+    """
+    # Prefer aria-label if available (more stable than tool-tip markup)
+    label = td.get("aria-label", "")
+    if label:
+        m = re.search(r"(\d+)\s+contribution", label, re.I)
+        if m:
+            return int(m.group(1))
+        # "No contributions on ..." => 0
+        if re.search(r"no contributions?", label, re.I):
+            return 0
+        return 0
+
+    # Fall back to tool-tip element (older GitHub markup)
+    td_id = td.get("id")
+    tooltip_el = soup.find("tool-tip", attrs={"for": td_id}) if td_id else None
+    text = tooltip_el.get_text(strip=True) if tooltip_el else ""
+
+    if re.search(r"no contributions?", text, re.I):
+        return 0
+
+    m = re.search(r"(\d+)\s+contribution", text, re.I)
+    return int(m.group(1)) if m else 0
+
+
+def fetch_year_range(from_date, to_date, session=None):
     """Fetch contributions for a specific date range.
+
     Returns list of {"date": ..., "count": ...} dicts, or empty list if no
     calendar cells are found (no data for that period).
     """
+    if session is None:
+        session = _make_session()
     url = f"{URL}?from={from_date}&to={to_date}"
-    resp = requests.get(url, headers={"User-Agent": "profile-readme-bot/1.0"}, timeout=30)
+    resp = session.get(url, timeout=30)
     resp.raise_for_status()
     soup = BeautifulSoup(resp.text, "html.parser")
 
+    # Primary selector; fallback if GitHub renames the class
     cells = soup.select("td.ContributionCalendar-day")
+    if not cells:
+        cells = soup.select("td[data-date]")
+    if not cells:
+        cells = soup.select("[data-date]")
     if not cells:
         return []
 
@@ -43,14 +93,7 @@ def fetch_year_range(from_date, to_date):
         date = td.get("data-date")
         if not date:
             continue
-        td_id = td.get("id")
-        tooltip_el = soup.find("tool-tip", attrs={"for": td_id}) if td_id else None
-        text = tooltip_el.get_text(strip=True) if tooltip_el else ""
-        if re.search(r"no contributions", text, re.I):
-            count = 0
-        else:
-            m = re.match(r"(\d+)", text)
-            count = int(m.group(1)) if m else 0
+        count = _parse_count(td, soup)
         days.append({"date": date, "count": count})
 
     days.sort(key=lambda d: d["date"])
@@ -62,9 +105,15 @@ def fetch_all_days():
     through the current year. Uses the from/to query parameters that GitHub's
     public contributions endpoint supports.
     """
-    now = datetime.datetime.utcnow()
-    current_year = now.year
+    if USERNAME == "YOUR_GITHUB_USERNAME":
+        raise ValueError(
+            "GH_PROFILE_USER environment variable not set. "
+            "Set it to your GitHub username before running this script."
+        )
 
+    now = datetime.datetime.now(datetime.timezone.utc)
+    current_year = now.year
+    session = _make_session()
     all_days = []
 
     for year in range(START_YEAR, current_year + 1):
@@ -75,7 +124,7 @@ def fetch_all_days():
             from_date = f"{year}-01-01"
             to_date = f"{year}-12-31"
 
-        days = fetch_year_range(from_date, to_date)
+        days = fetch_year_range(from_date, to_date, session=session)
         if not days:
             print(f"  {year}: no calendar data returned", file=sys.stderr)
             continue
@@ -88,33 +137,50 @@ def fetch_all_days():
         print("no calendar cells found -- github markup may have changed", file=sys.stderr)
         sys.exit(1)
 
-    all_days.sort(key=lambda d: d["date"])
-    # Deduplicate by date (keep the last occurrence)
-    seen = {}
-    for d in all_days:
-        seen[d["date"]] = d
-    all_days = list(seen.values())
-    all_days.sort(key=lambda d: d["date"])
+    # Deduplicate by date (keep the last occurrence) — single expression
+    all_days = sorted(
+        {d["date"]: d for d in all_days}.values(),
+        key=lambda x: x["date"]
+    )
 
     return all_days
 
 
 def compute_current_streak(days):
+    """Compute the current (ongoing) contribution streak.
+
+    Skips today's entry if it has 0 contributions and today hasn't finished
+    yet in UTC, to avoid breaking the streak prematurely.
+    """
+    if not days:
+        return 0, None, None
+
+    today_str = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
     idx = len(days) - 1
-    if days[idx]["count"] == 0:
-        idx -= 1  # today isn't over yet -- don't break the streak on it
+
+    # If the last entry is today with 0 contributions, skip it — day isn't over
+    if idx >= 0 and days[idx]["date"] == today_str and days[idx]["count"] == 0:
+        idx -= 1
+
+    if idx < 0:
+        return 0, None, None
+
     streak = 0
     end_idx = idx
+
     while idx >= 0 and days[idx]["count"] > 0:
         streak += 1
         idx -= 1
-    start_idx = idx + 1
+
     if streak == 0:
         return 0, None, None
+
+    start_idx = idx + 1
     return streak, days[start_idx]["date"], days[end_idx]["date"]
 
 
 def compute_longest_streak(days):
+    """Compute the longest contribution streak ever recorded."""
     longest = run = 0
     longest_start = longest_end = None
     run_start_idx = None
@@ -133,6 +199,7 @@ def compute_longest_streak(days):
 
 
 def build_data(days):
+    """Assemble the full data structure from a list of day dicts."""
     total = sum(d["count"] for d in days)
     active_days = sum(1 for d in days if d["count"] > 0)
     best = max(days, key=lambda d: d["count"])
@@ -147,7 +214,7 @@ def build_data(days):
 
     return {
         "username": USERNAME,
-        "generated_at": datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "generated_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "range": {"start": days[0]["date"], "end": days[-1]["date"]},
         "total_contributions": total,
         "active_days": active_days,

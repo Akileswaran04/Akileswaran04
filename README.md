@@ -23,11 +23,11 @@
 
 <img src="./contrib-heatmap.svg" width="860" alt="GitHub contribution graph" />
 
-<br><br>
+<br>
 
 <img src="./typewriter-card.svg" width="860" alt="Typewriter countdown" />
 
-<br><br>
+<br>
 
 </div>
 
@@ -37,11 +37,11 @@
 
 <div align="center">
 
-<br><br>
+<br>
 
 <img src="./glass-projects.svg" width="860" alt="Projects" />
 
-<br><br>
+<br>
 
 <table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="24" cellspacing="0" width="860" style="border-radius:12px">
 <tr><td>
@@ -60,15 +60,15 @@
 </td></tr>
 </table>
 
-<br><br>
+<br>
 
 <img src="./glass-stack.svg" width="860" alt="Stack" />
 
-<br><br>
+<br>
 
 <img src="./glass-building.svg" width="860" alt="Building now" />
 
-<br><br><br>
+<br>
 
 <img src="./glass-tagline.svg" width="860" alt="Tagline" />
 
