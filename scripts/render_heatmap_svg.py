@@ -450,6 +450,10 @@ def render(data):
     best = data["best_day"]
     rng = data["range"]
 
+    # Plural helpers for streak labels
+    cs_label = f"{cs} day" if cs == 1 else f"{cs} days"
+    ls_label = f"{ls} day" if ls == 1 else f"{ls} days"
+
     ly = sep_y + 24
     parts.append(
         f'<text x="{PAD}" y="{ly}" font-size="13" fill="{ACCENT}">'
@@ -461,9 +465,9 @@ def render(data):
     ly += 24
     parts.append(
         f'<text x="{PAD}" y="{ly}" font-size="13" fill="{MUTED}">current streak '
-        f'<tspan fill="{ACCENT}" font-weight="700">{cs} days</tspan>'
+        f'<tspan fill="{ACCENT}" font-weight="700">{cs_label}</tspan>'
         f'<tspan fill="{MUTED}">   ·   longest </tspan>'
-        f'<tspan fill="{ACCENT}" font-weight="700">{ls} days</tspan></text>')
+        f'<tspan fill="{ACCENT}" font-weight="700">{ls_label}</tspan></text>')
     parts.append(
         f'<text x="{canvas_w - PAD}" y="{ly}" font-size="12" fill="{MUTED}" text-anchor="end">'
         f'best day <tspan fill="{ACCENT}" font-weight="700">{best["count"]}</tspan> on {best["date"]}</text>')
