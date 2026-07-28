@@ -41,24 +41,19 @@
 
 <img src="./glass-projects.svg" width="860" alt="Projects" />
 
-<br>
+<br><br>
 
-<table align="center" bgcolor="#0d1117" border="1" bordercolor="#22D3EE" cellpadding="24" cellspacing="0" width="860" style="border-radius:12px">
-<tr><td>
-
-<pre><font color="#22D3EE">│ <font color="#38BDF8">akileswaran04@github</font>:<font color="#22D3EE">~</font>$ <font color="#e6edf3">github-stats</font></font>
+<pre>
+<font color="#22D3EE">│ <font color="#38BDF8">akileswaran04@github</font>:<font color="#22D3EE">~</font>$ <font color="#e6edf3">github-stats</font></font>
 </pre>
 
 <br>
 
-<div align="center">
-<img src="https://github-stats-extended.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" width="100%" style="max-width:860px;height:auto" />
-<br><br>
-<img src="https://streak-stats.demolab.com/?user=Akileswaran04&background=0f172a&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE" width="100%" style="max-width:860px;height:auto" />
-</div>
+<img src="https://github-stats-extended.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" width="860" />
 
-</td></tr>
-</table>
+<br><br>
+
+<img src="https://streak-stats.demolab.com/?user=Akileswaran04&background=0f172a&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE" width="860" />
 
 <br>
 
