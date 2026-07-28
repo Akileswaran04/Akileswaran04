@@ -41,7 +41,8 @@ def _parse_count(td, soup):
     Checks multiple data sources in order of reliability:
     1. aria-label on the <td> itself (most stable)
     2. <tool-tip> element referenced by the cell's id
-    3. Falls back to 0
+    3. data-level attribute (gives a range estimate)
+    4. Falls back to 0
     """
     # Prefer aria-label if available (more stable than tool-tip markup)
     label = td.get("aria-label", "")
@@ -63,7 +64,23 @@ def _parse_count(td, soup):
         return 0
 
     m = re.search(r"(\d+)\s+contribution", text, re.I)
-    return int(m.group(1)) if m else 0
+    if m:
+        return int(m.group(1))
+
+    # Last resort: data-level attribute (range-based, gives an approximate count)
+    level = td.get("data-level")
+    if level is not None:
+        try:
+            level = int(level)
+            if level == 0:
+                return 0
+            # Use a midpoint estimate for the level range
+            estimates = {1: 3, 2: 8, 3: 15, 4: 25}
+            return estimates.get(level, 1)
+        except (ValueError, TypeError):
+            pass
+
+    return 0
 
 
 def fetch_year_range(from_date, to_date, session=None):
@@ -71,6 +88,9 @@ def fetch_year_range(from_date, to_date, session=None):
 
     Returns list of {"date": ..., "count": ...} dicts, or empty list if no
     calendar cells are found (no data for that period).
+
+    Note: GitHub's endpoint returns the FULL year's data regardless of the
+    'to' parameter. The caller must filter out future dates.
     """
     if session is None:
         session = _make_session()
@@ -112,6 +132,7 @@ def fetch_all_days():
         )
 
     now = datetime.datetime.now(datetime.timezone.utc)
+    today_str = now.strftime("%Y-%m-%d")
     current_year = now.year
     session = _make_session()
     all_days = []
@@ -119,7 +140,7 @@ def fetch_all_days():
     for year in range(START_YEAR, current_year + 1):
         if year == current_year:
             from_date = f"{year}-01-01"
-            to_date = now.strftime("%Y-%m-%d")
+            to_date = today_str
         else:
             from_date = f"{year}-01-01"
             to_date = f"{year}-12-31"
@@ -137,11 +158,16 @@ def fetch_all_days():
         print("no calendar cells found -- github markup may have changed", file=sys.stderr)
         sys.exit(1)
 
-    # Deduplicate by date (keep the last occurrence) — single expression
+    # Deduplicate by date (keep the last occurrence)
     all_days = sorted(
         {d["date"]: d for d in all_days}.values(),
         key=lambda x: x["date"]
     )
+
+    # Filter out future dates — GitHub returns the full year's data even
+    # when we query up to today, so dates after today have count=0 and
+    # would incorrectly break streak computation.
+    all_days = [d for d in all_days if d["date"] <= today_str]
 
     return all_days
 
