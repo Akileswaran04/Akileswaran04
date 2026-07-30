@@ -35,6 +35,7 @@ jobs:
         run: python scripts/fetch_contributions.py
         env:
           GH_PROFILE_USER: ${{ github.repository_owner }}
+          GH_PAT: ${{ secrets.GH_PAT }}
 
       - name: Render heatmap SVG
         run: python scripts/render_heatmap_svg.py

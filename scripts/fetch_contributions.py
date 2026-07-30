@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 """
-Scrape real daily contribution counts from GitHub's public, unauthenticated
-contributions endpoint (the same fragment the profile page itself uses) and
+Fetch real daily contribution counts from GitHub's official GraphQL API and
 write data/contributions.json with the raw days plus derived stats
 (current streak, longest streak, best day, monthly totals).
 
-No token, no auth, no GraphQL -- just the public HTML GitHub already serves.
-Run daily by .github/workflows/update-profile-art.yml.
+Primary data source: GitHub GraphQL API v4 (requires GH_PAT token env var).
+Fallback:           HTML scraping of the public contributions endpoint
+                    (unauthenticated, less reliable).
+
+Set GH_PAT to a classic personal access token with read:user scope for
+accurate, stable data. Without it, the script falls back to HTML scraping
+which may produce incomplete or approximate results.
+
+Run daily by .github/workflows/snake.yml.
 """
 import datetime
 import json
@@ -15,15 +21,38 @@ import re
 import sys
 
 import requests
-from bs4 import BeautifulSoup
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 USERNAME = os.environ.get("GH_PROFILE_USER", "YOUR_GITHUB_USERNAME")
-URL = f"https://github.com/users/{USERNAME}/contributions"
+GH_PAT = os.environ.get("GH_PAT", "")
+GRAPHQL_URL = "https://api.github.com/graphql"
+HTML_URL = f"https://github.com/users/{USERNAME}/contributions"
 OUT_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "contributions.json")
 
 START_YEAR = 2020  # earliest year to check for contributions
+
+USE_GRAPHQL = bool(GH_PAT)
+
+
+# ── GraphQL query helpers ─────────────────────────────────────────────
+
+CONTRIBUTIONS_QUERY = """
+query($username: String!, $from: DateTime!, $to: DateTime!) {
+  user(login: $username) {
+    contributionsCollection(from: $from, to: $to) {
+      contributionCalendar {
+        weeks {
+          contributionDays {
+            date
+            contributionCount
+          }
+        }
+      }
+    }
+  }
+}
+"""
 
 
 def _make_session():
@@ -35,6 +64,51 @@ def _make_session():
     return session
 
 
+# ── GraphQL fetch ─────────────────────────────────────────────────────
+
+def fetch_year_range_graphql(from_date, to_date, session=None):
+    """Fetch contributions via GitHub GraphQL API for a date range.
+
+    Returns list of {"date": ..., "count": ...} dicts.
+    """
+    if session is None:
+        session = _make_session()
+    session.headers.update({"Authorization": f"Bearer {GH_PAT}"})
+
+    variables = {
+        "username": USERNAME,
+        "from": f"{from_date}T00:00:00Z",
+        "to": f"{to_date}T23:59:59Z",
+    }
+    payload = {"query": CONTRIBUTIONS_QUERY, "variables": variables}
+
+    resp = session.post(GRAPHQL_URL, json=payload, timeout=30)
+    resp.raise_for_status()
+    body = resp.json()
+
+    if "errors" in body:
+        err_msg = body["errors"][0].get("message", str(body["errors"]))
+        raise RuntimeError(f"GraphQL API error: {err_msg}")
+
+    try:
+        weeks = body["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
+    except (KeyError, TypeError) as exc:
+        raise RuntimeError(f"Unexpected GraphQL response structure: {exc}") from exc
+
+    days = []
+    for week in weeks:
+        for day in week.get("contributionDays", []):
+            date = day.get("date")
+            count = day.get("contributionCount", 0)
+            if date:
+                days.append({"date": date, "count": count})
+
+    days.sort(key=lambda d: d["date"])
+    return days
+
+
+# ── HTML fallback fetch (unchanged scraping logic) ────────────────────
+
 def _parse_count(td, soup):
     """Extract contribution count from a calendar cell.
 
@@ -44,18 +118,15 @@ def _parse_count(td, soup):
     3. data-level attribute (gives a range estimate)
     4. Falls back to 0
     """
-    # Prefer aria-label if available (more stable than tool-tip markup)
     label = td.get("aria-label", "")
     if label:
         m = re.search(r"(\d+)\s+contribution", label, re.I)
         if m:
             return int(m.group(1))
-        # "No contributions on ..." => 0
         if re.search(r"no contributions?", label, re.I):
             return 0
         return 0
 
-    # Fall back to tool-tip element (older GitHub markup)
     td_id = td.get("id")
     tooltip_el = soup.find("tool-tip", attrs={"for": td_id}) if td_id else None
     text = tooltip_el.get_text(strip=True) if tooltip_el else ""
@@ -67,14 +138,12 @@ def _parse_count(td, soup):
     if m:
         return int(m.group(1))
 
-    # Last resort: data-level attribute (range-based, gives an approximate count)
     level = td.get("data-level")
     if level is not None:
         try:
             level = int(level)
             if level == 0:
                 return 0
-            # Use a midpoint estimate for the level range
             estimates = {1: 3, 2: 8, 3: 15, 4: 25}
             return estimates.get(level, 1)
         except (ValueError, TypeError):
@@ -83,23 +152,17 @@ def _parse_count(td, soup):
     return 0
 
 
-def fetch_year_range(from_date, to_date, session=None):
-    """Fetch contributions for a specific date range.
-
-    Returns list of {"date": ..., "count": ...} dicts, or empty list if no
-    calendar cells are found (no data for that period).
-
-    Note: GitHub's endpoint returns the FULL year's data regardless of the
-    'to' parameter. The caller must filter out future dates.
-    """
+def fetch_year_range_html(from_date, to_date, session=None):
+    """Fetch contributions via HTML scraping (fallback method)."""
     if session is None:
         session = _make_session()
-    url = f"{URL}?from={from_date}&to={to_date}"
+    url = f"{HTML_URL}?from={from_date}&to={to_date}"
     resp = session.get(url, timeout=30)
     resp.raise_for_status()
+
+    from bs4 import BeautifulSoup
     soup = BeautifulSoup(resp.text, "html.parser")
 
-    # Primary selector; fallback if GitHub renames the class
     cells = soup.select("td.ContributionCalendar-day")
     if not cells:
         cells = soup.select("td[data-date]")
@@ -120,16 +183,33 @@ def fetch_year_range(from_date, to_date, session=None):
     return days
 
 
-def fetch_all_days():
-    """Fetch ALL contributions by iterating year by year from START_YEAR
-    through the current year. Uses the from/to query parameters that GitHub's
-    public contributions endpoint supports.
+# ── Fetch orchestrator ────────────────────────────────────────────────
+
+def fetch_year_range(from_date, to_date, session=None):
+    """Fetch contributions for a specific date range.
+
+    Uses GraphQL API if GH_PAT is set, otherwise falls back to HTML scraping.
     """
+    if USE_GRAPHQL:
+        return fetch_year_range_graphql(from_date, to_date, session)
+    else:
+        print("  ⚠️  WARNING: GH_PAT not set — falling back to HTML scraping. Data may be INACCURATE (missing days, estimated counts).", file=sys.stderr)
+        return fetch_year_range_html(from_date, to_date, session)
+
+
+def fetch_all_days():
+    """Fetch ALL contributions by iterating year by year from START_YEAR."""
     if USERNAME == "YOUR_GITHUB_USERNAME":
         raise ValueError(
             "GH_PROFILE_USER environment variable not set. "
             "Set it to your GitHub username before running this script."
         )
+
+    if USE_GRAPHQL:
+        print(f"fetching ALL contributions for {USERNAME} via GraphQL API...")
+    else:
+        print(f"fetching ALL contributions for {USERNAME} via HTML scraping (no GH_PAT set)...")
+        print("  ℹ️  Set GH_PAT env var (classic PAT with read:user scope) for accurate GraphQL data.", file=sys.stderr)
 
     now = datetime.datetime.now(datetime.timezone.utc)
     today_str = now.strftime("%Y-%m-%d")
@@ -151,11 +231,12 @@ def fetch_all_days():
             continue
 
         total = sum(d["count"] for d in days)
-        print(f"  {year}: {total} contributions over {len(days)} days")
+        print(f"  {year}: {total} contributions over {len(days)} days "
+              f"({days[0]['date']} to {days[-1]['date']})")
         all_days.extend(days)
 
     if not all_days:
-        print("no calendar cells found -- github markup may have changed", file=sys.stderr)
+        print("NO contribution data returned from any source", file=sys.stderr)
         sys.exit(1)
 
     # Deduplicate by date (keep the last occurrence)
@@ -164,13 +245,24 @@ def fetch_all_days():
         key=lambda x: x["date"]
     )
 
-    # Filter out future dates — GitHub returns the full year's data even
-    # when we query up to today, so dates after today have count=0 and
-    # would incorrectly break streak computation.
+    # Filter out future dates
     all_days = [d for d in all_days if d["date"] <= today_str]
+
+    # Sanity check: warn if a year has significantly fewer days than expected
+    for year in set(d["date"][:4] for d in all_days):
+        year_days = [d for d in all_days if d["date"].startswith(year)]
+        expected = 366 if int(year) % 4 == 0 and (int(year) % 100 != 0 or int(year) % 400 == 0) else 365
+        now_doy = int(now.strftime("%j"))
+        if int(year) == current_year:
+            expected = now_doy
+        if len(year_days) < expected * 0.85:
+            print(f"  [warning] {year}: only {len(year_days)} days (expected ~{expected}) "
+                  f"— data may be incomplete", file=sys.stderr)
 
     return all_days
 
+
+# ── Streak & stats computation (unchanged) ────────────────────────────
 
 def compute_current_streak(days):
     """Compute the current (ongoing) contribution streak.
@@ -184,7 +276,6 @@ def compute_current_streak(days):
     today_str = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
     idx = len(days) - 1
 
-    # If the last entry is today with 0 contributions, skip it — day isn't over
     if idx >= 0 and days[idx]["date"] == today_str and days[idx]["count"] == 0:
         idx -= 1
 
@@ -241,6 +332,7 @@ def build_data(days):
     return {
         "username": USERNAME,
         "generated_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "source": "graphql" if USE_GRAPHQL else "html_scrape",
         "range": {"start": days[0]["date"], "end": days[-1]["date"]},
         "total_contributions": total,
         "active_days": active_days,
@@ -261,7 +353,9 @@ if __name__ == "__main__":
     with open(OUT_PATH, "w") as f:
         json.dump(data, f, indent=2)
     rng = data["range"]
+    source_label = "GraphQL API" if USE_GRAPHQL else "HTML scrape"
     print(f"wrote {OUT_PATH}: {data['total_contributions']} contributions, "
           f"{rng['start']} to {rng['end']}, "
           f"current streak {data['current_streak']['length']}, "
-          f"longest streak {data['longest_streak']['length']}")
+          f"longest streak {data['longest_streak']['length']} "
+          f"[source: {source_label}]")
