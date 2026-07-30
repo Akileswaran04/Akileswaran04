@@ -41,32 +41,30 @@
 
 <img src="./glass-projects.svg" width="860" alt="Projects" />
 
-<br><br>
-
-<pre>
+<br><br><pre>
 <font color="#22D3EE">│ <font color="#38BDF8">akileswaran04@github</font>:<font color="#22D3EE">~</font>$ <font color="#e6edf3">github-stats</font></font>
 </pre>
 
 <br>
 
-<img src="https://github-stats-extended.vercel.app/api?username=Akileswaran04&show_icons=true&bg_color=0f172a&title_color=22d3ee&text_color=e6edf3&icon_color=22d3ee&border_color=22D3EE&hide_border=true" width="860" />
+<img src="./github-stats.svg" width="860" alt="GitHub stats" />
 
 <br><br>
 
-<img src="https://streak-stats.demolab.com/?user=Akileswaran04&background=0f172a&ring=22d3ee&fire=22d3ee&currStreakLabel=e6edf3&sideLabels=e6edf3&currStreakNum=22d3ee&sideNums=22d3ee&dates=7d8590&border=22D3EE" width="860" />
+<img src="./streak-stats.svg" width="860" alt="Streak stats" />
 
-<br>
+<br><br>
 
 <img src="./glass-stack.svg" width="860" alt="Stack" />
 
-<br>
+<br><br>
 
 <img src="./glass-building.svg" width="860" alt="Building now" />
 
-<br>
+<br><br>
 
 <img src="./glass-tagline.svg" width="860" alt="Tagline" />
 
-<br>
+<br><br>
 
 </div>
