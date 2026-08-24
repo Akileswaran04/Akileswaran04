@@ -28,7 +28,6 @@
 <text x="22" y="74.4" fill="#38BDF8" font-size="9">Mon</text>
 <text x="22" y="104.4" fill="#38BDF8" font-size="9">Wed</text>
 <text x="22" y="134.4" fill="#38BDF8" font-size="9">Fri</text>
-<rect class="c" x="52" y="65" width="12" height="12" rx="2.5" fill="#0d1117" style="animation-delay:0.045s"><title>2025-07-14: 0 contributions</title></rect>
 <rect class="c" x="52" y="80" width="12" height="12" rx="2.5" fill="#0d1117" style="animation-delay:0.090s"><title>2025-07-15: 0 contributions</title></rect>
 <rect class="c" x="52" y="95" width="12" height="12" rx="2.5" fill="#0d1117" style="animation-delay:0.135s"><title>2025-07-16: 0 contributions</title></rect>
 <rect class="c" x="52" y="110" width="12" height="12" rx="2.5" fill="#0d1117" style="animation-delay:0.180s"><title>2025-07-17: 0 contributions</title></rect>
@@ -434,6 +433,7 @@
 <rect class="c" x="907" y="125" width="12" height="12" rx="2.5" fill="#085a50" style="animation-delay:1.251s"><title>2026-08-21: 1 contributions</title></rect>
 <rect class="c" x="907" y="140" width="12" height="12" rx="2.5" fill="#085a50" style="animation-delay:1.296s"><title>2026-08-22: 2 contributions</title></rect>
 <rect class="c" x="922" y="50" width="12" height="12" rx="2.5" fill="#0d1117" style="animation-delay:1.044s"><title>2026-08-23: 0 contributions</title></rect>
+<rect class="c" x="922" y="65" width="12" height="12" rx="2.5" fill="#0d1117" style="animation-delay:1.089s"><title>2026-08-24: 0 contributions</title></rect>
 <line x1="52" y1="299.0" x2="937" y2="299.0" stroke="#22D3EE" stroke-width="1" stroke-dasharray="4,4" stroke-opacity="0.25"/>
 <circle r="2.2" fill="#e6edf3" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.15;0.6;1" dur="0.15s" begin="2.107s" fill="freeze"/><animateMotion path="M117.4,303.0 L117.8,131.0" dur="0.15s" begin="2.107s" fill="freeze"/></circle>
 <circle cx="118.0" cy="131.0" r="2" fill="none" stroke="#22D3EE" stroke-width="2.5" filter="url(#glow)" opacity="0"><animate attributeName="r" values="2;11;14" keyTimes="0;0.3;1" dur="1.0s" begin="2.107s" fill="freeze"/><animate attributeName="opacity" values="0;1.0;0" keyTimes="0;0.25;1" dur="1.0s" begin="2.107s" fill="freeze"/></circle>
@@ -629,8 +629,8 @@
 <text x="885" y="170.6" fill="#38BDF8" font-size="10">More</text>
 <line x1="0" y1="187" x2="959" y2="187" stroke="#22D3EE" stroke-opacity="0.25"/>
 <text x="22" y="211" font-size="13" fill="#22D3EE"><tspan font-weight="700">210</tspan><tspan fill="#38BDF8"> total contributions</tspan></text>
-<text x="937" y="211" font-size="12" fill="#38BDF8" text-anchor="end">2020-01-01 → 2026-08-23</text>
-<text x="22" y="235" font-size="13" fill="#38BDF8">current streak <tspan fill="#22D3EE" font-weight="700">2 days</tspan><tspan fill="#38BDF8">   ·   longest </tspan><tspan fill="#22D3EE" font-weight="700">9 days</tspan></text>
+<text x="937" y="211" font-size="12" fill="#38BDF8" text-anchor="end">2020-01-01 → 2026-08-24</text>
+<text x="22" y="235" font-size="13" fill="#38BDF8">current streak <tspan fill="#22D3EE" font-weight="700">0 days</tspan><tspan fill="#38BDF8">   ·   longest </tspan><tspan fill="#22D3EE" font-weight="700">9 days</tspan></text>
 <text x="937" y="235" font-size="12" fill="#38BDF8" text-anchor="end">best day <tspan fill="#22D3EE" font-weight="700">46</tspan> on 2026-07-23</text>
 <text x="479.5" y="325" font-size="10" fill="#38BDF8" text-anchor="middle" opacity="0.5">[ drone sweep — firing 6 rounds max per cell ]</text>
 <rect x="937" y="315" width="7" height="13" fill="#22D3EE" opacity="0.4"/>
