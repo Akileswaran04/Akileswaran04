@@ -35,7 +35,7 @@ transform="rotate(-90 90 115)"/>
 <text x="208" y="102" font-size="36" font-weight="700"
  fill="#e6edf3">210</text>
 <text x="208" y="122" font-size="11" fill="#38BDF8">
-2020-01-01 → 2026-08-24</text>
+2020-01-01 → 2026-08-25</text>
 <text x="428" y="72" font-size="11" fill="#7d8590"
  font-weight="600">LONGEST STREAK</text>
 <text x="428" y="102" font-size="30" font-weight="700"
@@ -48,5 +48,5 @@ transform="rotate(-90 90 115)"/>
 <text x="428" y="192" font-size="11" fill="#38BDF8">
 on 2026-07-23</text>
 <text x="830" y="210" text-anchor="end" font-size="9"
- fill="#7d8590" opacity="0.5">generated 2026-08-24 18:39 UTC</text>
+ fill="#7d8590" opacity="0.5">generated 2026-08-25 01:15 UTC</text>
 </svg>
