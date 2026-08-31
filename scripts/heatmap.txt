@@ -1,0 +1,19 @@
+Here's how to fix it:
+
+1. Generate a new Personal Access Token
+1. Go to https://github.com/settings/tokens
+2. Click "Generate new token (classic)"
+3. Give it a name like  profile-readme-bot 
+4. Set an expiry (90 days max for classic tokens — you'll need to regenerate when it expires)
+5. Under Scopes, check  read:user  (that's all the script needs)
+6. Click Generate token and copy it immediately
+
+2. Update the secret in your repo
+1. Go to https://github.com/Akileswaran04/Akileswaran04/settings/secrets/actions
+2. Find the  GH_PAT  secret
+3. Click Update and paste your new token
+4. Save
+
+3. Re-run the workflow
+
+Go to Actions → "Refresh Contribution Heatmap" → click "Run workflow" to test it.
