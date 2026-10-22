@@ -2,14 +2,14 @@
 
 <div align="center">
 
-<img src="assets/banner.svg" width="860" alt="Akileswaran A: full-stack developer · applied ML. Open to SWE / ML internships. Now building ODYSSEY — multi-agent AI for fintech." />
+<img src="assets/banner.svg" width="860" alt="Akileswaran A: full-stack developer · applied ML. Open to SWE / ML internships. Now building CSAU Web — 3D site for the CS club." />
 
 **Akileswaran A** — full-stack developer · applied ML · B.Tech IT · CEG, Anna University · Chennai, Tamil Nadu<br>
-Open to **SWE / ML internships** · now building ODYSSEY — multi-agent AI for fintech · exploring agentic AI (SubShield, SyllabusMind)
+Open to **SWE / ML internships** · now building CSAU Web — 3D site for the CS club · exploring agentic AI (SubShield, SyllabusMind)
 
 <img src="assets/hero.svg" width="860" alt="ASCII portrait of Akileswaran A beside a terminal: full-stack developer · applied ML; B.Tech IT · CEG, Anna University; Chennai, Tamil Nadu; open to SWE / ML internships." />
 
-<img src="assets/projects.svg" width="860" alt="Projects: SMBConnect, AI commerce platform for MSMEs: buyer, seller, delivery, admin (shipped); SENTRI, ML dashboard for Bengaluru Traffic Police (live); ODYSSEY, Multi-agent AI assistant for fintech (SBI YONO) (building); SubShield, AI agent that reads invoices and cancels subscriptions (shipped); SyllabusMind, AI study agent that finds weak topics (Agent-A-Thon) (shipped); Riddle Rush, Multiplayer 3D trivia board game, online rooms (live); CSAU Web, 3D space-themed site for Anna University's CS club (building); Study Portal, Upload, search and share study PDFs, E2E tested (shipped); Staff Portal, Student feedback for teachers; scrypt-hashed login codes (shipped); AlumniDB, Alumni records, event invites and thank-you letters (shipped); Gridlock, Traffic demand forecasting (hackathon) (archived); DayLog, Real-time attendance tracking (shipped)." />
+<img src="assets/projects.svg" width="860" alt="Projects: SMBConnect, AI commerce platform for MSMEs: buyer, seller, delivery, admin (shipped); SENTRI, ML dashboard for Bengaluru Traffic Police (live); SubShield, AI agent that reads invoices and cancels subscriptions (shipped); SyllabusMind, AI study agent that finds weak topics (Agent-A-Thon) (shipped); Riddle Rush, Multiplayer 3D trivia board game, online rooms (live); CSAU Web, 3D space-themed site for Anna University's CS club (building); Study Portal, Upload, search and share study PDFs, E2E tested (shipped); Staff Portal, Student feedback for teachers; scrypt-hashed login codes (shipped); AlumniDB, Alumni records, event invites and thank-you letters (shipped); Gridlock, Traffic demand forecasting (hackathon) (archived); DayLog, Real-time attendance tracking (shipped)." />
 
 <img src="assets/flagship.svg" width="860" alt="SMBConnect architecture: 4 React apps → FastAPI → Groq LLM → data layer. 21.5k lines of code; 9.7k lines written by me; 25 backend modules; 4 apps, one backend" />
 
@@ -30,7 +30,6 @@ Open to **SWE / ML internships** · now building ODYSSEY — multi-agent AI for 
 | --- | --- | --- | --- |
 | SMBConnect | AI commerce platform for MSMEs: buyer, seller, delivery, admin | FastAPI, React, PostgreSQL, MongoDB, Redis, Groq | shipped |
 | SENTRI | ML dashboard for Bengaluru Traffic Police | XGBoost, FastAPI, Streamlit | live |
-| ODYSSEY | Multi-agent AI assistant for fintech (SBI YONO) | LLM, EBM, LangChain | building |
 | SubShield | AI agent that reads invoices and cancels subscriptions | Python, Gemini, Playwright, browser-use | shipped |
 | SyllabusMind | AI study agent that finds weak topics (Agent-A-Thon) | React, TypeScript, LLM | shipped |
 | Riddle Rush | Multiplayer 3D trivia board game, online rooms | React, Three.js, Supabase, Socket.io | live |

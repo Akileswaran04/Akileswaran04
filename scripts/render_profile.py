@@ -356,15 +356,90 @@ def hero(p, theme):
     return svg(theme, h, label, body, css), label
 
 
-# ── 3. projects: carousel with a build pipeline per project ──────────────
+# ── 3. projects: carousel with an app-window preview + build pipeline ────
 
 STAGES = ("plan", "build", "test", "ship")
 STATUS = {"live": ("acc2", "● live"), "building": ("acc", "◐ building"),
           "shipped": ("acc3", "✓ shipped"), "archived": ("dim", "▣ archived")}
 
 
+def mock(kind, name, x, y, w, h, d0):
+    """A tiny animated app window hinting at what the project looks like.
+    Pieces fade/grow in each time the slide comes round (classes st / gw)."""
+    rnd = random.Random(name)
+    t = lambda k: f'style="animation-delay:{d0 + .35 + k * .12:.2f}s"'
+    o = [f'<rect class="f-bg2 s-line" x="{x}" y="{y}" width="{w}" height="{h}" rx="10"/>',
+         *[f'<circle class="f-{c}" cx="{x + 12 + i * 10}" cy="{y + 12}" r="3"/>' for i, c in enumerate(("acc", "acc2", "acc3"))],
+         f'<rect class="f-bg" x="{x + 44}" y="{y + 6}" width="{w - 54}" height="12" rx="6"/>',
+         f'<text class="f-dim" x="{x + 52}" y="{y + 15}" font-size="8">{esc(name.lower().replace(" ", "-"))}</text>']
+    cx, cy, cw, ch = x + 10, y + 26, w - 20, h - 34
+    if kind == "dashboard":
+        o.append(f'<rect class="f-bg" x="{cx}" y="{cy}" width="26" height="{ch}" rx="4"/>')
+        tw = (cw - 34 - 12) / 3
+        for k in range(3):
+            o.append(f'<g class="st" {t(k)}><rect class="f-bg" x="{cx + 34 + k * (tw + 6):.0f}" y="{cy}" width="{tw:.0f}" '
+                     f'height="26" rx="4"/><rect class="f-acc{["", "2", "3"][k]}" x="{cx + 40 + k * (tw + 6):.0f}" '
+                     f'y="{cy + 15}" width="{tw * .5:.0f}" height="4" rx="2"/></g>')
+        bw = (cw - 34) / 8
+        for k in range(7):
+            bh = rnd.uniform(.3, 1) * (ch - 40)
+            o.append(f'<rect class="f-{"acc" if k % 2 else "acc2"} gw" x="{cx + 38 + k * bw:.0f}" y="{cy + ch - bh:.0f}" '
+                     f'width="{bw * .6:.0f}" height="{bh:.0f}" rx="2" {t(k + 3)}/>')
+    elif kind == "chat":
+        for k in range(4):
+            right = k % 2 == 1
+            bw = rnd.uniform(.45, .7) * cw
+            bx = cx + cw - bw if right else cx
+            o.append(f'<rect class="{"f-acc" if right else "f-bg s-line"} st" x="{bx:.0f}" y="{cy + k * 26}" '
+                     f'width="{bw:.0f}" height="18" rx="9" {t(k * 2)}/>')
+        o.append(f'<rect class="f-bg s-line" x="{cx}" y="{cy + ch - 16}" width="{cw}" height="16" rx="8"/>'
+                 f'<circle class="f-acc" cx="{cx + cw - 9}" cy="{cy + ch - 8}" r="5"/>')
+    elif kind == "agent":
+        o.append(f'<rect class="f-bg" x="{cx}" y="{cy}" width="{cw}" height="{ch}" rx="6"/>')
+        for k in range(6):
+            lw = rnd.uniform(.35, .85) * (cw - 30)
+            o.append(f'<g class="st" {t(k * 2)}><text class="f-acc2" x="{cx + 8}" y="{cy + 16 + k * 17}" font-size="10">›</text>'
+                     f'<rect class="f-{"dim" if k < 5 else "acc3"}" x="{cx + 20}" y="{cy + 10 + k * 17}" width="{lw:.0f}" '
+                     f'height="5" rx="2.5" opacity="{.6 if k < 5 else 1}"/></g>')
+    elif kind == "graph":
+        pts = [(.5, .15), (.2, .45), (.5, .5), (.8, .45), (.3, .85), (.7, .85)]
+        pts = [(cx + px * cw, cy + py * ch) for px, py in pts]
+        for a_, b_ in ((0, 1), (0, 2), (0, 3), (1, 4), (2, 4), (2, 5), (3, 5)):
+            o.append(f'<line class="s-line" x1="{pts[a_][0]:.0f}" y1="{pts[a_][1]:.0f}" x2="{pts[b_][0]:.0f}" '
+                     f'y2="{pts[b_][1]:.0f}" stroke-width="1.5"/>')
+        for k, (px, py) in enumerate(pts):
+            o.append(f'<circle class="f-{("acc", "acc2", "acc3")[k % 3]} st" cx="{px:.0f}" cy="{py:.0f}" r="{9 if k == 2 else 7}" {t(k)}/>')
+        o.append(f'<circle class="s-acc pl" cx="{pts[2][0]:.0f}" cy="{pts[2][1]:.0f}" r="9" fill="none" stroke-width="2"/>')
+    elif kind == "game":
+        cols, rows = 6, 3
+        s = min((cw - 40) / cols, (ch - 10) / rows)
+        path = []
+        for r in range(rows):
+            for c in (range(cols) if r % 2 == 0 else range(cols - 1, -1, -1)):
+                px, py = cx + c * s, cy + ch - (r + 1) * s
+                o.append(f'<rect class="{"f-acc3" if (r * cols + c) % 4 == 1 else "f-bg"} s-line" x="{px:.0f}" '
+                         f'y="{py:.0f}" width="{s - 3:.0f}" height="{s - 3:.0f}" rx="3" '
+                         f'opacity="{.55 if (r * cols + c) % 4 == 1 else 1}"/>')
+                path.append(f"{px + s / 2 - 1.5:.0f},{py + s / 2 - 1.5:.0f}")
+        o.append(f'<circle class="f-acc" r="5" filter="url(#glow)"><animateMotion path="M{" L".join(path)}" '
+                 f'dur="6s" repeatCount="indefinite" calcMode="linear"/></circle>')
+        dx, dy = cx + cw - 26, cy + 4
+        o.append(f'<rect class="f-ink" x="{dx}" y="{dy}" width="24" height="24" rx="5"/>'
+                 + "".join(f'<circle class="f-bg" cx="{dx + px}" cy="{dy + py}" r="2.2"/>' for px, py in ((6, 6), (12, 12), (18, 18))))
+    else:  # web
+        o.append(f'<rect class="f-bg" x="{cx}" y="{cy}" width="{cw}" height="10" rx="3"/>'
+                 f'<rect class="f-acc st" x="{cx}" y="{cy + 20}" width="{cw * .6:.0f}" height="9" rx="3" {t(0)}/>'
+                 f'<rect class="f-dim st" x="{cx}" y="{cy + 34}" width="{cw * .45:.0f}" height="5" rx="2" opacity=".6" {t(1)}/>'
+                 f'<rect class="st" x="{cx}" y="{cy + 46}" width="54" height="14" rx="7" fill="url(#pg)" {t(2)}/>')
+        cw3 = (cw - 12) / 3
+        for k in range(3):
+            o.append(f'<rect class="f-bg s-line st" x="{cx + k * (cw3 + 6):.0f}" y="{cy + 70}" width="{cw3:.0f}" '
+                     f'height="{ch - 70}" rx="5" {t(3 + k)}/>')
+    return "".join(o)
+
+
 def projects(p, theme):
-    h, per = 300, 4.0
+    h, per = 320, 4.0
     items = p["projects"]
     n = len(items)
     cyc = per * n
@@ -374,24 +449,42 @@ def projects(p, theme):
            f"{b}%{{opacity:1;transform:none}}{c}%{{opacity:0;transform:translateX(-20px)}}100%{{opacity:0}}}}"
            f".st{{animation:st {cyc}s infinite backwards}}"
            f"@keyframes st{{0%{{opacity:0}}{a}%{{opacity:1}}{b}%{{opacity:1}}{c}%{{opacity:0}}100%{{opacity:0}}}}"
+           f".gw{{transform-box:fill-box;transform-origin:bottom;animation:gw {cyc}s cubic-bezier(.2,.8,.2,1) infinite backwards}}"
+           f"@keyframes gw{{0%{{transform:scaleY(0)}}{a + 1.5}%{{transform:none}}100%{{transform:none}}}}"
            ".pl{transform-box:fill-box;transform-origin:center;animation:pl 1.4s ease-out infinite}"
            "@keyframes pl{from{opacity:.9;transform:scale(1)}to{opacity:0;transform:scale(2.6)}}"
+           f".tm{{transform-box:fill-box;transform-origin:left;animation:tm {per}s linear infinite}}"
+           "@keyframes tm{from{transform:scaleX(0)}}"
            "@media (prefers-reduced-motion:reduce){.sl:not(.s0),.dt:not(.d0){display:none}}")
+    mx, my, mw, mh = 600, 74, 220, 172
     slides = []
     for i, pr in enumerate(items):
         d0 = i * per
         col, stat = STATUS.get(pr["status"], ("dim", pr["status"]))
-        g = [f'<text class="f-line" x="40" y="150" font-size="78" font-weight="800">{i + 1:02d}</text>',
-             f'<text class="f-ink" x="190" y="96" font-size="30" font-weight="800">{esc(pr["name"])}</text>',
-             f'<text class="f-{col}" x="{W - 40}" y="94" font-size="13.5" text-anchor="end">{esc(stat)}</text>',
-             f'<text class="f-dim" x="190" y="124" font-size="15">{esc(pr["tagline"])}</text>']
-        cx = 190
+        tag = pr.get("type", "")
+        tw = len(tag) * 11 * CW + 18
+        g = [f'<text class="f-line" x="40" y="160" font-size="78" font-weight="800">{i + 1:02d}</text>',
+             f'<rect class="s-acc2" x="190" y="74" width="{tw:.0f}" height="20" rx="10" fill="none"/>'
+             f'<text class="f-acc2" x="{190 + tw / 2:.0f}" y="88" font-size="11" text-anchor="middle">{esc(tag)}</text>',
+             f'<text class="f-{col}" x="{190 + tw + 12:.0f}" y="88" font-size="12">{esc(stat)}</text>',
+             f'<text class="f-ink" x="190" y="124" font-size="28" font-weight="800">{esc(pr["name"])}</text>']
+        line, y = "", 146
+        for word in pr["tagline"].split():  # wrap to the space left of the preview window
+            if len(f"{line} {word}".strip()) > 44:
+                g.append(f'<text class="f-dim" x="190" y="{y}" font-size="13">{esc(line)}</text>')
+                line, y = word, y + 18
+            else:
+                line = f"{line} {word}".strip()
+        g.append(f'<text class="f-dim" x="190" y="{y}" font-size="13">{esc(line)}</text>')
+        cx, cy_ = 190, y + 14
         for s in pr["stack"]:
-            w = len(s) * 12 * CW + 18
-            g.append(f'<rect class="f-bg2 s-line" x="{cx}" y="140" width="{w:.0f}" height="22" rx="11"/>'
-                     f'<text class="f-acc3" x="{cx + w / 2:.0f}" y="155" font-size="12" text-anchor="middle">{esc(s)}</text>')
-            cx += w + 8
-        sx, gap, sy = 200, 160, 212
+            w = len(s) * 11 * CW + 16
+            if cx + w > mx - 12:
+                break
+            g.append(f'<rect class="f-bg2 s-line" x="{cx:.0f}" y="{cy_}" width="{w:.0f}" height="20" rx="10"/>'
+                     f'<text class="f-acc3" x="{cx + w / 2:.0f}" y="{cy_ + 14}" font-size="11" text-anchor="middle">{esc(s)}</text>')
+            cx += w + 6
+        sx, gap, sy = 200, 115, 248
         for k, name in enumerate(STAGES):
             x = sx + k * gap
             done, cur = k < pr["stage"], k == pr["stage"]
@@ -406,15 +499,20 @@ def projects(p, theme):
             elif cur:
                 g.append(f'<circle class="s-acc pl" cx="{x}" cy="{sy}" r="8" fill="none" stroke-width="2" filter="url(#glow)"/>'
                          f'<circle class="f-acc" cx="{x}" cy="{sy}" r="5"/>')
-            g.append(f'<text class="f-{"ink" if done or cur else "dim"}" x="{x}" y="{sy + 30}" font-size="12" '
+            g.append(f'<text class="f-{"ink" if done or cur else "dim"}" x="{x}" y="{sy + 26}" font-size="11.5" '
                      f'text-anchor="middle">{name}</text>')
+        g.append(mock(pr.get("ui", "web"), pr["name"], mx, my, mw, mh, d0))
+        g.append(f'<text class="f-dim" x="{W - 40}" y="{h - 18}" font-size="11.5" text-anchor="end">'
+                 f'{i + 1:02d} / {n:02d}</text>')
         slides.append(f'<g class="sl s{i}" style="animation-delay:{d0}s">{"".join(g)}</g>')
     dots = []
     for i in range(n):
         x = W / 2 + (i - (n - 1) / 2) * 18
         dots.append(f'<circle class="f-line" cx="{x}" cy="{h - 22}" r="4"/>'
                     f'<circle class="f-acc st dt d{i}" cx="{x}" cy="{h - 22}" r="4" style="animation-delay:{i * per}s"/>')
-    body = frame(h, "My Projects", "what I've shipped and what's in the pipeline") + "".join(slides) + "".join(dots)
+    timer = (f'<rect class="f-line" x="40" y="{h - 6}" width="{W - 80}" height="2" rx="1"/>'
+             f'<rect class="tm" x="40" y="{h - 6}" width="{W - 80}" height="2" rx="1" fill="url(#pg)"/>')
+    body = frame(h, "My Projects", "what I've shipped and what's in the pipeline") + "".join(slides) + "".join(dots) + timer
     label = "Projects: " + "; ".join(f'{x["name"]}, {x["tagline"]} ({x["status"]})' for x in items) + "."
     return svg(theme, h, label, body, css), label
 

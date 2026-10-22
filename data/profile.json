@@ -1,64 +1,334 @@
 {
-  "theme": ["riso", "sumi"],
+  "theme": [
+    "riso",
+    "sumi"
+  ],
   "name": "Akileswaran A",
   "handle": "akileswaran04",
   "headline": "full-stack developer · applied ML",
-  "roles": ["full-stack developer", "applied-ML builder", "hackathon builder"],
+  "roles": [
+    "full-stack developer",
+    "applied-ML builder",
+    "hackathon builder"
+  ],
   "education": "B.Tech IT · CEG, Anna University",
   "location": "Chennai, Tamil Nadu",
   "open_to": "SWE / ML internships",
   "now": [
-    "building ODYSSEY — multi-agent AI for fintech",
+    "building CSAU Web — 3D site for the CS club",
     "exploring agentic AI (SubShield, SyllabusMind)"
   ],
   "stack": [
-    {"group": "languages", "items": ["C++", "Python", "C", "TypeScript", "JavaScript", "Java"]},
-    {"group": "ml / ai", "items": ["XGBoost", "LightGBM", "EBM", "DBSCAN", "LangChain", "Gemini", "Groq"]},
-    {"group": "web", "items": ["React", "Next.js", "Node/Express", "FastAPI", "Spring Boot", "Streamlit", "Three.js"]},
-    {"group": "data & tools", "items": ["PostgreSQL", "MongoDB", "Redis", "Firebase", "Supabase", "Docker", "Playwright", "Git"]}
+    {
+      "group": "languages",
+      "items": [
+        "C++",
+        "Python",
+        "C",
+        "TypeScript",
+        "JavaScript",
+        "Java"
+      ]
+    },
+    {
+      "group": "ml / ai",
+      "items": [
+        "XGBoost",
+        "LightGBM",
+        "EBM",
+        "DBSCAN",
+        "LangChain",
+        "Gemini",
+        "Groq"
+      ]
+    },
+    {
+      "group": "web",
+      "items": [
+        "React",
+        "Next.js",
+        "Node/Express",
+        "FastAPI",
+        "Spring Boot",
+        "Streamlit",
+        "Three.js"
+      ]
+    },
+    {
+      "group": "data & tools",
+      "items": [
+        "PostgreSQL",
+        "MongoDB",
+        "Redis",
+        "Firebase",
+        "Supabase",
+        "Docker",
+        "Playwright",
+        "Git"
+      ]
+    }
   ],
   "projects": [
-    {"name": "SMBConnect", "tagline": "AI commerce platform for MSMEs: buyer, seller, delivery, admin", "stack": ["FastAPI", "React", "PostgreSQL", "MongoDB", "Redis", "Groq"], "status": "shipped", "stage": 4},
-    {"name": "SENTRI", "tagline": "ML dashboard for Bengaluru Traffic Police", "stack": ["XGBoost", "FastAPI", "Streamlit"], "status": "live", "stage": 4},
-    {"name": "ODYSSEY", "tagline": "Multi-agent AI assistant for fintech (SBI YONO)", "stack": ["LLM", "EBM", "LangChain"], "status": "building", "stage": 1},
-    {"name": "SubShield", "tagline": "AI agent that reads invoices and cancels subscriptions", "stack": ["Python", "Gemini", "Playwright", "browser-use"], "status": "shipped", "stage": 4},
-    {"name": "SyllabusMind", "tagline": "AI study agent that finds weak topics (Agent-A-Thon)", "stack": ["React", "TypeScript", "LLM"], "status": "shipped", "stage": 4},
-    {"name": "Riddle Rush", "tagline": "Multiplayer 3D trivia board game, online rooms", "stack": ["React", "Three.js", "Supabase", "Socket.io"], "status": "live", "stage": 4},
-    {"name": "CSAU Web", "tagline": "3D space-themed site for Anna University's CS club", "stack": ["Next.js", "R3F", "GSAP"], "status": "building", "stage": 2},
-    {"name": "Study Portal", "tagline": "Upload, search and share study PDFs, E2E tested", "stack": ["React", "Spring Boot", "PostgreSQL"], "status": "shipped", "stage": 4},
-    {"name": "Staff Portal", "tagline": "Student feedback for teachers; scrypt-hashed login codes", "stack": ["Next.js", "TypeScript", "GSAP"], "status": "shipped", "stage": 4},
-    {"name": "AlumniDB", "tagline": "Alumni records, event invites and thank-you letters", "stack": ["React", "TypeScript", "Supabase"], "status": "shipped", "stage": 4},
-    {"name": "Gridlock", "tagline": "Traffic demand forecasting (hackathon)", "stack": ["LightGBM", "XGBoost"], "status": "archived", "stage": 4},
-    {"name": "DayLog", "tagline": "Real-time attendance tracking", "stack": ["React", "Node.js", "Firebase"], "status": "shipped", "stage": 4}
+    {
+      "name": "SMBConnect",
+      "tagline": "AI commerce platform for MSMEs: buyer, seller, delivery, admin",
+      "stack": [
+        "FastAPI",
+        "React",
+        "PostgreSQL",
+        "MongoDB",
+        "Redis",
+        "Groq"
+      ],
+      "status": "shipped",
+      "stage": 4,
+      "type": "full-stack · team",
+      "ui": "chat"
+    },
+    {
+      "name": "SENTRI",
+      "tagline": "ML dashboard for Bengaluru Traffic Police",
+      "stack": [
+        "XGBoost",
+        "FastAPI",
+        "Streamlit"
+      ],
+      "status": "live",
+      "stage": 4,
+      "type": "ML dashboard",
+      "ui": "dashboard"
+    },
+    {
+      "name": "SubShield",
+      "tagline": "AI agent that reads invoices and cancels subscriptions",
+      "stack": [
+        "Python",
+        "Gemini",
+        "Playwright",
+        "browser-use"
+      ],
+      "status": "shipped",
+      "stage": 4,
+      "type": "AI agent",
+      "ui": "agent"
+    },
+    {
+      "name": "SyllabusMind",
+      "tagline": "AI study agent that finds weak topics (Agent-A-Thon)",
+      "stack": [
+        "React",
+        "TypeScript",
+        "LLM"
+      ],
+      "status": "shipped",
+      "stage": 4,
+      "type": "AI tutor · hackathon",
+      "ui": "graph"
+    },
+    {
+      "name": "Riddle Rush",
+      "tagline": "Multiplayer 3D trivia board game, online rooms",
+      "stack": [
+        "React",
+        "Three.js",
+        "Supabase",
+        "Socket.io"
+      ],
+      "status": "live",
+      "stage": 4,
+      "type": "multiplayer game",
+      "ui": "game"
+    },
+    {
+      "name": "CSAU Web",
+      "tagline": "3D space-themed site for Anna University's CS club",
+      "stack": [
+        "Next.js",
+        "R3F",
+        "GSAP"
+      ],
+      "status": "building",
+      "stage": 2,
+      "type": "3D website",
+      "ui": "web"
+    },
+    {
+      "name": "Study Portal",
+      "tagline": "Upload, search and share study PDFs, E2E tested",
+      "stack": [
+        "React",
+        "Spring Boot",
+        "PostgreSQL"
+      ],
+      "status": "shipped",
+      "stage": 4,
+      "type": "full-stack",
+      "ui": "web"
+    },
+    {
+      "name": "Staff Portal",
+      "tagline": "Student feedback for teachers; scrypt-hashed login codes",
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "GSAP"
+      ],
+      "status": "shipped",
+      "stage": 4,
+      "type": "web app",
+      "ui": "chat"
+    },
+    {
+      "name": "AlumniDB",
+      "tagline": "Alumni records, event invites and thank-you letters",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Supabase"
+      ],
+      "status": "shipped",
+      "stage": 4,
+      "type": "database app",
+      "ui": "dashboard"
+    },
+    {
+      "name": "Gridlock",
+      "tagline": "Traffic demand forecasting (hackathon)",
+      "stack": [
+        "LightGBM",
+        "XGBoost"
+      ],
+      "status": "archived",
+      "stage": 4,
+      "type": "ML · hackathon",
+      "ui": "dashboard"
+    },
+    {
+      "name": "DayLog",
+      "tagline": "Real-time attendance tracking",
+      "stack": [
+        "React",
+        "Node.js",
+        "Firebase"
+      ],
+      "status": "shipped",
+      "stage": 4,
+      "type": "web app",
+      "ui": "web"
+    }
   ],
   "flagship": {
     "project": "SMBConnect",
     "flow": [
-      {"label": "4 React apps", "sub": "buyer · seller · admin"},
-      {"label": "FastAPI", "sub": "25-module monolith"},
-      {"label": "Groq LLM", "sub": "classify + extract"},
-      {"label": "data layer", "sub": "Postgres · Mongo · Redis"}
+      {
+        "label": "4 React apps",
+        "sub": "buyer · seller · admin"
+      },
+      {
+        "label": "FastAPI",
+        "sub": "25-module monolith"
+      },
+      {
+        "label": "Groq LLM",
+        "sub": "classify + extract"
+      },
+      {
+        "label": "data layer",
+        "sub": "Postgres · Mongo · Redis"
+      }
     ],
     "facts": [
-      {"value": "21.5k", "label": "lines of code"},
-      {"value": "9.7k", "label": "lines written by me"},
-      {"value": "25", "label": "backend modules"},
-      {"value": "4", "label": "apps, one backend"}
+      {
+        "value": "21.5k",
+        "label": "lines of code"
+      },
+      {
+        "value": "9.7k",
+        "label": "lines written by me"
+      },
+      {
+        "value": "25",
+        "label": "backend modules"
+      },
+      {
+        "value": "4",
+        "label": "apps, one backend"
+      }
     ]
   },
   "journey": [
-    {"date": "2026-10", "lane": "main", "title": "Study Portal", "detail": "React + Spring Boot coursework"},
-    {"date": "2026-09", "lane": "feat", "title": "SMBConnect", "detail": "AI commerce for MSMEs, 9.7k lines mine"},
-    {"date": "2026-09", "lane": "feat", "title": "DIST staff portal", "detail": "hashed-code auth, Next.js"},
-    {"date": "2026-09", "lane": "hack", "title": "SyllabusMind", "detail": "Agent-A-Thon build"},
-    {"date": "2026-09", "lane": "main", "title": "SubShield", "detail": "subscription-cancel agent for IOC"},
-    {"date": "2026-08", "lane": "feat", "title": "TECHNOVA", "detail": "first cut of SMBConnect"},
-    {"date": "2026-08", "lane": "feat", "title": "CSAU Web", "detail": "3D site for the CS club"},
-    {"date": "2026-07", "lane": "main", "title": "profile generators", "detail": "this README"},
-    {"date": "2026-07", "lane": "feat", "title": "Riddle Rush", "detail": "multiplayer 3D trivia, live"},
-    {"date": "2025-11", "lane": "hack", "title": "DreamWalkers", "detail": "TypeScript"},
-    {"date": "2025-10", "lane": "main", "title": "AlumniDB", "detail": "Supabase alumni + events app"},
-    {"date": "2025-06", "lane": "main", "title": "custom-cursor", "detail": "first repo"}
+    {
+      "date": "2026-10",
+      "lane": "main",
+      "title": "Study Portal",
+      "detail": "React + Spring Boot coursework"
+    },
+    {
+      "date": "2026-09",
+      "lane": "feat",
+      "title": "SMBConnect",
+      "detail": "AI commerce for MSMEs, 9.7k lines mine"
+    },
+    {
+      "date": "2026-09",
+      "lane": "feat",
+      "title": "DIST staff portal",
+      "detail": "hashed-code auth, Next.js"
+    },
+    {
+      "date": "2026-09",
+      "lane": "hack",
+      "title": "SyllabusMind",
+      "detail": "Agent-A-Thon build"
+    },
+    {
+      "date": "2026-09",
+      "lane": "main",
+      "title": "SubShield",
+      "detail": "subscription-cancel agent for IOC"
+    },
+    {
+      "date": "2026-08",
+      "lane": "feat",
+      "title": "TECHNOVA",
+      "detail": "first cut of SMBConnect"
+    },
+    {
+      "date": "2026-08",
+      "lane": "feat",
+      "title": "CSAU Web",
+      "detail": "3D site for the CS club"
+    },
+    {
+      "date": "2026-07",
+      "lane": "main",
+      "title": "profile generators",
+      "detail": "this README"
+    },
+    {
+      "date": "2026-07",
+      "lane": "feat",
+      "title": "Riddle Rush",
+      "detail": "multiplayer 3D trivia, live"
+    },
+    {
+      "date": "2025-11",
+      "lane": "hack",
+      "title": "DreamWalkers",
+      "detail": "TypeScript"
+    },
+    {
+      "date": "2025-10",
+      "lane": "main",
+      "title": "AlumniDB",
+      "detail": "Supabase alumni + events app"
+    },
+    {
+      "date": "2025-06",
+      "lane": "main",
+      "title": "custom-cursor",
+      "detail": "first repo"
+    }
   ],
   "achievements": []
 }
