@@ -42,16 +42,23 @@ def load(rel):
 def svg(theme, h, label, body, css=""):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" '
             f'viewBox="0 0 {W} {h}" role="img" aria-label="{esc(label)}">'
-            f"<style><![CDATA[{th.css(theme)}{css}]]></style>{body}</svg>")
+            f"<style><![CDATA[{th.css(theme)}{css}]]></style>{FX}{body}</svg>")
 
 
-def frame(h, path):
-    """Panel background, a path-style title and three accent squares."""
-    squares = "".join(f'<rect class="f-{c}" x="{W - 58 + i * 14}" y="13" width="8" height="8" rx="1.5"/>'
-                      for i, c in enumerate(("acc", "acc2", "acc3")))
-    return (f'<rect class="f-bg s-line" x=".5" y=".5" width="{W - 1}" height="{h - 1}" rx="10"/>'
-            f'<text class="f-dim" x="20" y="22" font-size="11.5">{esc(path)}</text>{squares}'
-            f'<line class="s-line" x1="0" y1="34" x2="{W}" y2="34"/>')
+def frame(h, title, sub=""):
+    """Panel card with a centred '✿ About Me ✿' heading (last word glows) and a subtitle."""
+    *head, last = title.split()
+    adv = 20 * CW
+    x0 = W / 2 - len(title) * adv / 2
+    x_last = x0 + (len(title) - len(last)) * adv
+    return (f'<rect class="f-bg s-line" x=".5" y=".5" width="{W - 1}" height="{h - 1}" rx="14"/>'
+            f'<g transform="translate({x0 - 20:.0f},31) scale(.75)" filter="url(#glow)"><use href="#fl"/></g>'
+            f'<g transform="translate({x0 + len(title) * adv + 20:.0f},31) scale(.75)" filter="url(#glow)"><use href="#fl"/></g>'
+            f'<text class="f-ink" x="{x0:.1f}" y="38" font-size="20" font-weight="800" '
+            f'textLength="{len(" ".join(head)) * adv:.1f}">{esc(" ".join(head))}</text>'
+            f'<text class="f-acc" x="{x_last:.1f}" y="38" font-size="20" font-weight="800" '
+            f'textLength="{len(last) * adv:.1f}" filter="url(#glow)">{esc(last)}</text>'
+            f'<text class="f-dim" x="{W / 2}" y="57" font-size="11.5" text-anchor="middle">{esc(sub)}</text>')
 
 
 RISE = "@keyframes rise{from{opacity:0;transform:translateY(10px)}}"
@@ -61,49 +68,112 @@ POP = ".pop{transform-box:fill-box;transform-origin:center;animation:pop .45s cu
       "@keyframes pop{from{opacity:0;transform:scale(.2)}}"
 
 
-# ── 1. banner: glitch name + headline + now ──────────────────────────────
+# ── shared sakura / neon pieces ─────────────────────────────────────────
+
+FX = ('<defs>'
+      '<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/>'
+      '<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+      '<filter id="glow2" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="10" result="b"/>'
+      '<feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+      '<linearGradient id="pg" x1="0" x2="1"><stop offset="0" style="stop-color:var(--acc)"/>'
+      '<stop offset="1" style="stop-color:var(--acc2)"/></linearGradient>'
+      '<path id="pt" d="M0,0 C-5,-3 -5.5,-9 -1.6,-11.5 L0,-9.6 L1.6,-11.5 C5.5,-9 5,-3 0,0Z"/>'
+      '<g id="fl">' + "".join(f'<use href="#pt" class="f-acc3" transform="rotate({k * 72})"/>' for k in range(5)) +
+      '<circle class="f-acc" r="2.6"/></g></defs>')
+
+SAKURA_CSS = (".sway{animation:sway 7s ease-in-out infinite alternate}"
+              "@keyframes sway{from{transform:rotate(-1.5deg)}to{transform:rotate(1.5deg)}}"
+              ".fall{opacity:0;transform-box:fill-box;transform-origin:center;animation:fall linear infinite}"
+              "@keyframes fall{0%{opacity:0;transform:translate(0,0) rotate(0)}10%{opacity:.9}85%{opacity:.8}"
+              "100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(420deg)}}")
+
+
+def branch(x, y, s=1.0, flip=False, t0=0.3):
+    """A blossoming cherry branch; base at (x, y), growing up and right (or left)."""
+    paths = [("M0,0 C40,-10 70,-40 110,-60 S170,-100 200,-120", 3.2), ("M70,-38 C80,-60 95,-75 100,-95", 2.2),
+             ("M120,-64 C140,-58 160,-50 185,-55", 2), ("M150,-85 C155,-100 165,-110 170,-125", 1.6)]
+    blooms = [(60, -30, .8), (85, -70, .7), (110, -60, 1.1), (100, -95, 1), (140, -80, .9), (130, -100, .6),
+              (160, -52, .7), (185, -55, 1), (170, -125, .9), (200, -120, .8)]
+    g = "".join(f'<path class="s-acc" d="{d}" fill="none" stroke-width="{w}" stroke-linecap="round" opacity=".55"/>'
+                for d, w in paths)
+    g += '<g filter="url(#glow)">' + "".join(
+        f'<g transform="translate({bx},{by}) scale({bs})"><use href="#fl" class="pop" '
+        f'style="animation-delay:{t0 + i * .12:.2f}s"/></g>' for i, (bx, by, bs) in enumerate(blooms)) + "</g>"
+    return f'<g transform="translate({x},{y}) scale({-s if flip else s},{s})"><g class="sway">{g}</g></g>'
+
+
+def petals(x0, x1, y0, y1, n, seed):
+    rnd = random.Random(seed)
+    out = []
+    for _ in range(n):
+        x, s, dur = rnd.uniform(x0, x1), rnd.uniform(.5, .9), rnd.uniform(6, 11)
+        out.append(f'<g transform="translate({x:.0f},{y0}) scale({s:.2f})"><use href="#pt" class="f-acc3 fall" '
+                   f'style="--dx:{rnd.uniform(-70, 20) / s:.0f}px;--dy:{(y1 - y0) / s:.0f}px;'
+                   f'animation-duration:{dur:.1f}s;animation-delay:{-rnd.uniform(0, dur):.1f}s"/></g>')
+    return "".join(out)
+
+
+# ── 1. banner: landing-page hero with navbar, typed roles, neon moon ────
+
+def typed_roles(x0, y, fs, roles):
+    """Type, hold, erase each role in turn, forever (SMIL, so it also runs in <img>)."""
+    adv = fs * CW
+    plan, t = [], 0.0
+    for r in roles:
+        ev = [(t + k * .07, k) for k in range(1, len(r) + 1)]
+        end = ev[-1][0] + 2.2
+        ev += [(end + (len(r) - k) * .03, k) for k in range(len(r) - 1, -1, -1)]
+        plan.append(ev)
+        t = ev[-1][0] + .35
+    total = t
+
+    def anim(attr, events, base):
+        times, vals = [0.0], [base]
+        for tt, k in events:
+            times.append(tt / total)
+            vals.append(base + k * adv)
+        times.append(1.0)
+        vals.append(base)
+        return (f'<animate attributeName="{attr}" calcMode="discrete" dur="{total:.2f}s" repeatCount="indefinite" '
+                f'keyTimes="{";".join(f"{x:.4f}" for x in times)}" values="{";".join(f"{v:.1f}" for v in vals)}"/>')
+
+    out = []
+    for i, (r, ev) in enumerate(zip(roles, plan)):
+        out.append(f'<clipPath id="ro{i}"><rect x="{x0}" y="{y - fs}" width="0" height="{fs * 1.5}">'
+                   f'{anim("width", ev, 0)}</rect></clipPath>'
+                   f'<text class="f-acc" clip-path="url(#ro{i})" x="{x0}" y="{y}" font-size="{fs}" font-weight="700" '
+                   f'textLength="{len(r) * adv:.1f}" lengthAdjust="spacing" filter="url(#glow)">{esc(r)}</text>')
+    caret_ev = sorted(e for ev in plan for e in ev)
+    out.append(f'<rect class="f-acc caret" x="{x0}" y="{y - fs + 3}" width="3" height="{fs}">'
+               f'{anim("x", caret_ev, x0)}</rect>')
+    return "".join(out)
+
 
 def banner(p, theme):
-    h = 200
-    perim = 2 * (W + h)
-    name = p["name"].upper()
-    css = (RISE + FADE + BLINK +
-           ".nm{animation:rise .9s cubic-bezier(.2,.8,.2,1) both}"
-           ".fd{animation:fade .8s ease both}"
-           ".gl{opacity:0;animation:gl 7s steps(1) 1.6s infinite}"
-           ".gl2{animation-delay:1.66s}"
-           "@keyframes gl{0%,88%,100%{opacity:0;transform:none}89%{opacity:.9;transform:translate(-5px,2px)}"
-           "91%{opacity:.9;transform:translate(4px,-2px)}93%{opacity:.9;transform:translate(-2px,0)}95%{opacity:0}}"
-           ".jit{animation:jit 7s steps(1) 1.6s infinite}"
-           "@keyframes jit{0%,88%,100%{transform:none}89%{transform:translateX(3px)}91%{transform:translateX(-2px)}}"
-           f".trace{{stroke-dasharray:180 {perim};animation:trace 10s linear infinite}}"
-           f"@keyframes trace{{from{{stroke-dashoffset:0}}to{{stroke-dashoffset:-{perim + 180}}}}}"
-           ".caret{animation:blink 1s steps(1) infinite}")
-    big = 'font-size="56" font-weight="800" letter-spacing="5" text-anchor="middle"'
-    now = p["now"][0]
-    body = (
-        '<defs><pattern id="scan" width="4" height="3" patternUnits="userSpaceOnUse">'
-        '<rect class="f-line" width="4" height="1" opacity=".35"/></pattern></defs>'
-        f'<rect class="f-bg s-line" x=".5" y=".5" width="{W - 1}" height="{h - 1}" rx="10"/>'
-        f'<rect width="{W}" height="{h}" rx="10" fill="url(#scan)"/>'
-        f'<rect class="s-acc trace" x="1" y="1" width="{W - 2}" height="{h - 2}" rx="10" fill="none" stroke-width="2"/>'
-        f'<text class="f-dim" x="22" y="28" font-size="11.5">~/{esc(p["handle"])}</text>'
-        f'<text class="f-dim" x="{W - 22}" y="28" font-size="11.5" text-anchor="end">{esc(p["location"].lower())}</text>'
-        '<g class="nm">'
-        f'<text class="f-acc2 gl" x="{W / 2}" y="100" {big}>{esc(name)}</text>'
-        f'<text class="f-acc3 gl gl2" x="{W / 2}" y="100" {big}>{esc(name)}</text>'
-        f'<text class="f-ink jit" x="{W / 2}" y="100" {big}>{esc(name)}</text></g>'
-        f'<text class="f-acc fd" x="{W / 2}" y="134" font-size="16" text-anchor="middle" '
-        f'style="animation-delay:.5s">{esc(p["headline"])}</text>'
-        f'<text class="fd" x="{W / 2}" y="168" font-size="13.5" text-anchor="middle" style="animation-delay:.9s">'
-        f'<tspan class="f-acc2">●</tspan><tspan class="f-ink"> open to {esc(p["open_to"])}</tspan>'
-        f'<tspan class="f-dim">   ·   </tspan><tspan class="f-acc">▸</tspan>'
-        f'<tspan class="f-ink"> now {esc(now)}</tspan></text>'
-    )
+    h = 350
     names = [theme] if isinstance(theme, str) else theme
-    if len(names) > 1:  # a toggle that flips in sync with the palette morph
-        kw, sw = 64, 64 * len(names)
-        x0 = W / 2 - sw / 2
+    first = p["name"].split()[0]
+    css = (POP + SAKURA_CSS + RISE + BLINK + ".up{animation:rise .8s cubic-bezier(.2,.8,.2,1) both}"
+           ".caret{animation:blink 1s steps(1) infinite}")
+    body = [f'<clipPath id="card"><rect width="{W}" height="{h}" rx="14"/></clipPath>',
+            f'<rect class="f-bg s-line" x=".5" y=".5" width="{W - 1}" height="{h - 1}" rx="14"/>']
+
+    # navbar pill (labels are decoration; the right-hand pill is the theme toggle)
+    nx, nw = 150, 560
+    body.append(f'<rect class="f-bg2 s-line" x="{nx}" y="16" width="{nw}" height="36" rx="18"/>'
+                f'<text x="{nx + 22}" y="39" font-size="16" font-weight="800"><tspan class="f-acc">AK</tspan>'
+                f'<tspan class="f-ink">I</tspan></text>')
+    for i, lab in enumerate(("home", "about", "projects", "skills", "journey")):
+        x = nx + 92 + i * 66
+        body.append(f'<text class="f-{"acc" if i == 0 else "ink"}" x="{x}" y="38" font-size="11.5" '
+                    f'font-weight="700" text-anchor="middle">{lab.upper()}</text>')
+        if i == 0:
+            body.append(f'<rect class="f-acc" x="{x - 17}" y="43" width="34" height="2" rx="1"/>')
+    kw = 62
+    sw = kw * len(names) if len(names) > 1 else 112
+    tx = nx + nw - 6 - sw
+    body.append(f'<rect x="{tx}" y="21" width="{sw}" height="26" rx="13" fill="url(#pg)" filter="url(#glow)"/>')
+    if len(names) > 1:  # knob slides in sync with the palette morph
         n = len(names)
         f = th.FADE / th.cycle_seconds(n)
         times, vals = [], []
@@ -112,16 +182,66 @@ def banner(p, theme):
             vals += [f"{i * kw},0"] * 2
         times.append(1)
         vals.append("0,0")
-        knob = (f'<animateTransform attributeName="transform" type="translate" values="{";".join(vals)}" '
-                f'keyTimes="{";".join(f"{t:.4f}" for t in times)}" dur="{th.cycle_seconds(n)}s" '
-                f'repeatCount="indefinite"/>')
-        body += (f'<text class="f-dim" x="{x0 - 10}" y="28" font-size="13" text-anchor="end">◐</text>'
-                 f'<rect class="f-bg2 s-line" x="{x0}" y="12" width="{sw}" height="22" rx="11"/>'
-                 f'<rect class="f-acc" x="{x0 + 2}" y="14" width="{kw - 4}" height="18" rx="9" opacity=".4">{knob}</rect>'
-                 + "".join(f'<text class="f-ink" x="{x0 + kw * i + kw / 2}" y="27" font-size="11.5" '
-                           f'text-anchor="middle">{esc(nm)}</text>' for i, nm in enumerate(names)))
-    label = f'{p["name"]}: {p["headline"]}. Open to {p["open_to"]}. Now {now}.'
-    return svg(theme, h, label, body, css), label
+        body.append(f'<rect class="f-bg" x="{tx + 3}" y="24" width="{kw - 6}" height="20" rx="10" opacity=".35">'
+                    f'<animateTransform attributeName="transform" type="translate" values="{";".join(vals)}" '
+                    f'keyTimes="{";".join(f"{t:.4f}" for t in times)}" dur="{th.cycle_seconds(n)}s" '
+                    f'repeatCount="indefinite"/></rect>')
+        body += [f'<text class="f-bg" x="{tx + kw * i + kw / 2}" y="38" font-size="11.5" font-weight="800" '
+                 f'text-anchor="middle">{esc(nm)}</text>' for i, nm in enumerate(names)]
+    else:
+        body.append(f'<text class="f-bg" x="{tx + sw / 2}" y="38" font-size="11.5" font-weight="800" '
+                    f'text-anchor="middle">OPEN TO WORK</text>')
+
+    # left column
+    hi = f"Hi, I'm {first}"
+    hi_end = 84 + len(hi) * 34 * CW
+    prefix = "I'm a "
+    body.append(
+        f'<g class="up" style="animation-delay:.1s"><text class="f-dim" x="56" y="110" font-size="12" '
+        f'letter-spacing="2" font-weight="700">{esc(p["name"].upper())}</text></g>'
+        f'<g class="up" style="animation-delay:.25s">'
+        f'<g transform="translate(66,140) scale(.9)" filter="url(#glow)"><use href="#fl"/></g>'
+        f'<text class="f-ink" x="84" y="152" font-size="34" font-weight="800" '
+        f'textLength="{len(hi) * 34 * CW:.1f}">{esc(hi)}</text>'
+        f'<g transform="translate({hi_end + 16:.0f},140) scale(.9)" filter="url(#glow)"><use href="#fl"/></g></g>'
+        f'<text class="f-acc2" x="56" y="194" font-size="24" font-weight="700">{prefix}</text>'
+        + typed_roles(56 + len(prefix) * 24 * CW, 194, 24, p["roles"]) +
+        f'<g class="up" style="animation-delay:.5s">'
+        f'<text class="f-dim" x="56" y="230" font-size="13">{esc(p["education"])} · {esc(p["location"])}</text>'
+        f'<text class="f-dim" x="56" y="250" font-size="13">now {esc(p["now"][0])}</text></g>')
+    btn = f"● open to {p['open_to']}"
+    bw = len(btn) * 13 * CW + 40
+    body.append(f'<g class="up" style="animation-delay:.7s">'
+                f'<rect x="56" y="266" width="{bw:.0f}" height="34" rx="17" fill="url(#pg)" filter="url(#glow)"/>'
+                f'<text class="f-bg" x="{56 + bw / 2:.0f}" y="288" font-size="13" font-weight="800" '
+                f'text-anchor="middle">{esc(btn)}</text></g>')
+
+    # right: neon moon + blossom branch + falling petals (instead of a portrait)
+    body.append(f'<g class="up" style="animation-delay:.2s">'
+                f'<circle class="f-acc" cx="700" cy="168" r="96" opacity=".08"/>'
+                f'<circle class="s-acc" cx="700" cy="168" r="96" fill="none" stroke-width="2" filter="url(#glow2)"/>'
+                f'<circle class="s-acc2" cx="700" cy="168" r="78" fill="none" stroke-width="1" opacity=".4" '
+                f'stroke-dasharray="2 6"/></g>'
+                + branch(560, 268, 1.25) + petals(560, 840, 60, 300, 12, 3))
+
+    # bottom strip: the whole stack scrolling past
+    items = [it for g in p["stack"] for it in g["items"]]
+    adv, gap = 12 * CW, 44
+    xs, x = [], 0.0
+    for it in items:
+        xs.append(x)
+        x += len(it) * adv + gap
+    copy = x
+    strip = "".join(f'<circle class="f-acc" cx="{off + x0 + 4:.1f}" cy="{h - 23}" r="3.5" filter="url(#glow)"/>'
+                    f'<text class="f-ink" x="{off + x0 + 14:.1f}" y="{h - 19}" font-size="12">{esc(it)}</text>'
+                    for off in (0, copy) for x0, it in zip(xs, items))
+    css += f".mq{{animation:mq {copy / 28:.1f}s linear infinite}}@keyframes mq{{to{{transform:translateX(-{copy:.0f}px)}}}}"
+    body.append(f'<g clip-path="url(#card)"><rect class="f-bg2" x="0" y="{h - 44}" width="{W}" height="44"/>'
+                f'<rect x="0" y="{h - 44}" width="{W}" height="2" fill="url(#pg)" opacity=".7"/>'
+                f'<g class="mq">{strip}</g></g>')
+
+    label = f'{p["name"]}: {p["headline"]}. Open to {p["open_to"]}. Now {p["now"][0]}.'
+    return svg(theme, h, label, "".join(body), css), label
 
 
 # ── 2. hero: decrypting ASCII portrait + typed terminal session ──────────
@@ -144,7 +264,7 @@ def portrait_rows():
 def hero(p, theme):
     rows = portrait_rows()
     cols = len(rows[0])
-    px, top, pw = 24, 52, 330
+    px, top, pw = 24, 72, 330
     fs = pw / cols / CW
     lh = fs * 1.13
     ph = len(rows) * lh
@@ -163,7 +283,7 @@ def hero(p, theme):
             f'<g class="sc" style="animation-duration:{d:.2f}s">'
             f'<text class="f-acc fa" x="{px}" y="{y:.1f}" {tl}>{esc(scramble(r))}</text>'
             f'<text class="f-acc fb" x="{px}" y="{y:.1f}" {tl}>{esc(scramble(r))}</text></g>'
-            f'<text class="f-ink pr" x="{px}" y="{y:.1f}" {tl} style="animation-delay:{d:.2f}s">{esc(r)}</text>')
+            f'<text class="f-acc3 pr" x="{px}" y="{y:.1f}" {tl} style="animation-delay:{d:.2f}s">{esc(r)}</text>')
     beam = f'<rect class="f-acc bm" x="{px - 4}" y="{top}" width="{pw + 8}" height="2" rx="1"/>'
 
     # terminal
@@ -226,10 +346,11 @@ def hero(p, theme):
            f"@keyframes bm{{0%{{opacity:.9;transform:translateY(0)}}96%{{opacity:.9;transform:translateY({ph:.0f}px)}}"
            f"100%{{opacity:0;transform:translateY({ph:.0f}px)}}}}"
            ".o{animation:o .3s ease both}@keyframes o{from{opacity:0;transform:translateX(-6px)}}"
-           ".caret{animation:blink 1s steps(1) infinite}")
-    body = (frame(h, f"~/{p['handle']} — whoami") + "".join(art) + beam +
+           ".caret{animation:blink 1s steps(1) infinite}" + SAKURA_CSS)
+    body = (frame(h, "About Me", f"~/{p['handle']} — whoami") +
+            f'<g filter="url(#glow)">{"".join(art)}</g>' + beam +
             f'<line class="s-line" x1="{tx - 18}" y1="{top + 8}" x2="{tx - 18}" y2="{h - 22}" stroke-dasharray="2 4"/>' +
-            "".join(out))
+            "".join(out) + petals(tx, W - 20, top, h - 20, 7, 5))
     label = (f"ASCII portrait of {p['name']} beside a terminal: {p['headline']}; {p['education']}; "
              f"{p['location']}; open to {p['open_to']}.")
     return svg(theme, h, label, body, css), label
@@ -283,7 +404,7 @@ def projects(p, theme):
             if done:
                 g.append(f'<circle class="f-acc2 st" cx="{x}" cy="{sy}" r="8" style="animation-delay:{d0 + .35 + k * .3:.2f}s"/>')
             elif cur:
-                g.append(f'<circle class="s-acc pl" cx="{x}" cy="{sy}" r="8" fill="none" stroke-width="2"/>'
+                g.append(f'<circle class="s-acc pl" cx="{x}" cy="{sy}" r="8" fill="none" stroke-width="2" filter="url(#glow)"/>'
                          f'<circle class="f-acc" cx="{x}" cy="{sy}" r="5"/>')
             g.append(f'<text class="f-{"ink" if done or cur else "dim"}" x="{x}" y="{sy + 30}" font-size="12" '
                      f'text-anchor="middle">{name}</text>')
@@ -293,7 +414,7 @@ def projects(p, theme):
         x = W / 2 + (i - (n - 1) / 2) * 18
         dots.append(f'<circle class="f-line" cx="{x}" cy="{h - 22}" r="4"/>'
                     f'<circle class="f-acc st dt d{i}" cx="{x}" cy="{h - 22}" r="4" style="animation-delay:{i * per}s"/>')
-    body = frame(h, "~/projects — ls --pipeline") + "".join(slides) + "".join(dots)
+    body = frame(h, "My Projects", "what I've shipped and what's in the pipeline") + "".join(slides) + "".join(dots)
     label = "Projects: " + "; ".join(f'{x["name"]}, {x["tagline"]} ({x["status"]})' for x in items) + "."
     return svg(theme, h, label, body, css), label
 
@@ -304,14 +425,14 @@ def flagship(p, theme):
     f = p["flagship"]
     pr = next(x for x in p["projects"] if x["name"] == f["project"])
     nodes = f["flow"]
-    h, bw, bh, yc = 240, 150, 64, 160
+    h, bw, bh, yc = 250, 150, 64, 170
     n = len(nodes)
     gap = (W - 80 - n * bw) / max(n - 1, 1)
     xs = [40 + i * (bw + gap) for i in range(n)]
     col, stat = STATUS.get(pr["status"], ("dim", pr["status"]))
     css = (RISE + ".nd{animation:rise .6s cubic-bezier(.2,.8,.2,1) both}"
            ".fl{stroke-dasharray:3 7;animation:fl .8s linear infinite}@keyframes fl{to{stroke-dashoffset:-10}}")
-    body = [frame(h, f"~/flagship — {f['project'].lower()} --arch"),
+    body = [frame(h, "Flagship Build", f"how {f['project']} works"),
             f'<text class="f-ink" x="40" y="76" font-size="24" font-weight="800">{esc(pr["name"])}</text>',
             f'<text class="f-dim" x="40" y="100" font-size="14">{esc(pr["tagline"])}</text>',
             f'<text class="f-{col}" x="{W - 40}" y="76" font-size="13.5" text-anchor="end">{esc(stat)}</text>']
@@ -321,7 +442,7 @@ def flagship(p, theme):
                     f'<line class="s-acc fl" x1="{x1}" y1="{yc}" x2="{x2}" y2="{yc}" stroke-width="2"/>')
     path = f"M{xs[0] + bw / 2},{yc} L{xs[-1] + bw / 2},{yc}"
     for k in range(3):  # packets travel under the boxes, so they look like they pass through each stage
-        body.append(f'<circle class="f-acc" r="4"><animateMotion path="{path}" dur="4.5s" '
+        body.append(f'<circle class="f-acc" r="4" filter="url(#glow)"><animateMotion path="{path}" dur="4.5s" '
                     f'begin="{k * 1.5}s" repeatCount="indefinite"/></circle>')
     for i, (x, nd) in enumerate(zip(xs, nodes)):
         body.append(f'<g class="nd" style="animation-delay:{.2 + i * .2:.1f}s">'
@@ -338,11 +459,12 @@ def flagship(p, theme):
 # ── 5. stack: rotating orbits + readable legend ─────────────────────────
 
 def stack(p, theme):
-    h, cx, cy = 420, 230, 225
+    h, cx, cy = 440, 230, 240
     radii, speeds, cols = (64, 114, 164), (40, 60, 90), ("acc", "acc2", "acc3")
     css = (FADE + ".r{animation:spin linear infinite}@keyframes spin{to{transform:rotate(360deg)}}"
            ".lg{animation:fade .6s ease both}")
-    body = [frame(h, "~/stack — orbit")]
+    css += POP + SAKURA_CSS
+    body = [frame(h, "My Skills", "what I build with"), branch(850, h - 12, .55, flip=True, t0=1)]
     for gi, grp in enumerate(p["stack"][:3]):
         r, sp, col = radii[gi], speeds[gi], cols[gi]
         rev = gi % 2 == 1
@@ -393,14 +515,15 @@ def activity(contrib, theme):
         return 0 if not c else 1 + sum(c > t for t in q)
 
     lead = (datetime.date.fromisoformat(days[0]["date"]).weekday() + 1) % 7  # Sunday-first rows
-    gx, gy, step, cell = 64, 74, 14, 11
+    gx, gy, step, cell = 64, 88, 14, 11
     cells, months = [], []
     for i, d in enumerate(days):
         ci, ri = divmod(i + lead, 7)
         date = datetime.date.fromisoformat(d["date"])
         if date.day == 1:
             months.append((ci, date.strftime("%b").lower()))
-        cells.append(f'<rect class="f-h{lvl(d["count"])} c" x="{gx + ci * step}" y="{gy + ri * step}" '
+        glow = ' filter="url(#glow)"' if lvl(d["count"]) == 4 else ""
+        cells.append(f'<rect class="f-h{lvl(d["count"])} c"{glow} x="{gx + ci * step}" y="{gy + ri * step}" '
                      f'width="{cell}" height="{cell}" rx="2" style="--k:{ci + ri}"/>')
     n_cols = (len(days) + lead + 6) // 7
     total = sum(d["count"] for d in days)
@@ -420,7 +543,7 @@ def activity(contrib, theme):
            ".od{transform:translateY(var(--y));animation:roll 1.8s cubic-bezier(.15,.8,.2,1) both}"
            "@keyframes roll{from{transform:translateY(0)}}"
            ".lb{animation:fade .6s ease both}")
-    body = [frame(1, "")]  # placeholder, replaced below once height is known
+    body = [""]  # frame goes here once the height is known
     for ci, m in months:
         body.append(f'<text class="f-dim" x="{gx + ci * step}" y="{gy - 8}" font-size="10.5">{m}</text>')
     for ri, wd in ((1, "mon"), (3, "wed"), (5, "fri")):
@@ -453,8 +576,10 @@ def activity(contrib, theme):
         body.append(f'<g class="f-ink" clip-path="url(#od{si})" font-size="{fs}" font-weight="800">{"".join(digits)}</g>'
                     f'<text class="f-dim lb" x="{sx}" y="{sy + 24}" font-size="11.5" letter-spacing="1" '
                     f'style="animation-delay:{.6 + si * .2:.1f}s">{esc(lab.upper())}</text>')
-    h = sy + 50
-    body[0] = f"<defs>{''.join(defs)}</defs>" + frame(h, "~/activity — past 12 months")
+    h = sy + 52
+    cards = "".join(f'<rect class="f-bg2 s-line" x="{gx - 16 + si * 190}" y="{sy - 46}" width="176" height="84" rx="12"/>'
+                    for si in range(len(stats)))
+    body[0] = f"<defs>{''.join(defs)}</defs>" + frame(h, "GitHub Activity", "contributions, past 12 months") + cards
     label = f"{total:,} contributions over the past 12 months across {active} active days; busiest month {best_label}."
     return svg(theme, h, label, "".join(body), css), label
 
@@ -466,7 +591,7 @@ LANES = {"main": (44, "acc"), "feat": (72, "acc2"), "hack": (100, "acc3")}
 
 def journey(p, theme):
     ev = p["journey"]
-    top, rh = 70, 32
+    top, rh = 88, 32
     n = len(ev)
     h = top + n * rh + 10
     ys = [top + i * rh for i in range(n)]
@@ -475,7 +600,7 @@ def journey(p, theme):
            "@keyframes dr{from{stroke-dashoffset:1}}"
            ".rw{animation:rw .5s ease both}@keyframes rw{from{opacity:0;transform:translateX(-8px)}}")
     mx = LANES["main"][0]
-    body = [frame(h, "~/journey — git log --graph --oneline"),
+    body = [frame(h, "My Journey", "git log --graph --oneline"),
             f'<path class="s-acc dr" d="M{mx},{ys[-1]} L{mx},{ys[0]}" pathLength="1" fill="none" stroke-width="2"/>']
     for i, e in enumerate(ev):
         x, col = LANES.get(e["lane"], LANES["main"])
@@ -484,7 +609,7 @@ def journey(p, theme):
             body.append(f'<path class="s-{col} dr" pathLength="1" fill="none" stroke-width="2" '
                         f'style="animation-delay:{t_of(i) - .2:.2f}s;animation-duration:.6s" '
                         f'd="M{mx},{y + 16} C{x},{y + 16} {x},{y + 8} {x},{y} C{x},{y - 8} {x},{y - 16} {mx},{y - 16}"/>')
-        body.append(f'<circle class="f-{col} s-bg pop" cx="{x}" cy="{y}" r="5.5" stroke-width="2.5" '
+        body.append(f'<circle class="f-{col} s-bg pop" filter="url(#glow)" cx="{x}" cy="{y}" r="5.5" stroke-width="2.5" '
                     f'style="animation-delay:{t_of(i):.2f}s"/>')
         sha = hashlib.sha1(f'{e["date"]}{e["title"]}'.encode()).hexdigest()[:7]
         head = '<tspan class="f-acc">(HEAD → main) </tspan>' if i == 0 else ""

@@ -47,12 +47,12 @@ THEMES = {
                  "#ebe2cd #d9c88f #c2a14a #9a7417 #5e4507",
     },
     "riso": {
-        "label": "Risograph",
-        "note": "two-ink riso print: fluorescent pink and federal blue on paper",
-        "dark":  "#17162a #1f1d36 #3a3760 #f4efe6 #a7a3c2 #ff48b0 #7d95ff #ffe066 "
-                 "#221f3d #3d3a8a #6750b8 #c046b4 #ff48b0",
-        "light": "#f4efe6 #ebe4d6 #d4cab6 #1d1b2a #6c6878 #e0218a #3255a4 #9a7f00 "
-                 "#e8e1d3 #c9d0ef #8fa3dd #d877b6 #e0218a",
+        "label": "Neon Sakura",
+        "note": "hot-pink neon and cherry blossom on midnight navy",
+        "dark":  "#0f1424 #171d33 #283050 #f4f1f8 #8e93b0 #ff3d8b #ff7ab6 #ffc2dc "
+                 "#1a2038 #4a1d3d #8a2457 #d1306f #ff3d8b",
+        "light": "#fff6f9 #ffeaf2 #f5c9d9 #1b1530 #7a6a80 #e01e6f #c2185b #d4688f "
+                 "#fbe8ef #f7bcd2 #ef86ae #e0507f #c2185b",
     },
     "sumi": {
         "label": "Sumi & Matcha",
