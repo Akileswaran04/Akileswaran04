@@ -15,7 +15,6 @@ base style and animate *from* the hidden state, so prefers-reduced-motion
 (which switches CSS animations off) still shows a complete panel.
 """
 import argparse
-import base64
 import datetime
 import hashlib
 import json
@@ -894,19 +893,41 @@ ORDER = ("banner", "hero", "projects", "flagship", "stack", "activity", "journey
 GAP = 16
 
 
-def combine(docs):
-    """Stack every panel into one SVG. Each panel stays its own document (a data-URI
-    <image>), so CSS can't clash, but they all load together and share one clock:
-    separate <img>s each start their theme cycle whenever they happen to load."""
-    parts, y = [], 0
-    for name in ORDER:
+def namespace(doc, pre, theme_css):
+    """Split a panel into (css, body) with every id, class and keyframe name made
+    unique by `pre`, so panels can share one document. Theme classes (f-/s-) and
+    the shared theme CSS stay global."""
+    css = re.search(r"<style><!\[CDATA\[(.*?)\]\]></style>", doc, re.S).group(1).replace(theme_css, "")
+    body = re.search(r"</style>(.*)</svg>$", doc, re.S).group(1)
+    kf = set(re.findall(r"@keyframes ([\w-]+)", css))
+    css = re.sub(r"\.([A-Za-z_][\w-]*)", lambda m: f".{pre}{m[1]}", css)
+    css = re.sub(r"@keyframes ([\w-]+)", lambda m: f"@keyframes {pre}{m[1]}", css)
+    css = re.sub(r"(animation(?:-name)?:)([^;}]*)",
+                 lambda m: m[1] + re.sub(r"[\w-]+", lambda t: pre + t[0] if t[0] in kf else t[0], m[2]), css)
+    body = re.sub(r'\bid="([^"]+)"', lambda m: f'id="{pre}{m[1]}"', body)
+    body = re.sub(r"url\(#([^)]+)\)", lambda m: f"url(#{pre}{m[1]})", body)
+    body = re.sub(r'href="#([^"]+)"', lambda m: f'href="#{pre}{m[1]}"', body)
+    body = re.sub(r'class="([^"]+)"', lambda m: 'class="' + " ".join(
+        c if c.startswith(("f-", "s-")) else pre + c for c in m[1].split()) + '"', body)
+    return css, body
+
+
+def combine(docs, theme):
+    """Stack every panel into ONE plain SVG. Separate <img>s each start their theme
+    cycle whenever they load (GitHub lazy-loads lower ones), so they drift apart; one
+    document shares one clock. No nested <image>s: GitHub serves SVGs with
+    CSP default-src 'none', which blocks data: URIs inside them."""
+    theme_css = th.css(theme)
+    styles, parts, y = [theme_css], [], 0
+    for i, name in enumerate(ORDER):
         h = int(re.search(r'height="(\d+)"', docs[name]).group(1))
-        b64 = base64.b64encode(docs[name].encode()).decode()
-        parts.append(f'<image href="data:image/svg+xml;base64,{b64}" x="0" y="{y}" width="{W}" height="{h}"/>')
+        css, body = namespace(docs[name], f"p{i}", theme_css)
+        styles.append(css)
+        parts.append(f'<svg x="0" y="{y}" width="{W}" height="{h}" viewBox="0 0 {W} {h}">{body}</svg>')
         y += h + GAP
     y -= GAP
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{y}" viewBox="0 0 {W} {y}">'
-            f'{"".join(parts)}</svg>')
+            f'<style><![CDATA[{"".join(styles)}]]></style>{"".join(parts)}</svg>')
 
 
 def readme(p, labels, prefix):
@@ -969,7 +990,7 @@ def main():
             "activity": lambda: activity(contrib, theme)}
     for name, job in jobs.items():
         docs[name], labels[name] = job()
-    docs["profile"] = combine(docs)
+    docs["profile"] = combine(docs, theme)
     for name, doc in docs.items():
         with open(os.path.join(out, f"{name}.svg"), "w", encoding="utf-8", newline="\n") as f:
             f.write(doc)
