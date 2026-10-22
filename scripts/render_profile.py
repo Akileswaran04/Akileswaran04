@@ -534,8 +534,10 @@ def flagship(p, theme):
     xs = [40 + i * (bw + gap) for i in range(n)]
     col, stat = STATUS.get(pr["status"], ("dim", pr["status"]))
     css = (RISE + ".nd{animation:rise .6s cubic-bezier(.2,.8,.2,1) both}"
-           ".fl{stroke-dasharray:3 7;animation:fl .8s linear infinite}@keyframes fl{to{stroke-dashoffset:-10}}")
+           ".fl{stroke-dasharray:3 7;animation:fl .8s linear infinite}@keyframes fl{to{stroke-dashoffset:-10}}"
+           + LANTERN_CSS)
     body = [frame(h, "Flagship Build", f"how {f['project']} works"),
+            lantern(665, 0, 8, .9, 4.2), lantern(705, 0, 18, 1.0, 3.6), lantern(745, 0, 2, .8, 4.8),
             f'<text class="f-ink" x="40" y="76" font-size="24" font-weight="800">{esc(pr["name"])}</text>',
             f'<text class="f-dim" x="40" y="100" font-size="14">{esc(pr["tagline"])}</text>',
             f'<text class="f-{col}" x="{W - 40}" y="76" font-size="13.5" text-anchor="end">{esc(stat)}</text>']
@@ -712,7 +714,7 @@ def journey(p, theme):
     h = top + n * rh + 10
     ys = [top + i * rh for i in range(n)]
     t_of = lambda i: .3 + (n - 1 - i) * .22  # oldest (bottom) first
-    css = (FADE + POP + ".dr{stroke-dasharray:1;animation:dr 2.4s ease-in-out both}"
+    css = (FADE + POP + FAN_CSS + ".dr{stroke-dasharray:1;animation:dr 2.4s ease-in-out both}"
            "@keyframes dr{from{stroke-dashoffset:1}}"
            ".rw{animation:rw .5s ease both}@keyframes rw{from{opacity:0;transform:translateX(-8px)}}")
     mx = LANES["main"][0]
@@ -734,13 +736,161 @@ def journey(p, theme):
                     f'<tspan class="f-dim">{sha}  {esc(e["date"])}  </tspan>{head}{tag}'
                     f'<tspan class="f-ink" font-weight="700">{esc(e["title"])}</tspan>'
                     f'<tspan class="f-dim"> — {esc(e["detail"])}</tspan></text>')
+    body.append(fan(745, h - 120, 92, t0=1.2))
     label = "Timeline, newest first: " + "; ".join(f'{e["date"]} {e["title"]} ({e["detail"]})' for e in ev) + "."
+    return svg(theme, h, label, "".join(body), css), label
+
+
+# ── more hand-drawn pieces: fan, lanterns, torii, koi ───────────────────
+
+FAN_CSS = (".fanw{animation:flut 5s ease-in-out infinite alternate}"
+           "@keyframes flut{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}"
+           ".seg{animation:fan 1.3s cubic-bezier(.2,.8,.2,1) both}@keyframes fan{from{transform:rotate(var(--a))}}"
+           ".tas{animation:tas 3s ease-in-out infinite alternate}"
+           "@keyframes tas{from{transform:rotate(6deg)}to{transform:rotate(-6deg)}}")
+
+
+def fan(px, py, r, t0=.4, seed=1):
+    """A folding fan (sensu) with a sakura print that opens rib by rib; tassel sways."""
+    rnd = random.Random(seed)
+    n, a0, a1, ri = 9, 205, 335, r * .3
+    pt = lambda ang, rad: (px + rad * math.cos(math.radians(ang)), py + rad * math.sin(math.radians(ang)))
+    origin = f"transform-origin:{px}px {py}px"
+    segs = []
+    for k in range(n):
+        s1, s2 = a0 + (a1 - a0) * k / n, a0 + (a1 - a0) * (k + 1) / n
+        (ox1, oy1), (ox2, oy2), (ix1, iy1), (ix2, iy2) = pt(s1, r), pt(s2, r), pt(s1, ri), pt(s2, ri)
+        g = (f'<path class="f-{"acc" if k % 2 else "acc2"}" opacity="{.9 if k % 2 else .75}" '
+             f'd="M{ix1:.1f},{iy1:.1f} L{ox1:.1f},{oy1:.1f} A{r},{r} 0 0 1 {ox2:.1f},{oy2:.1f} '
+             f'L{ix2:.1f},{iy2:.1f} A{ri},{ri} 0 0 0 {ix1:.1f},{iy1:.1f}Z"/>'
+             f'<line class="s-bg" x1="{px}" y1="{py}" x2="{ox1:.1f}" y2="{oy1:.1f}" stroke-width="1.2"/>')
+        if rnd.random() < .6:
+            fx, fy = pt((s1 + s2) / 2, rnd.uniform(.55, .85) * r)
+            g += f'<g transform="translate({fx:.1f},{fy:.1f}) scale({rnd.uniform(.35, .55):.2f})"><use href="#fl"/></g>'
+        segs.append(f'<g class="seg" style="{origin};--a:{a0 - s1:.1f}deg;animation-delay:{t0:.2f}s">{g}</g>')
+    tassel = (f'<g class="tas" style="{origin}"><line class="s-acc3" x1="{px}" y1="{py}" x2="{px}" y2="{py + 34}" stroke-width="1.5"/>'
+              f'<circle class="f-acc" cx="{px}" cy="{py + 36}" r="3.5" filter="url(#glow)"/>'
+              + "".join(f'<line class="s-acc" x1="{px}" y1="{py + 38}" x2="{px + dx}" y2="{py + 62}" stroke-width="1.2"/>'
+                        for dx in (-4, -2, 0, 2, 4)) + "</g>")
+    return (f'<g class="fanw" style="{origin}">{"".join(segs)}'
+            f'<circle class="f-acc3 s-bg" cx="{px}" cy="{py}" r="4.5" stroke-width="1.5"/></g>{tassel}')
+
+
+LANTERN_CSS = (".lan{animation:lan ease-in-out infinite alternate}"
+               "@keyframes lan{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}"
+               ".fk{animation:fk 2.3s steps(6) infinite}@keyframes fk{50%{opacity:.45}}")
+
+
+def lantern(x, top, drop, s=1.0, dur=4.0):
+    """A chōchin paper lantern hanging from (x, top), swinging, with a flickering core."""
+    cy, rx, ry = top + drop + 16 * s, 11 * s, 15 * s
+    ribs = "".join(f'<line class="s-bg" x1="{x - rx * math.sqrt(1 - (d / ry) ** 2):.1f}" y1="{cy + d:.1f}" '
+                   f'x2="{x + rx * math.sqrt(1 - (d / ry) ** 2):.1f}" y2="{cy + d:.1f}" stroke-width=".8" opacity=".6"/>'
+                   for d in (-9 * s, -3 * s, 3 * s, 9 * s))
+    return (f'<g class="lan" style="transform-origin:{x}px {top}px;animation-duration:{dur}s">'
+            f'<line class="s-line" x1="{x}" y1="{top}" x2="{x}" y2="{cy - ry}" stroke-width="1"/>'
+            f'<ellipse class="f-acc" cx="{x}" cy="{cy}" rx="{rx}" ry="{ry}" filter="url(#glow2)"/>'
+            f'<ellipse class="f-acc3 fk" cx="{x}" cy="{cy}" rx="{rx * .45:.1f}" ry="{ry * .6:.1f}" opacity=".8"/>{ribs}'
+            f'<rect class="f-bg2" x="{x - rx * .55:.1f}" y="{cy - ry - 2:.1f}" width="{rx * 1.1:.1f}" height="4" rx="1"/>'
+            f'<rect class="f-bg2" x="{x - rx * .55:.1f}" y="{cy + ry - 2:.1f}" width="{rx * 1.1:.1f}" height="4" rx="1"/>'
+            f'<line class="s-acc" x1="{x}" y1="{cy + ry + 2}" x2="{x}" y2="{cy + ry + 12 * s}" stroke-width="1.5"/></g>')
+
+
+def torii(x, base, w, h):
+    """A torii gate in neon outline, standing on the water line at `base`."""
+    pw = w * .07
+    l, r = x + w * .16, x + w * .84 - pw
+    top = base - h
+    return (f'<g filter="url(#glow)">'
+            f'<rect class="f-acc s-acc" x="{l:.0f}" y="{top + 14:.0f}" width="{pw:.0f}" height="{h - 14:.0f}" fill-opacity=".25" stroke-width="2"/>'
+            f'<rect class="f-acc s-acc" x="{r:.0f}" y="{top + 14:.0f}" width="{pw:.0f}" height="{h - 14:.0f}" fill-opacity=".25" stroke-width="2"/>'
+            f'<path class="f-acc s-acc" fill-opacity=".35" stroke-width="2" d="M{x},{top + 2} Q{x + w / 2},{top + 12} {x + w},{top + 2} '
+            f'L{x + w - 8},{top + 12} Q{x + w / 2},{top + 20} {x + 8},{top + 12}Z"/>'
+            f'<rect class="f-acc s-acc" x="{x + w * .1:.0f}" y="{top + 30:.0f}" width="{w * .8:.0f}" height="7" fill-opacity=".3" stroke-width="2"/>'
+            f'<rect class="f-acc s-acc" x="{x + w / 2 - 4:.0f}" y="{top + 18:.0f}" width="8" height="12" fill-opacity=".3" stroke-width="1.5"/></g>')
+
+
+KOI = ('<path class="{body}" d="M14,0 C8,-6.5 -6,-6.5 -12,0 C-6,6.5 8,6.5 14,0Z"/>'
+       '<path class="{body} tail" d="M-11,0 L-21,-7 L-18,0 L-21,7Z"/>'
+       '<circle class="{spot}" cx="6" cy="-1.5" r="2.4"/><circle class="{spot}" cx="-3" cy="1.5" r="1.8"/>')
+
+
+def footer(p, theme):
+    h = 300
+    wy = 222  # water line
+    rnd = random.Random(11)
+    css = (SAKURA_CSS + POP + LANTERN_CSS + BLINK +
+           ".tail{transform-box:fill-box;transform-origin:right center;animation:wag .5s ease-in-out infinite alternate}"
+           "@keyframes wag{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}"
+           ".rip{transform-box:fill-box;transform-origin:center;opacity:0;animation:rip 4s ease-out infinite}"
+           "@keyframes rip{0%{opacity:.8;transform:scale(.2)}100%{opacity:0;transform:scale(1.6)}}"
+           ".wv{stroke-dasharray:18 14;animation:wv 6s linear infinite}@keyframes wv{to{stroke-dashoffset:-64}}"
+           ".ref{animation:ref 4s ease-in-out infinite alternate}@keyframes ref{from{transform:skewX(-3deg)}to{transform:skewX(3deg)}}"
+           ".ff{opacity:0;animation:ff ease-in-out infinite}"
+           "@keyframes ff{0%,100%{opacity:0;transform:translate(0,0)}50%{opacity:1;transform:translate(var(--fx),var(--fy))}}"
+           ".toro{animation:toro linear infinite}@keyframes toro{from{transform:translateX(-60px)}to{transform:translateX(920px)}}"
+           ".bob{animation:bob 2.6s ease-in-out infinite alternate}@keyframes bob{to{transform:translateY(2px)}}"
+           ".caret{animation:blink 1s steps(1) infinite}"
+           "@media (prefers-reduced-motion:reduce){.toro{display:none}}")
+    body = [f'<clipPath id="card"><rect width="{W}" height="{h}" rx="14"/></clipPath>',
+            frame(h, "Thanks for Visiting", "see you around")]
+    # sky: moon, fireflies, hanging branch
+    body.append(f'<circle class="f-acc3" cx="770" cy="104" r="30" opacity=".9" filter="url(#glow2)"/>'
+                f'<circle class="f-bg" cx="782" cy="96" r="26" opacity=".35"/>')
+    for _ in range(12):
+        fx, fy = rnd.uniform(40, 820), rnd.uniform(80, wy - 20)
+        body.append(f'<circle class="f-acc3 ff" cx="{fx:.0f}" cy="{fy:.0f}" r="1.7" filter="url(#glow)" '
+                    f'style="--fx:{rnd.uniform(-14, 14):.0f}px;--fy:{rnd.uniform(-10, 6):.0f}px;'
+                    f'animation-duration:{rnd.uniform(3, 6):.1f}s;animation-delay:{-rnd.uniform(0, 6):.1f}s"/>')
+    body.append(f'<g transform="translate(14,4) scale(.9,-.9)">{branch(0, 0, 1, t0=.6)}</g>')
+    # torii and its rippling reflection
+    tx, tw, th_ = 200, 170, 120
+    body.append(torii(tx, wy, tw, th_))
+    # water
+    water = [f'<rect class="f-bg2" x="0" y="{wy}" width="{W}" height="{h - wy}"/>',
+             f'<line class="s-acc" x1="0" y1="{wy}" x2="{W}" y2="{wy}" stroke-width="1.5" opacity=".7" filter="url(#glow)"/>',
+             f'<g class="ref" style="transform-origin:{tx + tw / 2}px {wy}px" opacity=".22">'
+             f'<g transform="translate(0,{2 * wy}) scale(1,-1)">{torii(tx, wy, tw, th_)}</g></g>',
+             f'<ellipse class="f-acc3" cx="770" cy="{wy + 16}" rx="26" ry="4" opacity=".25"/>']
+    for k in range(4):
+        yy = wy + 14 + k * 15
+        water.append(f'<line class="s-acc3 wv" x1="0" y1="{yy}" x2="{W}" y2="{yy}" stroke-width="1" opacity="{.35 - k * .06:.2f}" '
+                     f'style="animation-duration:{6 + k * 2}s"/>')
+    for k in range(5):
+        rx_ = rnd.uniform(380, 820)
+        water.append(f'<ellipse class="s-acc3 rip" cx="{rx_:.0f}" cy="{rnd.uniform(wy + 18, h - 18):.0f}" rx="18" ry="4" '
+                     f'fill="none" stroke-width="1" style="animation-delay:{-k * .8:.1f}s"/>')
+    # koi circling the pond
+    for k, (bd, sp, dur, rev) in enumerate((("f-ink", "f-acc", 16, False), ("f-acc3", "f-acc2", 21, True))):
+        cx_, cy_, rxx, ryy = 560, wy + 40, 150 - k * 40, 18 - k * 4
+        d = (f"M{cx_ - rxx},{cy_} A{rxx},{ryy} 0 1,{0 if rev else 1} {cx_ + rxx},{cy_} "
+             f"A{rxx},{ryy} 0 1,{0 if rev else 1} {cx_ - rxx},{cy_}")
+        water.append(f'<g opacity=".95">{KOI.format(body=bd, spot=sp)}'
+                     f'<animateMotion path="{d}" dur="{dur}s" rotate="auto" repeatCount="indefinite"/></g>')
+    # floating lanterns (toro nagashi)
+    for k in range(3):
+        dur = 38
+        water.append(f'<g class="toro" style="animation-duration:{dur}s;animation-delay:{-k * dur / 3:.1f}s">'
+                     f'<g class="bob"><rect class="f-bg" x="0" y="{wy - 3}" width="16" height="5" rx="1"/>'
+                     f'<rect class="f-acc3" x="3" y="{wy - 14}" width="10" height="11" rx="1.5" filter="url(#glow2)"/>'
+                     f'<rect class="f-bg" x="2" y="{wy - 16}" width="12" height="3" rx="1"/></g></g>')
+    body.append(f'<g clip-path="url(#card)">{"".join(water)}</g>')
+    # words
+    body.append(f'<text class="f-ink" x="560" y="130" font-size="20" font-weight="800" text-anchor="middle">'
+                f'thanks for stopping by</text>'
+                f'<text class="f-dim" x="560" y="156" font-size="12.5" text-anchor="middle">'
+                f'open to {esc(p["open_to"])} · this page redraws itself daily</text>'
+                f'<text class="f-acc2" x="560" y="184" font-size="13" text-anchor="middle">~/{esc(p["handle"])} $ '
+                f'<tspan class="f-acc">exit</tspan></text>'
+                f'<rect class="f-acc caret" x="{560 + (len(p["handle"]) + 9) / 2 * 13 * CW + 2:.0f}" y="173" width="7" height="14"/>'
+                + petals(360, W - 20, 70, wy, 8, 21))
+    label = f"Closing scene: a neon torii gate over a koi pond at night. Thanks for stopping by; {p['name']} is open to {p['open_to']}."
     return svg(theme, h, label, "".join(body), css), label
 
 
 # ── README ──────────────────────────────────────────────────────────────
 
-ORDER = ("banner", "hero", "projects", "flagship", "stack", "activity", "journey")
+ORDER = ("banner", "hero", "projects", "flagship", "stack", "activity", "journey", "footer")
 GAP = 16
 
 
@@ -797,7 +947,7 @@ Open to **{p["open_to"]}** · now {now}
 
 
 PANELS = {"banner": banner, "hero": hero, "projects": projects, "flagship": flagship,
-          "stack": stack, "journey": journey}
+          "stack": stack, "journey": journey, "footer": footer}
 
 
 def main():
