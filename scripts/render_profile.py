@@ -369,10 +369,10 @@ def projects(p, theme):
     n = len(items)
     cyc = per * n
     a, b, c = 2.0, 100 / n - 2.0, 100 / n
-    css = (f".sl{{animation:sl {cyc}s infinite}}"
+    css = (f".sl{{animation:sl {cyc}s infinite backwards}}"
            f"@keyframes sl{{0%{{opacity:0;transform:translateX(20px)}}{a}%{{opacity:1;transform:none}}"
            f"{b}%{{opacity:1;transform:none}}{c}%{{opacity:0;transform:translateX(-20px)}}100%{{opacity:0}}}}"
-           f".st{{animation:st {cyc}s infinite}}"
+           f".st{{animation:st {cyc}s infinite backwards}}"
            f"@keyframes st{{0%{{opacity:0}}{a}%{{opacity:1}}{b}%{{opacity:1}}{c}%{{opacity:0}}100%{{opacity:0}}}}"
            ".pl{transform-box:fill-box;transform-origin:center;animation:pl 1.4s ease-out infinite}"
            "@keyframes pl{from{opacity:.9;transform:scale(1)}to{opacity:0;transform:scale(2.6)}}"
