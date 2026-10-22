@@ -15,12 +15,14 @@ base style and animate *from* the hidden state, so prefers-reduced-motion
 (which switches CSS animations off) still shows a complete panel.
 """
 import argparse
+import base64
 import datetime
 import hashlib
 import json
 import math
 import os
 import random
+import re
 from xml.sax.saxutils import escape
 
 import theme as th
@@ -738,8 +740,27 @@ def journey(p, theme):
 
 # ── README ──────────────────────────────────────────────────────────────
 
+ORDER = ("banner", "hero", "projects", "flagship", "stack", "activity", "journey")
+GAP = 16
+
+
+def combine(docs):
+    """Stack every panel into one SVG. Each panel stays its own document (a data-URI
+    <image>), so CSS can't clash, but they all load together and share one clock:
+    separate <img>s each start their theme cycle whenever they happen to load."""
+    parts, y = [], 0
+    for name in ORDER:
+        h = int(re.search(r'height="(\d+)"', docs[name]).group(1))
+        b64 = base64.b64encode(docs[name].encode()).decode()
+        parts.append(f'<image href="data:image/svg+xml;base64,{b64}" x="0" y="{y}" width="{W}" height="{h}"/>')
+        y += h + GAP
+    y -= GAP
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{y}" viewBox="0 0 {W} {y}">'
+            f'{"".join(parts)}</svg>')
+
+
 def readme(p, labels, prefix):
-    img = lambda name: f'<img src="{prefix}{name}.svg" width="860" alt="{esc(labels[name])}" />'
+    alt = " | ".join(labels[n] for n in ORDER)
     proj_rows = "\n".join(f'| {x["name"]} | {x["tagline"]} | {", ".join(x["stack"])} | {x["status"]} |'
                           for x in p["projects"])
     stack_rows = "\n".join(f'- **{g["group"]}:** {", ".join(g["items"])}' for g in p["stack"])
@@ -751,22 +772,10 @@ def readme(p, labels, prefix):
 
 <div align="center">
 
-{img("banner")}
-
 **{p["name"]}** — {p["headline"]} · {p["education"]} · {p["location"]}<br>
 Open to **{p["open_to"]}** · now {now}
 
-{img("hero")}
-
-{img("projects")}
-
-{img("flagship")}
-
-{img("stack")}
-
-{img("activity")}
-
-{img("journey")}
+<img src="{prefix}profile.svg" width="860" alt="{esc(alt)}" />
 
 </div>
 {ach}
@@ -805,11 +814,13 @@ def main():
         raise SystemExit(f"unknown theme {bad}; pick from: {', '.join(th.THEMES)}")
     out = os.path.join(ROOT, args.out) if args.out else os.path.join(ROOT, "assets")
     os.makedirs(out, exist_ok=True)
-    labels = {}
+    labels, docs = {}, {}
     jobs = {**{k: (lambda f=f: f(p, theme)) for k, f in PANELS.items()},
             "activity": lambda: activity(contrib, theme)}
     for name, job in jobs.items():
-        doc, labels[name] = job()
+        docs[name], labels[name] = job()
+    docs["profile"] = combine(docs)
+    for name, doc in docs.items():
         with open(os.path.join(out, f"{name}.svg"), "w", encoding="utf-8", newline="\n") as f:
             f.write(doc)
         print(f"  {name}.svg  {len(doc) / 1024:.1f} KB")
