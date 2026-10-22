@@ -364,7 +364,7 @@ STATUS = {"live": ("acc2", "● live"), "building": ("acc", "◐ building"),
 
 
 def projects(p, theme):
-    h, per = 300, 4.5
+    h, per = 300, 4.0
     items = p["projects"]
     n = len(items)
     cyc = per * n
@@ -459,13 +459,16 @@ def flagship(p, theme):
 # ── 5. stack: rotating orbits + readable legend ─────────────────────────
 
 def stack(p, theme):
-    h, cx, cy = 440, 230, 240
-    radii, speeds, cols = (64, 114, 164), (40, 60, 90), ("acc", "acc2", "acc3")
+    groups = p["stack"][:4]
+    n = len(groups)
+    h, cx, cy, r0, r1 = 480, 240, 268, 90, 188
+    radii = [r0 + i * (r1 - r0) / max(n - 1, 1) for i in range(n)]
+    speeds, cols = (40, 60, 80, 100), ("acc", "acc2", "acc3", "ink")
     css = (FADE + ".r{animation:spin linear infinite}@keyframes spin{to{transform:rotate(360deg)}}"
            ".lg{animation:fade .6s ease both}")
     css += POP + SAKURA_CSS
-    body = [frame(h, "My Skills", "what I build with"), branch(850, h - 12, .55, flip=True, t0=1)]
-    for gi, grp in enumerate(p["stack"][:3]):
+    body = [frame(h, "My Skills", "what I build with"), petals(500, W - 20, 70, h - 20, 6, 9)]
+    for gi, grp in enumerate(groups):
         r, sp, col = radii[gi], speeds[gi], cols[gi]
         rev = gi % 2 == 1
         items = grp["items"]
@@ -482,22 +485,22 @@ def stack(p, theme):
                     f'animation-direction:{"reverse" if rev else "normal"}">{"".join(ring)}</g></g>')
     body.append(f'<circle class="f-bg2 s-acc" cx="{cx}" cy="{cy}" r="32" stroke-width="1.5"/>'
                 f'<text class="f-acc" x="{cx}" y="{cy + 6}" font-size="17" font-weight="800" text-anchor="middle">&lt;/&gt;</text>')
-    y = 92
-    for gi, grp in enumerate(p["stack"][:3]):
+    y, lx = 100, 500
+    for gi, grp in enumerate(groups):
         body.append(f'<g class="lg" style="animation-delay:{.3 + gi * .25:.2f}s">'
-                    f'<rect class="f-{cols[gi]}" x="470" y="{y - 10}" width="10" height="10" rx="2"/>'
-                    f'<text class="f-ink" x="490" y="{y}" font-size="13.5" font-weight="700">{esc(grp["group"])}</text>')
+                    f'<rect class="f-{cols[gi]}" x="{lx}" y="{y - 10}" width="10" height="10" rx="2"/>'
+                    f'<text class="f-ink" x="{lx + 20}" y="{y}" font-size="13.5" font-weight="700">{esc(grp["group"])}</text>')
         y += 24
         line = ""
         for it in grp["items"]:
             nxt = f"{line} · {it}" if line else it
-            if len(nxt) > 44:
-                body.append(f'<text class="f-dim" x="490" y="{y}" font-size="13">{esc(line)}</text>')
+            if len(nxt) > 40:
+                body.append(f'<text class="f-dim" x="{lx + 20}" y="{y}" font-size="13">{esc(line)}</text>')
                 y += 20
                 nxt = it
             line = nxt
-        body.append(f'<text class="f-dim" x="490" y="{y}" font-size="13">{esc(line)}</text></g>')
-        y += 42
+        body.append(f'<text class="f-dim" x="{lx + 20}" y="{y}" font-size="13">{esc(line)}</text></g>')
+        y += 40
     label = "Tech stack. " + " ".join(f'{g["group"]}: {", ".join(g["items"])}.' for g in p["stack"])
     return svg(theme, h, label, "".join(body), css), label
 

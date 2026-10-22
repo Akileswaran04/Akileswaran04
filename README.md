@@ -5,19 +5,19 @@
 <img src="assets/banner.svg" width="860" alt="Akileswaran A: full-stack developer · applied ML. Open to SWE / ML internships. Now building ODYSSEY — multi-agent AI for fintech." />
 
 **Akileswaran A** — full-stack developer · applied ML · B.Tech IT · CEG, Anna University · Chennai, Tamil Nadu<br>
-Open to **SWE / ML internships** · now building ODYSSEY — multi-agent AI for fintech · exploring agentic AI (Agent-A-Thon, agentic_ai)
+Open to **SWE / ML internships** · now building ODYSSEY — multi-agent AI for fintech · exploring agentic AI (SubShield, SyllabusMind)
 
 <img src="assets/hero.svg" width="860" alt="ASCII portrait of Akileswaran A beside a terminal: full-stack developer · applied ML; B.Tech IT · CEG, Anna University; Chennai, Tamil Nadu; open to SWE / ML internships." />
 
-<img src="assets/projects.svg" width="860" alt="Projects: SENTRI, ML dashboard for Bengaluru Traffic Police (live); ODYSSEY, Multi-agent AI assistant for fintech (SBI YONO) (building); Riddle Rush, 3D trivia board game (live); Gridlock, Traffic demand forecasting (hackathon) (archived); DayLog, Real-time attendance tracking (shipped)." />
+<img src="assets/projects.svg" width="860" alt="Projects: SMBConnect, AI commerce platform for MSMEs: buyer, seller, delivery, admin (shipped); SENTRI, ML dashboard for Bengaluru Traffic Police (live); ODYSSEY, Multi-agent AI assistant for fintech (SBI YONO) (building); SubShield, AI agent that reads invoices and cancels subscriptions (shipped); SyllabusMind, AI study agent that finds weak topics (Agent-A-Thon) (shipped); Riddle Rush, Multiplayer 3D trivia board game, online rooms (live); CSAU Web, 3D space-themed site for Anna University's CS club (building); Study Portal, Upload, search and share study PDFs, E2E tested (shipped); Gridlock, Traffic demand forecasting (hackathon) (archived); DayLog, Real-time attendance tracking (shipped)." />
 
 <img src="assets/flagship.svg" width="860" alt="SENTRI architecture: traffic data → XGBoost → FastAPI → Streamlit." />
 
-<img src="assets/stack.svg" width="860" alt="Tech stack. languages: C++, Python, C, TypeScript, JavaScript. ml / ai: XGBoost, LightGBM, EBM, DBSCAN, LangChain. web &amp; tools: React, Node/Express, FastAPI, Streamlit, Firebase, Supabase, Three.js, Git." />
+<img src="assets/stack.svg" width="860" alt="Tech stack. languages: C++, Python, C, TypeScript, JavaScript, Java. ml / ai: XGBoost, LightGBM, EBM, DBSCAN, LangChain, Gemini, Groq. web: React, Next.js, Node/Express, FastAPI, Spring Boot, Streamlit, Three.js. data &amp; tools: PostgreSQL, MongoDB, Redis, Firebase, Supabase, Docker, Playwright, Git." />
 
 <img src="assets/activity.svg" width="860" alt="475 contributions over the past 12 months across 69 active days; busiest month aug '26." />
 
-<img src="assets/journey.svg" width="860" alt="Timeline, newest first: 2026-10 web-programming (Spring Boot coursework); 2026-09 Agent-A-Thon (agentic AI hackathon build); 2026-09 SMB-Connect (Python); 2026-09 agentic_ai (agentic AI project for IOC); 2026-08 Technova-SOP (platform for MSME sellers); 2026-08 CSAU-MainWeb (Anna University CS club site); 2026-07 profile generators (this README); 2025-11 DreamWalkers (TypeScript); 2025-10 alumni-DB + medical-db (college DB projects); 2025-06 custom-cursor (first repo)." />
+<img src="assets/journey.svg" width="860" alt="Timeline, newest first: 2026-10 Study Portal (React + Spring Boot coursework); 2026-09 SMBConnect (AI commerce for MSMEs, 9.7k lines mine); 2026-09 DIST staff portal (hashed-code auth, Next.js); 2026-09 SyllabusMind (Agent-A-Thon build); 2026-09 SubShield (subscription-cancel agent for IOC); 2026-08 TECHNOVA (first cut of SMBConnect); 2026-08 CSAU Web (3D site for the CS club); 2026-07 profile generators (this README); 2026-07 Riddle Rush (multiplayer 3D trivia, live); 2025-11 DreamWalkers (TypeScript); 2025-10 alumni-DB + medical-db (college DB projects); 2025-06 custom-cursor (first repo)." />
 
 </div>
 
@@ -28,16 +28,22 @@ Open to **SWE / ML internships** · now building ODYSSEY — multi-agent AI for 
 
 | Project | What it is | Stack | Status |
 | --- | --- | --- | --- |
+| SMBConnect | AI commerce platform for MSMEs: buyer, seller, delivery, admin | FastAPI, React, PostgreSQL, MongoDB, Redis, Groq | shipped |
 | SENTRI | ML dashboard for Bengaluru Traffic Police | XGBoost, FastAPI, Streamlit | live |
 | ODYSSEY | Multi-agent AI assistant for fintech (SBI YONO) | LLM, EBM, LangChain | building |
-| Riddle Rush | 3D trivia board game | React, Three.js, Supabase | live |
+| SubShield | AI agent that reads invoices and cancels subscriptions | Python, Gemini, Playwright, browser-use | shipped |
+| SyllabusMind | AI study agent that finds weak topics (Agent-A-Thon) | React, TypeScript, LLM | shipped |
+| Riddle Rush | Multiplayer 3D trivia board game, online rooms | React, Three.js, Supabase, Socket.io | live |
+| CSAU Web | 3D space-themed site for Anna University's CS club | Next.js, R3F, GSAP | building |
+| Study Portal | Upload, search and share study PDFs, E2E tested | React, Spring Boot, PostgreSQL | shipped |
 | Gridlock | Traffic demand forecasting (hackathon) | LightGBM, XGBoost | archived |
 | DayLog | Real-time attendance tracking | React, Node.js, Firebase | shipped |
 
 ### Stack
 
-- **languages:** C++, Python, C, TypeScript, JavaScript
-- **ml / ai:** XGBoost, LightGBM, EBM, DBSCAN, LangChain
-- **web & tools:** React, Node/Express, FastAPI, Streamlit, Firebase, Supabase, Three.js, Git
+- **languages:** C++, Python, C, TypeScript, JavaScript, Java
+- **ml / ai:** XGBoost, LightGBM, EBM, DBSCAN, LangChain, Gemini, Groq
+- **web:** React, Next.js, Node/Express, FastAPI, Spring Boot, Streamlit, Three.js
+- **data & tools:** PostgreSQL, MongoDB, Redis, Firebase, Supabase, Docker, Playwright, Git
 
 </details>
