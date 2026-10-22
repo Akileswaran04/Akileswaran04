@@ -1,0 +1,56 @@
+name: Refresh profile
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "scripts/**"
+      - "data/profile.json"
+      - "data/portrait.txt"
+  schedule:
+    - cron: "0 2 * * *"   # daily; contribution data doesn't need more
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# a push and the daily run must not race on `git push`
+concurrency:
+  group: refresh-profile
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Fetch contribution data
+        run: python scripts/fetch_contributions.py
+        env:
+          GH_PROFILE_USER: ${{ github.repository_owner }}
+          # GH_PAT (fine-grained, read-only) adds private contributions;
+          # without it the workflow token still reads public ones.
+          GH_PAT: ${{ secrets.GH_PAT || github.token }}
+
+      - name: Render panels + README
+        run: python scripts/render_profile.py
+
+      - name: Commit & push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/contributions.json assets README.md
+          git diff --staged --quiet && exit 0
+          git commit -m "auto: refresh profile"
+          git pull --rebase
+          git push

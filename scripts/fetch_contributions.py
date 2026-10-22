@@ -8,11 +8,12 @@ Primary data source: GitHub GraphQL API v4 (requires GH_PAT token env var).
 Fallback:           HTML scraping of the public contributions endpoint
                     (unauthenticated, less reliable).
 
-Set GH_PAT to a classic personal access token with read:user scope for
-accurate, stable data. Without it, the script falls back to HTML scraping
-which may produce incomplete or approximate results.
+Set GH_PAT to a fine-grained, read-only token to include private
+contributions; the workflow falls back to its own GITHUB_TOKEN (public
+contributions) so an expired PAT no longer drops you to HTML scraping.
+Without any token, the script scrapes HTML, which may be incomplete.
 
-Run daily by .github/workflows/snake.yml.
+Run daily by .github/workflows/refresh-profile.yml.
 """
 import datetime
 import json

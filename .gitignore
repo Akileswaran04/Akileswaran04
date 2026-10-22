@@ -1,4 +1,6 @@
 source-photo.jpg
 source-prepped.png
+pic/
+previews/
 __pycache__/
 *.pyc

@@ -1,0 +1,47 @@
+{
+  "theme": ["riso", "sumi"],
+  "name": "Akileswaran A",
+  "handle": "akileswaran04",
+  "headline": "full-stack developer · applied ML",
+  "education": "B.Tech IT · CEG, Anna University",
+  "location": "Chennai, Tamil Nadu",
+  "open_to": "SWE / ML internships",
+  "now": [
+    "building ODYSSEY — multi-agent AI for fintech",
+    "exploring agentic AI (Agent-A-Thon, agentic_ai)"
+  ],
+  "stack": [
+    {"group": "languages", "items": ["C++", "Python", "C", "TypeScript", "JavaScript"]},
+    {"group": "ml / ai", "items": ["XGBoost", "LightGBM", "EBM", "DBSCAN", "LangChain"]},
+    {"group": "web & tools", "items": ["React", "Node/Express", "FastAPI", "Streamlit", "Firebase", "Supabase", "Three.js", "Git"]}
+  ],
+  "projects": [
+    {"name": "SENTRI", "tagline": "ML dashboard for Bengaluru Traffic Police", "stack": ["XGBoost", "FastAPI", "Streamlit"], "status": "live", "stage": 4},
+    {"name": "ODYSSEY", "tagline": "Multi-agent AI assistant for fintech (SBI YONO)", "stack": ["LLM", "EBM", "LangChain"], "status": "building", "stage": 1},
+    {"name": "Riddle Rush", "tagline": "3D trivia board game", "stack": ["React", "Three.js", "Supabase"], "status": "live", "stage": 4},
+    {"name": "Gridlock", "tagline": "Traffic demand forecasting (hackathon)", "stack": ["LightGBM", "XGBoost"], "status": "archived", "stage": 4},
+    {"name": "DayLog", "tagline": "Real-time attendance tracking", "stack": ["React", "Node.js", "Firebase"], "status": "shipped", "stage": 4}
+  ],
+  "flagship": {
+    "project": "SENTRI",
+    "flow": [
+      {"label": "traffic data", "sub": "input"},
+      {"label": "XGBoost", "sub": "prediction"},
+      {"label": "FastAPI", "sub": "serving"},
+      {"label": "Streamlit", "sub": "dashboard"}
+    ]
+  },
+  "journey": [
+    {"date": "2026-10", "lane": "main", "title": "web-programming", "detail": "Spring Boot coursework"},
+    {"date": "2026-09", "lane": "hack", "title": "Agent-A-Thon", "detail": "agentic AI hackathon build"},
+    {"date": "2026-09", "lane": "feat", "title": "SMB-Connect", "detail": "Python"},
+    {"date": "2026-09", "lane": "main", "title": "agentic_ai", "detail": "agentic AI project for IOC"},
+    {"date": "2026-08", "lane": "feat", "title": "Technova-SOP", "detail": "platform for MSME sellers"},
+    {"date": "2026-08", "lane": "feat", "title": "CSAU-MainWeb", "detail": "Anna University CS club site"},
+    {"date": "2026-07", "lane": "main", "title": "profile generators", "detail": "this README"},
+    {"date": "2025-11", "lane": "hack", "title": "DreamWalkers", "detail": "TypeScript"},
+    {"date": "2025-10", "lane": "main", "title": "alumni-DB + medical-db", "detail": "college DB projects"},
+    {"date": "2025-06", "lane": "main", "title": "custom-cursor", "detail": "first repo"}
+  ],
+  "achievements": []
+}
