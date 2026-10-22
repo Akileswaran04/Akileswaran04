@@ -425,7 +425,10 @@ def flagship(p, theme):
     f = p["flagship"]
     pr = next(x for x in p["projects"] if x["name"] == f["project"])
     nodes = f["flow"]
-    h, bw, bh, yc = 250, 150, 64, 170
+    facts = f.get("facts", [])
+    bw, bh, yc = 172, 64, 170
+    fy = yc + bh / 2 + 28  # top of the facts row
+    h = int(fy + 76 + 20) if facts else 250
     n = len(nodes)
     gap = (W - 80 - n * bw) / max(n - 1, 1)
     xs = [40 + i * (bw + gap) for i in range(n)]
@@ -452,7 +455,17 @@ def flagship(p, theme):
                     f'text-anchor="middle">{esc(nd["label"])}</text>'
                     f'<text class="f-dim" x="{x + bw / 2}" y="{yc + 17}" font-size="11.5" '
                     f'text-anchor="middle">{esc(nd["sub"])}</text></g>')
-    label = f'{pr["name"]} architecture: ' + " → ".join(nd["label"] for nd in nodes) + "."
+    fw = (W - 80 - 14 * (len(facts) - 1)) / max(len(facts), 1)
+    for i, fc in enumerate(facts):
+        x = 40 + i * (fw + 14)
+        body.append(f'<g class="nd" style="animation-delay:{1 + i * .15:.2f}s">'
+                    f'<rect class="f-bg2 s-line" x="{x:.0f}" y="{fy:.0f}" width="{fw:.0f}" height="76" rx="12"/>'
+                    f'<text class="f-acc" x="{x + 18:.0f}" y="{fy + 38:.0f}" font-size="26" font-weight="800" '
+                    f'filter="url(#glow)">{esc(fc["value"])}</text>'
+                    f'<text class="f-dim" x="{x + 18:.0f}" y="{fy + 60:.0f}" font-size="11" letter-spacing="1">'
+                    f'{esc(fc["label"].upper())}</text></g>')
+    label = (f'{pr["name"]} architecture: ' + " → ".join(nd["label"] for nd in nodes) + ". "
+             + "; ".join(f'{fc["value"]} {fc["label"]}' for fc in facts))
     return svg(theme, h, label, "".join(body), css), label
 
 

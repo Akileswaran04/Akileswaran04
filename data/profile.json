@@ -26,16 +26,24 @@
     {"name": "Riddle Rush", "tagline": "Multiplayer 3D trivia board game, online rooms", "stack": ["React", "Three.js", "Supabase", "Socket.io"], "status": "live", "stage": 4},
     {"name": "CSAU Web", "tagline": "3D space-themed site for Anna University's CS club", "stack": ["Next.js", "R3F", "GSAP"], "status": "building", "stage": 2},
     {"name": "Study Portal", "tagline": "Upload, search and share study PDFs, E2E tested", "stack": ["React", "Spring Boot", "PostgreSQL"], "status": "shipped", "stage": 4},
+    {"name": "Staff Portal", "tagline": "Student feedback for teachers; scrypt-hashed login codes", "stack": ["Next.js", "TypeScript", "GSAP"], "status": "shipped", "stage": 4},
+    {"name": "AlumniDB", "tagline": "Alumni records, event invites and thank-you letters", "stack": ["React", "TypeScript", "Supabase"], "status": "shipped", "stage": 4},
     {"name": "Gridlock", "tagline": "Traffic demand forecasting (hackathon)", "stack": ["LightGBM", "XGBoost"], "status": "archived", "stage": 4},
     {"name": "DayLog", "tagline": "Real-time attendance tracking", "stack": ["React", "Node.js", "Firebase"], "status": "shipped", "stage": 4}
   ],
   "flagship": {
-    "project": "SENTRI",
+    "project": "SMBConnect",
     "flow": [
-      {"label": "traffic data", "sub": "input"},
-      {"label": "XGBoost", "sub": "prediction"},
-      {"label": "FastAPI", "sub": "serving"},
-      {"label": "Streamlit", "sub": "dashboard"}
+      {"label": "4 React apps", "sub": "buyer · seller · admin"},
+      {"label": "FastAPI", "sub": "25-module monolith"},
+      {"label": "Groq LLM", "sub": "classify + extract"},
+      {"label": "data layer", "sub": "Postgres · Mongo · Redis"}
+    ],
+    "facts": [
+      {"value": "21.5k", "label": "lines of code"},
+      {"value": "9.7k", "label": "lines written by me"},
+      {"value": "25", "label": "backend modules"},
+      {"value": "4", "label": "apps, one backend"}
     ]
   },
   "journey": [
@@ -49,7 +57,7 @@
     {"date": "2026-07", "lane": "main", "title": "profile generators", "detail": "this README"},
     {"date": "2026-07", "lane": "feat", "title": "Riddle Rush", "detail": "multiplayer 3D trivia, live"},
     {"date": "2025-11", "lane": "hack", "title": "DreamWalkers", "detail": "TypeScript"},
-    {"date": "2025-10", "lane": "main", "title": "alumni-DB + medical-db", "detail": "college DB projects"},
+    {"date": "2025-10", "lane": "main", "title": "AlumniDB", "detail": "Supabase alumni + events app"},
     {"date": "2025-06", "lane": "main", "title": "custom-cursor", "detail": "first repo"}
   ],
   "achievements": []
