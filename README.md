@@ -15,7 +15,7 @@ Open to **SWE / ML internships** · now building ODYSSEY — multi-agent AI for 
 
 <img src="assets/stack.svg" width="860" alt="Tech stack. languages: C++, Python, C, TypeScript, JavaScript, Java. ml / ai: XGBoost, LightGBM, EBM, DBSCAN, LangChain, Gemini, Groq. web: React, Next.js, Node/Express, FastAPI, Spring Boot, Streamlit, Three.js. data &amp; tools: PostgreSQL, MongoDB, Redis, Firebase, Supabase, Docker, Playwright, Git." />
 
-<img src="assets/activity.svg" width="860" alt="475 contributions over the past 12 months across 69 active days; busiest month aug '26." />
+<img src="assets/activity.svg" width="860" alt="476 contributions over the past 12 months across 69 active days; busiest month aug '26." />
 
 <img src="assets/journey.svg" width="860" alt="Timeline, newest first: 2026-10 Study Portal (React + Spring Boot coursework); 2026-09 SMBConnect (AI commerce for MSMEs, 9.7k lines mine); 2026-09 DIST staff portal (hashed-code auth, Next.js); 2026-09 SyllabusMind (Agent-A-Thon build); 2026-09 SubShield (subscription-cancel agent for IOC); 2026-08 TECHNOVA (first cut of SMBConnect); 2026-08 CSAU Web (3D site for the CS club); 2026-07 profile generators (this README); 2026-07 Riddle Rush (multiplayer 3D trivia, live); 2025-11 DreamWalkers (TypeScript); 2025-10 alumni-DB + medical-db (college DB projects); 2025-06 custom-cursor (first repo)." />
 
